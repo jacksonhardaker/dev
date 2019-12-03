@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/jacksonhardaker
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://jacksonhardaker.dev
+  * I am jacksonhardaker (https://keybase.io/jacksonhardaker) on keybase.
+  * I have a public key ASCJiDUwocpNBRTnJhrpb4wxx0oqtC-Nz4djkX66ozTS1Ao
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012089883530a1ca4d0514e7261ae96f8c31c74a2ab42f8dcf8763917ebaa334d2d40a",
+      "host": "keybase.io",
+      "kid": "012089883530a1ca4d0514e7261ae96f8c31c74a2ab42f8dcf8763917ebaa334d2d40a",
+      "uid": "f6f16188f02953a707dea5f3bb074f19",
+      "username": "jacksonhardaker"
+    },
+    "merkle_root": {
+      "ctime": 1575342754,
+      "hash": "5fb4c0cb3cca27262348d290a448838dab451452c352ec2310e5de03ecd299a55df9f11372b154440500ad121fff33398000ebe4604b63810a485fa6896c591a",
+      "hash_meta": "e1e9939a1637b996cfe72a2b40aebb5f03452854607e75dd79d66d5f431709c9",
+      "seqno": 11883847
+    },
+    "service": {
+      "entropy": "Xbg0f75tMIVfL0+1lgcYW7gG",
+      "hostname": "jacksonhardaker.dev",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.0.0"
+  },
+  "ctime": 1575342760,
+  "expire_in": 504576000,
+  "prev": "75aac909e2dba828f7b1b6a2d24e366bdaec2891d2faec27751414ad18f71c4a",
+  "seqno": 34,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgiYg1MKHKTQUU5yYa6W+MMcdKKrQvjc+HY5F+uqM00tQKp3BheWxvYWTESpcCIsQgdarJCeLbqCj3sbai0k42a9rsKJHS+uwndRQUrRj3HErEICzZr3mPLZwBRlOMicus8+NkPQ3W98L9rygFt4cuhAImAgHCo3NpZ8RAA/RvApKvcJPIEENrvgi9SCNBA0dezpdPmrjosGrNQxN4smpgeUGl03cfv9ON6irKLVACSQAPF+i0jDvg8ekbAahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIF+r8VFQsl09hnf0rH8bCF1q05EmR9ZgQ716pNI9scoyo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/jacksonhardaker
+
+==================================================================
