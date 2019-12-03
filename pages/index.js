@@ -8,7 +8,7 @@ const Home = () => (
   <Page>
     <div>
       <Head>
-        <title>Jackson Hardaker | Front-end Engineer</title>
+        <title>Jackson Hardaker | Frontend Engineer</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -17,7 +17,7 @@ const Home = () => (
       <div className="hero">
         <h1 className="title">Jackson Hardaker</h1>
         <p className="description">
-          Frontend Engineer @ <a href='https://tn.com'>tuftandneedle.com</a>.
+          Frontend Engineer @ <a href='https://tn.com'>tuftandneedle.com</a>
         </p>
 
         <SocialButtons />
