@@ -12,7 +12,7 @@ const SocialButton = ({ brand, href }) => {
     return null;
 
   return (
-    <a href={href} target='_blank' rel='noopener noreferrer'>
+    <a href={href} target="_blank" rel="noopener noreferrer">
       <Base64SVG stream={svg} />
       <style jsx>{`
         a {
