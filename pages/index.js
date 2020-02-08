@@ -1,8 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
-import Nav from '../components/nav'
-import SocialButtons from '../components/SocialButtons'
-import Page from '../components/Page'
+import Nav from '../src/components/nav'
+import SocialButtons from '../src/components/SocialButtons'
+import Page from '../src/components/Page'
 
 const Home = () => (
   <Page>
