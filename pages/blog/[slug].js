@@ -1,58 +1,95 @@
 import { Predicates } from 'prismic-javascript';
+import Head from 'next/head';
+import { RichText } from 'prismic-reactjs';
+import format from 'date-fns/format';
 import useCms from '../../src/hooks/useCms';
 import Page from '../../src/components/Page';
-import { RichText } from 'prismic-reactjs';
-import PrismicDOM from 'prismic-dom';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/cjs/styles/hljs/';
-import he from 'he';
+import Code from '../../src/components/Code';
 
-const codeSerializer = (type, _, __, children) => {
-  const Elements = PrismicDOM.RichText.Elements;
-  switch (type) {
-    case Elements.paragraph:
-      return `${he.decode(children.join(''))}\n`;
-    default:
-      return null;
-  }
-}
-
-const Post = ({ post }) => {
-  console.log(post);
+const Post = ({ post, canonical }) => {
   if (!post)
     return null;
 
   const { data } = post;
+  const author = data.author.data;
+  const published = new Date(post.first_publication_date);
+  const modified = new Date(post.last_publication_date);
 
   return (
-    <Page>
-      <RichText render={data.title} />
-      {
-        data.body.map((slice, index) => {
-          switch(slice.slice_type) {
-            case 'text':
-              return <RichText key={index} render={slice.primary.text} />;
-            case 'code':
-              return (
-              <SyntaxHighlighter key={index} language={slice.primary.syntax_highlighting} style={docco}>
-                {PrismicDOM.RichText.asHtml(slice.primary.code_block, {}, codeSerializer)}
-              </SyntaxHighlighter>);
+    <Page {...{ canonical }}>
+      <Head>
+        <title>{RichText.asText(data.title)}</title>
+      </Head>
+      <article itemScope itemType="http://schema.org/BlogPosting">
+        <header itemProp="headline">
+          <h1 itemProp="name">{RichText.asText(data.title)}</h1>
+        </header>
+        <time dateTime={published} itemProp="datePublished">{format(published, 'MMMM do, y')}</time>
+        <a href="#" title={RichText.asText(author.name)} itemProp="author" itemScope itemType="https://schema.org/Person">
+          <span itemProp="name">{RichText.asText(author.name)}</span>
+        </a>
+        {/* <!-- Main post image -->
+        <figure itemProp="image" itemScope itemType="https://schema.org/ImageObject">
+          <img src="img/the-black-cat.jpg" alt="The Black Cat">
+          <meta itemProp="url" content="http://shomtek.com/img/the-black-cat.jpg">
+          <meta itemProp="width" content="300">
+          <meta itemProp="height" content="374">
+        </figure> */}
+        <div itemProp="articleBody">
+          {
+            data.body.map((slice, index) => {
+              switch (slice.slice_type) {
+                case 'text':
+                  return <RichText key={index} render={slice.primary.text} />;
+                case 'code':
+                  return <Code key={index} language={slice.primary.syntax_highlighting} content={slice.primary.code_block} />
+              }
+            })
           }
-        })
-      }
+        </div>
+        <div className="hidden">
+          <a itemProp="mainEntityOfPage" href={canonical}>{RichText.asText(data.title)}</a>
+          <meta itemProp="dateModified" content={modified} />
+          <div itemProp="publisher" itemScope itemType="https://schema.org/Organization">
+            {/* <div itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
+              <img src="//www.shomtek.com/wp-content/uploads/2014/01/logo.png" alt="SHOMTek" />
+              <meta itemProp="url" content="http://www.shomtek.com/wp-content/uploads/2014/01/logo.png" />
+              <meta itemProp="width" content="292" />
+              <meta itemProp="height" content="85" />
+            </div> */}
+            <meta itemProp="name" content="Jackson Hardaker" />
+          </div>
+        </div>
+      </article>
+      <style jsx>{`
+        .hidden {
+          visibility: hidden;
+          height: 0;
+          overflow: hidden;
+        }
+      `}</style>
     </Page>
   );
 }
 
 Post.getInitialProps = async ({ query, req }) => {
   const { slug } = query;
+  const host = req.headers.host;
+  const path = req.url;
   const cms = await useCms(req);
 
-  const meta = await cms.query(Predicates.at('my.blog_post.uid', slug));
+  const meta = await cms.query(Predicates.at('my.blog_post.uid', slug), {
+    fetchLinks: [
+      'author.name',
+      'author.portrait',
+      'author.about'
+    ]
+  });
   const [post] = meta.results;
 
   return {
     post,
+    canonical: host + path
   };
 };
 
