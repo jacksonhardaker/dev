@@ -1,5 +1,6 @@
 import { Predicates } from 'prismic-javascript';
 import Head from 'next/head';
+import Error from 'next/error'
 import { RichText } from 'prismic-reactjs';
 import format from 'date-fns/format';
 import useCms from '../../src/hooks/useCms';
@@ -8,7 +9,7 @@ import Code from '../../src/components/Code';
 
 const Post = ({ post, canonical }) => {
   if (!post)
-    return null;
+    return <Error statusCode={404} />;
 
   const { data } = post;
   const author = data.author.data;
@@ -78,19 +79,24 @@ Post.getInitialProps = async ({ query, req }) => {
   const path = req.url;
   const cms = await useCms(req);
 
-  const meta = await cms.query(Predicates.at('my.blog_post.uid', slug), {
-    fetchLinks: [
-      'author.name',
-      'author.portrait',
-      'author.about'
-    ]
-  });
-  const [post] = meta.results;
-
-  return {
-    post,
-    canonical: host + path
-  };
+  try {
+    const meta = await cms.query(Predicates.at('my.blog_post.uid', slug), {
+      fetchLinks: [
+        'author.name',
+        'author.portrait',
+        'author.about'
+      ]
+    });
+    const [post] = meta.results;
+  
+    return {
+      post,
+      canonical: host + path
+    };
+  }
+  catch {
+    return { };
+  }
 };
 
 export default Post;
