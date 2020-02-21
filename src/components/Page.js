@@ -35,7 +35,7 @@ const Page = ({ children, canonical }) => {
       }
 
       main {
-        max-width: 600px;
+        max-width: 680px;
         margin: 0 auto;
       }
 

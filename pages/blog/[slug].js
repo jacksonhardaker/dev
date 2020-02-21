@@ -6,6 +6,7 @@ import format from 'date-fns/format';
 import useCms from '../../src/hooks/useCms';
 import Page from '../../src/components/Page';
 import Code from '../../src/components/Code';
+import BlogCoverImage from '../../src/components/BlogCoverImage';
 
 const Post = ({ post, canonical }) => {
   if (!post)
@@ -29,13 +30,7 @@ const Post = ({ post, canonical }) => {
         <a href="#" title={RichText.asText(author.name)} itemProp="author" itemScope itemType="https://schema.org/Person">
           <span itemProp="name">{RichText.asText(author.name)}</span>
         </a>
-        {/* <!-- Main post image -->
-        <figure itemProp="image" itemScope itemType="https://schema.org/ImageObject">
-          <img src="img/the-black-cat.jpg" alt="The Black Cat">
-          <meta itemProp="url" content="http://shomtek.com/img/the-black-cat.jpg">
-          <meta itemProp="width" content="300">
-          <meta itemProp="height" content="374">
-        </figure> */}
+        <BlogCoverImage { ...post.data.cover_image } />
         <div itemProp="articleBody">
           {
             data.body.map((slice, index) => {
