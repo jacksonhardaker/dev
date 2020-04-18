@@ -38,6 +38,7 @@ const Page = ({ children, canonical }) => {
       main {
         max-width: 680px;
         margin: 0 auto;
+        padding: 20px;
       }
 
       h1, h2, h3, h4, h5, h6 {

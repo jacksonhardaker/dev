@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import { RichText } from 'prismic-reactjs';
 import classes from 'classnames';
 
-const BlogCoverImage = ({ dimensions = {}, url, alt, main2x, mobile, blur }) => {
+const BlogCoverImage = ({ dimensions = {}, url, alt, main2x, mobile, blur, richTextCaption }) => {
   const mainSrcEl = useRef(null);
   const mobileSrcEl = useRef(null);
   const [loading, setLoading] = useState(true);
@@ -30,6 +31,11 @@ const BlogCoverImage = ({ dimensions = {}, url, alt, main2x, mobile, blur }) => 
       <meta itemProp="url" content={url} />
       <meta itemProp="width" content={width} />
       <meta itemProp="height" content={height} />
+      {richTextCaption && (
+        <figcaption>
+          <RichText render={richTextCaption} />
+        </figcaption>
+      )}
       <style jsx>{`
         figure {
           margin: 1rem 0;
@@ -47,6 +53,9 @@ const BlogCoverImage = ({ dimensions = {}, url, alt, main2x, mobile, blur }) => 
           display: inline-block;
           width: 100%;
           overflow: hidden;
+        }
+        figcaption {
+          font-size: 0.8rem;
         }
       `}</style>
     </figure>

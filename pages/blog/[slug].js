@@ -8,6 +8,7 @@ import useCms from '../../src/hooks/useCms';
 import Page from '../../src/components/Page';
 import Code from '../../src/components/Code';
 import BlogCoverImage from '../../src/components/BlogCoverImage';
+import Author from '../../src/components/Author';
 
 const Post = ({ post, canonical }) => {
   if (!post)
@@ -28,10 +29,10 @@ const Post = ({ post, canonical }) => {
           <h1 itemProp="name">{RichText.asText(data.title)}</h1>
         </header>
         <time dateTime={published} itemProp="datePublished">{format(published, 'MMMM do, y')}</time>
-        <a href="#" title={RichText.asText(author.name)} itemProp="author" itemScope itemType="https://schema.org/Person">
-          <span itemProp="name">{RichText.asText(author.name)}</span>
+        <a href="/" title={RichText.asText(author.name)}>
+          <span>{RichText.asText(author.name)}</span>
         </a>
-        <BlogCoverImage {...post.data.cover_image} />
+        <BlogCoverImage {...data.cover_image} richTextCaption={data.cover_image_caption} />
         <div itemProp="articleBody">
           {
             data.body.map((slice, index) => {
@@ -44,21 +45,21 @@ const Post = ({ post, canonical }) => {
             })
           }
         </div>
+        <Author { ...author } />
         <div className="hidden">
           <a itemProp="mainEntityOfPage" href={canonical}>{RichText.asText(data.title)}</a>
           <meta itemProp="dateModified" content={modified} />
           <div itemProp="publisher" itemScope itemType="https://schema.org/Organization">
-            {/* <div itemProp="logo" itemScope itemType="https://schema.org/ImageObject">
-              <img src="//www.shomtek.com/wp-content/uploads/2014/01/logo.png" alt="SHOMTek" />
-              <meta itemProp="url" content="http://www.shomtek.com/wp-content/uploads/2014/01/logo.png" />
-              <meta itemProp="width" content="292" />
-              <meta itemProp="height" content="85" />
-            </div> */}
             <meta itemProp="name" content="Jackson Hardaker" />
           </div>
         </div>
       </article>
       <style jsx>{`
+        time::after {
+          content: '-';
+          display: inline-block;
+          margin: 0 1ch;
+        }
         .hidden {
           visibility: hidden;
           height: 0;
