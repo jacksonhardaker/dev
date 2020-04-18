@@ -14,6 +14,7 @@ const Page = ({ children, canonical }) => {
         <meta name="msapplication-TileColor" content="#da532c"></meta>
         <meta name="theme-color" content="#ffffff"></meta>
         <link rel="canonical" href={canonical}></link>
+        {process.env.META_ROBOTS && <meta name="robots" content={process.env.META_ROBOTS}></meta>}
       </Head>
       {children}
       <style jsx global>{`
