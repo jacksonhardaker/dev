@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import classes from 'classnames';
 
-const BlogCoverImage = ({ dimensions, url, alt, main2x, mobile, blur }) => {
+const BlogCoverImage = ({ dimensions = {}, url, alt, main2x, mobile, blur }) => {
   const mainSrcEl = useRef(null);
   const mobileSrcEl = useRef(null);
   const [loading, setLoading] = useState(true);

@@ -1,4 +1,5 @@
 import { Predicates } from 'prismic-javascript';
+import fetch from 'node-fetch';
 import Head from 'next/head';
 import Error from 'next/error'
 import { RichText } from 'prismic-reactjs';
@@ -30,7 +31,7 @@ const Post = ({ post, canonical }) => {
         <a href="#" title={RichText.asText(author.name)} itemProp="author" itemScope itemType="https://schema.org/Person">
           <span itemProp="name">{RichText.asText(author.name)}</span>
         </a>
-        <BlogCoverImage { ...post.data.cover_image } />
+        <BlogCoverImage {...post.data.cover_image} />
         <div itemProp="articleBody">
           {
             data.body.map((slice, index) => {
@@ -66,13 +67,11 @@ const Post = ({ post, canonical }) => {
       `}</style>
     </Page>
   );
-}
+};
 
-Post.getInitialProps = async ({ query, req }) => {
-  const { slug } = query;
-  const host = req.headers.host;
-  const path = req.url;
-  const cms = await useCms(req);
+export const getStaticProps = async ({ params }) => {
+  const cms = await useCms();
+  const { slug } = params;
 
   try {
     const meta = await cms.query(Predicates.at('my.blog_post.uid', slug), {
@@ -83,15 +82,35 @@ Post.getInitialProps = async ({ query, req }) => {
       ]
     });
     const [post] = meta.results;
-  
+
     return {
-      post,
-      canonical: host + path
+      props: {
+        post,
+        canonical: `https://jacksonhardaker.dev/blog/${slug}`
+      }
     };
   }
-  catch {
-    return { };
+  catch (error) {
+    console.error(error);
+    return { props: {} };
   }
+};
+
+export async function getStaticPaths() {
+  const cms = await useCms();
+
+  let meta = await cms.query(Predicates.at('document.type', 'blog_post'), { pageSize: 1 });
+  const validSlugs = meta.results.map(doc => doc.uid);
+
+  while (meta.next_page) {
+    meta = await fetch(meta.next_page).then(res => res.json());
+    validSlugs.push(...meta.results.map(doc => doc.uid));
+  }
+
+  return {
+    paths: validSlugs.map(slug => ({ params: { slug } })),
+    fallback: false,
+  };
 };
 
 export default Post;
