@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import Nav from '../src/components/nav'
 import SocialButtons from '../src/components/SocialButtons'
 import Page from '../src/components/Page'
 
@@ -10,8 +9,6 @@ const Home = () => (
       <Head>
         <title>Jackson Hardaker | Frontend Engineer</title>
       </Head>
-
-      <Nav />
 
       <div className="hero">
         <h1 className="title">Jackson Hardaker</h1>

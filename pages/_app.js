@@ -2,6 +2,7 @@ import App from 'next/app';
 import PrismicPreviewScript from '../src/components/PrismicPreviewScript';
 
 import 'normalize.css/normalize.css';
+import '../src/styles/fonts.scss';
 
 const MainApp = ({ Component, pageProps, preview }) => {
   return (

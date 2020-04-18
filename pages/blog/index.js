@@ -1,16 +1,11 @@
-import useCms from "../../src/hooks/useCms";
+import Page from '../../src/components/Page'
 
-const BlogIndex = ({ content }) => {
-  return <h1>B</h1>;
-};
-
-BlogIndex.getInitialProps = async ({ req }) => {
-  const cms = await useCms(req);
-  const content = await cms.query('');
-  
-  return {
-    content
-  }
+const BlogIndex = () => {
+  return (
+    <Page>
+      <h1>B</h1>
+    </Page>
+  );
 };
 
 export default BlogIndex;

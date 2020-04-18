@@ -1,6 +1,8 @@
 import React from 'react'
 
 const links = [
+  { href: '/', label: 'home' },
+  { href: '/blog', label: 'blog' },
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`
   return link
@@ -22,7 +24,6 @@ const Nav = () => (
       }
       ul {
         display: flex;
-        justify-content: space-between;
       }
       nav > ul {
         padding: 4px 16px;

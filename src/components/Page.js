@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { primary, black } from '../constants/colors';
 import PrismicPreviewScript from './PrismicPreviewScript';
 import ClearPreviewMode from './ClearPreviewMode';
+import Nav from './Navigation';
 
 const Page = ({ children, canonical, preview }) => {
   return (
@@ -19,25 +20,10 @@ const Page = ({ children, canonical, preview }) => {
         <link rel="canonical" href={canonical}></link>
         {process.env.META_ROBOTS && <meta name="robots" content={process.env.META_ROBOTS}></meta>}
       </Head>
+      <Nav />
       {children}
       {preview && <ClearPreviewMode />}
       <style jsx global>{`
-      @font-face {
-        font-family: 'Inter';
-        font-style:  normal;
-        font-weight: 100;
-        font-display: swap;
-        src: url("/fonts/Inter-Thin-BETA.woff2?v=3.11") format("woff2"),
-            url("/fonts/Inter-Thin-BETA.woff?v=3.11") format("woff");
-      }
-      @font-face {
-        font-family: 'InterRegular';
-        font-style:  normal;
-        font-weight: 400;
-        font-display: swap;
-        src: url("/fonts/Inter-Light-BETA.woff2?v=3.11") format("woff2"),
-            url("/fonts/Inter-Light-BETA.woff?v=3.11") format("woff");
-      }
 
       main {
         max-width: 680px;
