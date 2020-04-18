@@ -1,5 +1,7 @@
+import Head from 'next/head';
+
 const PrismicPreviewScript = ({ preview }) => {
-  return preview ? <script async defer src="//static.cdn.prismic.io/prismic.js?repo=jackson-hardaker-dev&new=true"></script> : null;
+  return preview ? <Head><script async defer src="https://static.cdn.prismic.io/prismic.min.js?repo=jackson-hardaker-dev&new=true"></script></Head> : null;
 };
 
 export default PrismicPreviewScript;

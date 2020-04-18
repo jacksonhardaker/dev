@@ -9,7 +9,6 @@ import Page from '../../src/components/Page';
 import Code from '../../src/components/Code';
 import BlogCoverImage from '../../src/components/BlogCoverImage';
 import Author from '../../src/components/Author';
-import PrismicPreviewScript from '../../src/components/PrismicPreviewScript';
 
 const Post = ({ post, canonical, preview }) => {
   if (!post)
@@ -21,8 +20,7 @@ const Post = ({ post, canonical, preview }) => {
   const modified = new Date(post.last_publication_date);
 
   return (
-    <Page {...{ canonical }}>
-      <PrismicPreviewScript {...{ preview }} />
+    <Page {...{ canonical }} preview={preview}>
       <Head>
         <title>{RichText.asText(data.title)}</title>
       </Head>
@@ -72,12 +70,13 @@ const Post = ({ post, canonical, preview }) => {
   );
 };
 
-export const getStaticProps = async ({ params, preview }) => {
+export const getStaticProps = async ({ params, preview, previewData = {} }) => {
   const cms = await useCms();
   const { slug } = params;
 
   try {
     const meta = await cms.query(Predicates.at('my.blog_post.uid', slug), {
+      ref: previewData.ref,
       fetchLinks: [
         'author.name',
         'author.portrait',

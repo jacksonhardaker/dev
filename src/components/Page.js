@@ -1,10 +1,13 @@
 import React from 'react';
 import Head from 'next/head';
 import { primary, black } from '../constants/colors';
+import PrismicPreviewScript from './PrismicPreviewScript';
+import ClearPreviewMode from './ClearPreviewMode';
 
-const Page = ({ children, canonical }) => {
+const Page = ({ children, canonical, preview }) => {
   return (
     <main>
+      <PrismicPreviewScript {...{ preview }} />
       <Head>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"></link>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"></link>
@@ -17,6 +20,7 @@ const Page = ({ children, canonical }) => {
         {process.env.META_ROBOTS && <meta name="robots" content={process.env.META_ROBOTS}></meta>}
       </Head>
       {children}
+      {preview && <ClearPreviewMode />}
       <style jsx global>{`
       @font-face {
         font-family: 'Inter';
