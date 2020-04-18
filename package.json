@@ -10,15 +10,16 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@zeit/next-css": "^1.0.1",
-    "next": "9.3.2",
     "classnames": "^2.2.6",
     "date-fns": "^2.9.0",
     "he": "^1.2.0",
+    "next": "9.3.2",
     "next-images": "^1.2.0",
     "normalize.css": "^8.0.1",
     "prismic-dom": "^2.1.0",
     "prismic-javascript": "^2.1.5",
     "prismic-reactjs": "^1.2.0",
+    "qs": "^6.9.3",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-syntax-highlighter": "^12.2.1"
