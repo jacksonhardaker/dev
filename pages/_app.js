@@ -3,6 +3,7 @@ import PrismicPreviewScript from '../src/components/PrismicPreviewScript';
 
 import 'normalize.css/normalize.css';
 import '../src/styles/fonts.scss';
+import '../src/styles/base.scss';
 
 const MainApp = ({ Component, pageProps, preview }) => {
   return (

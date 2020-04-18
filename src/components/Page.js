@@ -23,33 +23,6 @@ const Page = ({ children, canonical, preview }) => {
       <Nav />
       {children}
       {preview && <ClearPreviewMode />}
-      <style jsx global>{`
-
-      main {
-        max-width: 680px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
-      }
-
-      body {
-        margin: 0;
-        font-family: 'InterRegular', -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
-        line-height: 1.4;
-        color: ${black};
-      }
-
-      a {
-        color: ${primary};
-      }
-
-      a:hover {
-        color: ${black};
-      }
-    `}</style>
     </main>
   )
 };

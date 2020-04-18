@@ -1,10 +1,11 @@
-const black = '#111';
+import colors from '../styles/_exports.module.scss';
 
-const white = '#fff';
-
-const gray = '#ccc';
-
-const primary = '#C2714F';
+const {
+  black,
+  white,
+  gray,
+  primary
+} = colors;
 
 export {
   black,
