@@ -9,15 +9,28 @@ import Page from '../../src/components/Page';
 import Code from '../../src/components/Code';
 import BlogCoverImage from '../../src/components/BlogCoverImage';
 import Author from '../../src/components/Author';
+import fetchBlogPost from '../../src/fetch/cms/post';
+import { useState, useEffect } from 'react';
 
-const Post = ({ post, canonical, preview }) => {
+const Post = ({ post, canonical, preview, slug, previewRef }) => {
+  const [currentPost, setCurrentPost] = useState(post);
+
   if (!post)
     return <Error statusCode={404} />;
 
-  const { data } = post;
+  const { data } = currentPost;
   const author = data.author.data;
-  const published = data.published_date ? new Date(data.published_date) : new Date(post.first_publication_date);
-  const modified = new Date(post.last_publication_date);
+  const published = data.published_date ? new Date(data.published_date) : new Date(currentPost.first_publication_date);
+  const modified = new Date(currentPost.last_publication_date);
+
+  useEffect(() => {
+    if (preview) {
+      (async () => {
+        const post = await fetchBlogPost(slug, previewRef);
+        setCurrentPost(post);
+      })();
+    }
+  }, [preview]);
 
   return (
     <Page {...{ canonical }} preview={preview}>
@@ -45,7 +58,7 @@ const Post = ({ post, canonical, preview }) => {
             })
           }
         </div>
-        <Author { ...author } />
+        <Author {...author} />
         <div className="hidden">
           <a itemProp="mainEntityOfPage" href={canonical}>{RichText.asText(data.title)}</a>
           <meta itemProp="dateModified" content={modified} />
@@ -71,25 +84,18 @@ const Post = ({ post, canonical, preview }) => {
 };
 
 export const getStaticProps = async ({ params, preview, previewData = {} }) => {
-  const cms = await useCms();
   const { slug } = params;
 
   try {
-    const meta = await cms.query(Predicates.at('my.blog_post.uid', slug), {
-      ref: previewData.ref,
-      fetchLinks: [
-        'author.name',
-        'author.portrait',
-        'author.about'
-      ]
-    });
-    const [post] = meta.results;
+    const post = await fetchBlogPost(slug, previewData.ref);
 
     return {
       props: {
         post,
         canonical: `https://jacksonhardaker.dev/blog/${slug}`,
         preview: preview || null,
+        slug,
+        previewRef: previewData.ref || null,
       }
     };
   }
