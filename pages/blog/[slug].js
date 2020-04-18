@@ -9,18 +9,20 @@ import Page from '../../src/components/Page';
 import Code from '../../src/components/Code';
 import BlogCoverImage from '../../src/components/BlogCoverImage';
 import Author from '../../src/components/Author';
+import PrismicPreviewScript from '../../src/components/PrismicPreviewScript';
 
-const Post = ({ post, canonical }) => {
+const Post = ({ post, canonical, preview }) => {
   if (!post)
     return <Error statusCode={404} />;
 
   const { data } = post;
   const author = data.author.data;
-  const published = new Date(post.first_publication_date);
+  const published = data.published_date ? new Date(data.published_date) : new Date(post.first_publication_date);
   const modified = new Date(post.last_publication_date);
 
   return (
     <Page {...{ canonical }}>
+      <PrismicPreviewScript {...{ preview }} />
       <Head>
         <title>{RichText.asText(data.title)}</title>
       </Head>
@@ -70,7 +72,7 @@ const Post = ({ post, canonical }) => {
   );
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params, preview }) => {
   const cms = await useCms();
   const { slug } = params;
 
@@ -87,7 +89,8 @@ export const getStaticProps = async ({ params }) => {
     return {
       props: {
         post,
-        canonical: `https://jacksonhardaker.dev/blog/${slug}`
+        canonical: `https://jacksonhardaker.dev/blog/${slug}`,
+        preview: preview || null,
       }
     };
   }
