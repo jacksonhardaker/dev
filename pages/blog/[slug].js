@@ -101,7 +101,11 @@ export const getStaticProps = async ({ params, preview, previewData = {} }) => {
   }
   catch (error) {
     console.error(error);
-    return { props: {} };
+    return {
+      props: {
+        post: null
+      }
+    };
   }
 };
 
