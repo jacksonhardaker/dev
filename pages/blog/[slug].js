@@ -14,7 +14,7 @@ import fetchBlogPosts from '../../src/fetch/cms/posts';
 const Post = ({ post, canonical, preview, slug, previewRef }) => {
   const [currentPost, setCurrentPost] = useState(post);
 
-  if (!post)
+  if (!post || !post.data.public)
     return <Error statusCode={404} />;
 
   const { data } = currentPost;

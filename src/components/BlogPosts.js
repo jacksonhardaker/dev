@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import BlogCoverImage from './BlogCoverImage';
 
 const BlogPosts = ({ posts }) => {
+  const publicPosts = posts.results.filter(post => post.data.public);
 
   const previousLink = () => {
     return posts.prev_page && (
@@ -36,12 +37,13 @@ const BlogPosts = ({ posts }) => {
     )
   };
 
-  if (!posts.results)
-    return null;
+  if (!publicPosts[0])
+    return <h2>No Posts</h2>;
+
   return (
     <section>
       <div className="posts">
-        {posts.results.map(post => {
+        {publicPosts.filter(post => post.data.public).map(post => {
           const published = post.data.published_date ? new Date(post.data.published_date) : new Date(post.first_publication_date);
           return (
             <article key={post.uid}>
