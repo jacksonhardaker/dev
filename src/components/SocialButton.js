@@ -13,8 +13,10 @@ const SocialButton = ({ href, Icon }) => {
           margin: 5px;
           fill: ${black}
         }
-        a:hover {
-          fill: ${primary}
+        a:hover, a:focus {
+          fill: ${primary};
+          outline: none;
+          background-color: transparent;
         }
       `}</style>
     </a>

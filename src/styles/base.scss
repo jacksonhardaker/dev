@@ -26,6 +26,8 @@ a {
   color: $primary;
 }
 
-a:hover {
-  color: $black;
+a:hover, a:focus {
+  color: $white;
+  background-color: $primary;
+  outline: none;
 }

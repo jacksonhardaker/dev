@@ -1,16 +1,15 @@
-import { Predicates } from 'prismic-javascript';
 import fetch from 'node-fetch';
 import Head from 'next/head';
 import Error from 'next/error'
 import { RichText } from 'prismic-reactjs';
 import format from 'date-fns/format';
-import useCms from '../../src/hooks/useCms';
 import Page from '../../src/components/Page';
 import Code from '../../src/components/Code';
 import BlogCoverImage from '../../src/components/BlogCoverImage';
 import Author from '../../src/components/Author';
 import fetchBlogPost from '../../src/fetch/cms/post';
 import { useState, useEffect } from 'react';
+import fetchBlogPosts from '../../src/fetch/cms/posts';
 
 const Post = ({ post, canonical, preview, slug, previewRef }) => {
   const [currentPost, setCurrentPost] = useState(post);
@@ -110,9 +109,7 @@ export const getStaticProps = async ({ params, preview, previewData = {} }) => {
 };
 
 export async function getStaticPaths() {
-  const cms = await useCms();
-
-  let meta = await cms.query(Predicates.at('document.type', 'blog_post'), { pageSize: 1 });
+  let meta = await fetchBlogPosts();
   const validSlugs = meta.results.map(doc => doc.uid);
 
   while (meta.next_page) {

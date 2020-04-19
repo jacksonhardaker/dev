@@ -1,4 +1,5 @@
-import React from 'react'
+import Link from 'next/link';
+import { black, primary, white } from '../constants/colors';
 
 const links = [
   { href: '/', label: 'home' },
@@ -13,7 +14,9 @@ const Nav = () => (
     <ul>
       {links.map(({ key, href, label }) => (
         <li key={key}>
-          <a href={href}>{label}</a>
+          <Link href={href}>
+            <a>{label}</a>
+          </Link>
         </li>
       ))}
     </ul>
@@ -26,7 +29,8 @@ const Nav = () => (
         display: flex;
       }
       nav > ul {
-        padding: 4px 16px;
+        padding: 4px 0;
+        margin-left: -13px;
       }
       li {
         display: flex;
@@ -34,7 +38,12 @@ const Nav = () => (
       }
       a {
         text-decoration: none;
-        font-size: 13px;
+        padding: 3px 5px;
+      }
+      a:hover, a:focus {
+        color: ${white};
+        background-color: ${primary};
+        outline: none;
       }
     `}</style>
   </nav>
