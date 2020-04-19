@@ -3,7 +3,6 @@ import { RichText } from 'prismic-reactjs';
 import { gray } from '../constants/colors';
 
 const BlogPosts = ({ posts }) => {
-  console.log(posts);
 
   const previousLink = () => {
     return posts.prev_page && (
