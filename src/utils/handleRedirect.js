@@ -9,4 +9,6 @@ export default Location => {
 
     return {};
   };
+
+  return Page;
 };
