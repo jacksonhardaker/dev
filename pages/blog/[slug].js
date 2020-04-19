@@ -34,7 +34,7 @@ const Post = ({ post, canonical, preview, slug, previewRef }) => {
   return (
     <Page {...{ canonical }} preview={preview}>
       <Head>
-        <title>{RichText.asText(data.title)}</title>
+        <title>{RichText.asText(data.title)} | Jackson Hardaker</title>
       </Head>
       <article itemScope itemType="http://schema.org/BlogPosting">
         <header itemProp="headline">

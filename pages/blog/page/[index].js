@@ -2,11 +2,15 @@ import Page from '../../../src/components/Page'
 import fetchBlogPosts from '../../../src/fetch/cms/posts';
 import BlogPosts from '../../../src/components/BlogPosts';
 import { BLOG_PAGE_SIZE } from '../../../src/constants/blog';
+import Head from 'next/head';
 
 const BlogPage = ({ posts }) => {
   return (
     <Page>
-    <BlogPosts posts={posts} />
+      <Head>
+        <title>Blog page {posts.page} of {posts.total_pages} | Jackson Hardaker</title>
+      </Head>
+      <BlogPosts posts={posts} />
     </Page>
   );
 };
