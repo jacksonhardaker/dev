@@ -1,16 +1,14 @@
 require('dotenv').config();
 
 const withPlugins = require('next-compose-plugins');
-// const withImages = require('next-images');
 const withSass = require('@zeit/next-sass');
 const withCss = require('@zeit/next-css');
 
 module.exports = withPlugins([
   withCss,
   [withSass, {
-    cssModules: true,
+    cssModules: false,
   }],
-  // withImages,
 ], {
   env: {
     PRISMIC_TOKEN: 'MC5YajhldWhNQUFDQUFtTDBi.MFw677-977-977-977-9YG_vv70X77-977-9C--_vXEiV--_ve-_ve-_vVbvv70PJzJa77-977-977-9RDE',

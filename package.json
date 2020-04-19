@@ -22,6 +22,7 @@
     "node-fetch": "^2.6.0",
     "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
     "prismic-dom": "^2.1.0",
     "prismic-javascript": "^2.1.5",
     "prismic-reactjs": "^1.2.0",

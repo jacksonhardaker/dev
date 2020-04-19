@@ -27,6 +27,10 @@ const Home = () => (
           line-height: 1.15;
           font-size: 48px;
         }
+        a:hover, a:focus {
+          padding: 3px 3px;
+          margin: -3px -3px;
+        }
         .title,
         .description {
           text-align: center;

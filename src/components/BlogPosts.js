@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { RichText } from 'prismic-reactjs';
 import { gray } from '../constants/colors';
+import { format } from 'date-fns';
+import BlogCoverImage from './BlogCoverImage';
 
 const BlogPosts = ({ posts }) => {
 
@@ -36,19 +38,24 @@ const BlogPosts = ({ posts }) => {
 
   if (!posts.results)
     return null;
-
   return (
     <section>
       <div className="posts">
-        {posts.results.map(post => (
-          <article key={post.uid}>
-            <Link href={`/blog/${post.uid}`}>
-              <a className="post">
-                <h2>{RichText.asText(post.data.title)}</h2>
-              </a>
-            </Link>
-          </article>
-        ))}
+        {posts.results.map(post => {
+          const published = post.data.published_date ? new Date(post.data.published_date) : new Date(post.first_publication_date);
+          return (
+            <article key={post.uid}>
+              <Link href={`/blog/${post.uid}`}>
+                <a className="post">
+                  <BlogCoverImage {...post.data.cover_image} />
+                  <h2>{RichText.asText(post.data.title)}</h2>
+                  <time dateTime={published} itemProp="datePublished">{format(published, 'MMMM do, y')}</time>
+                </a>
+              </Link>
+            </article>
+          )
+        }
+        )}
       </div>
       <footer>
         {previousLink()}
@@ -62,9 +69,10 @@ const BlogPosts = ({ posts }) => {
         }
         .post {
           display: flex;
+          flex-direction: column;
           width: 100%;
           height: 100%;
-          padding: 0 20px;
+          padding: 0 20px 20px;
           box-sizing: border-box;
           text-decoration: none;
         }
@@ -73,6 +81,9 @@ const BlogPosts = ({ posts }) => {
           margin: 20px 0;
           border: 1px solid ${gray};
           box-sizing: border-box;
+        }
+        time {
+          margin: auto 0 0;
         }
         footer {
           display: flex;

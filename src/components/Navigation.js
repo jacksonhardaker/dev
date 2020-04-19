@@ -3,7 +3,7 @@ import { black, primary, white } from '../constants/colors';
 
 const links = [
   { href: '/', label: 'home' },
-  { href: '/blog', label: 'blog' },
+  { href: '/blog/page/1', label: 'blog' },
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`
   return link

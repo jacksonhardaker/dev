@@ -1,5 +1,6 @@
 import App from 'next/app';
 import PrismicPreviewScript from '../src/components/PrismicPreviewScript';
+import '../src/loading.config';
 
 import 'normalize.css/normalize.css';
 import '../src/styles/fonts.scss';
