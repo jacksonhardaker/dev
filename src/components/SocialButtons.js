@@ -8,9 +8,9 @@ const SocialButtons = () => {
 
   return (
     <div>
-      <SocialButton Icon={LinkedInIcon} brand="keybase" href="https://keybase.io/jacksonhardaker" />
-      <SocialButton Icon={KeybaseIcon} brand="github" href="https://www.github.com/jacksonhardaker" />
-      <SocialButton Icon={GithubIcon} brand="linkedin" href="https://www.linkedin.com/in/jackson-hardaker-9b0829116/" />
+      <SocialButton Icon={KeybaseIcon} label="Jackson's keybase profile" href="https://keybase.io/jacksonhardaker" />
+      <SocialButton Icon={GithubIcon} label="Jackson's github profile" href="https://www.github.com/jacksonhardaker" />
+      <SocialButton Icon={LinkedInIcon} label="Jackson's linkedin profile" href="https://www.linkedin.com/in/jackson-hardaker-9b0829116/" />
 
       <style jsx>{`
         div {

@@ -1,9 +1,9 @@
 import { primary, black } from "../constants/colors";
 
-const SocialButton = ({ href, Icon }) => {
+const SocialButton = ({ href, Icon, label }) => {
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
+    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
       <Icon />
       <style jsx>{`
         a {
