@@ -17,8 +17,8 @@ export default async (req, res) => {
   const ref = previewRef || masterRef.ref;
   res.setPreviewData({ ref });
 
-  const url = await api.previewSession(token, useLinkResolver, '/');
+  const Location = await api.previewSession(token, useLinkResolver, '/');
 
-  res.writeHead(307, { Location: `${url}?preview=true` });
+  res.writeHead(307, { Location });
   res.end();
 }

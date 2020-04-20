@@ -10,6 +10,7 @@ import Author from '../../src/components/Author';
 import fetchBlogPost from '../../src/fetch/cms/post';
 import { useState, useEffect } from 'react';
 import fetchBlogPosts from '../../src/fetch/cms/posts';
+import blogPostHtmlSerializer from '../../src/htmlSerializers/blogPost';
 
 const Post = ({ post, canonical, preview, slug, previewRef }) => {
   const [currentPost, setCurrentPost] = useState(post);
@@ -50,7 +51,7 @@ const Post = ({ post, canonical, preview, slug, previewRef }) => {
             data.body.map((slice, index) => {
               switch (slice.slice_type) {
                 case 'text':
-                  return <RichText key={index} render={slice.primary.text} />;
+                  return <RichText key={index} render={slice.primary.text} htmlSerializer={blogPostHtmlSerializer} />;
                 case 'code':
                   return <Code key={index} language={slice.primary.syntax_highlighting} content={slice.primary.code_block} />
               }
