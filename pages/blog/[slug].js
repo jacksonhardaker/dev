@@ -6,7 +6,6 @@ import Cookies from 'js-cookie';
 import { RichText } from 'prismic-reactjs';
 import format from 'date-fns/format';
 import Page from '../../src/components/Page';
-import Code from '../../src/components/Code';
 import BlogCoverImage from '../../src/components/BlogCoverImage';
 import Author from '../../src/components/Author';
 import fetchBlogPost from '../../src/fetch/cms/post';
@@ -57,16 +56,7 @@ const Post = ({ post, canonical, preview, slug }) => {
         </a>
         <BlogCoverImage {...data.cover_image} richTextCaption={data.cover_image_caption} />
         <div itemProp="articleBody">
-          {
-            data.body.map((slice, index) => {
-              switch (slice.slice_type) {
-                case 'text':
-                  return <RichText key={index} render={slice.primary.text} htmlSerializer={blogPostHtmlSerializer} />;
-                case 'code':
-                  return <Code key={index} language={slice.primary.syntax_highlighting} content={slice.primary.code_block} />
-              }
-            })
-          }
+          {data.content && <RichText render={data.content} htmlSerializer={blogPostHtmlSerializer} />}
         </div>
         <Author {...author} />
         <div className="hidden">
