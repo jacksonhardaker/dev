@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { black, primary, white } from '../constants/colors';
+import ToggleDarkModeButton from './ToggleDarkModeButton';
 
 const links = [
   { href: '/', label: 'home' },
@@ -19,6 +19,9 @@ const Nav = () => (
           </Link>
         </li>
       ))}
+      <li className="right">
+        <ToggleDarkModeButton />
+      </li>
     </ul>
 
     <style jsx>{`
@@ -36,14 +39,12 @@ const Nav = () => (
         display: flex;
         padding: 6px 8px;
       }
+      li.right {
+        margin: 0 0 0 auto;
+      }
       a {
         text-decoration: none;
         padding: 3px 5px;
-      }
-      a:hover, a:focus {
-        color: ${white};
-        background-color: ${primary};
-        outline: none;
       }
     `}</style>
   </nav>

@@ -1,6 +1,8 @@
-import { primary, black } from "../constants/colors";
+import { primary, black, primaryDark, offWhite } from "../constants/colors";
+import useTheme from "../context/ThemeContext";
 
 const SocialButton = ({ href, Icon, label, ...rest }) => {
+  const { darkMode } = useTheme();
 
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label} { ...rest }>
@@ -11,12 +13,12 @@ const SocialButton = ({ href, Icon, label, ...rest }) => {
           height: 24px;
           display: inline-block;
           margin: 5px;
-          fill: ${black}
+          fill: ${darkMode ? offWhite : black}
         }
         a:hover, a:focus {
-          fill: ${primary};
+          fill: ${darkMode ? primaryDark : primary};
           outline: none;
-          background-color: transparent;
+          background-color: transparent !important;
         }
       `}</style>
     </a>

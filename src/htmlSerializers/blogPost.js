@@ -1,13 +1,15 @@
 import React from 'react';
 import { Elements } from 'prismic-reactjs';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import style from 'react-syntax-highlighter/dist/cjs/styles/hljs/tomorrow';
+import lightStyle from 'react-syntax-highlighter/dist/cjs/styles/hljs/tomorrow';
+import darkStyle from 'react-syntax-highlighter/dist/cjs/styles/hljs/tomorrow-night';
 
 const propsWithUniqueKey = (props, key) => Object.assign(props || {}, { key });
 
 const normalizeHeading = text => text.replace(/[^A-Za-z\s]/g, '').replace(/\s/g, '-').toLowerCase();
 
-const blogPostHtmlSerializer = (type, element, content, children, key) => {
+const blogPostHtmlSerializer = darkMode => (type, element, content, children, key) => {
+  const style = darkMode ? darkStyle : lightStyle;
   let props = {};
   switch (type) {
     case Elements.hyperlink:

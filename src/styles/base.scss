@@ -3,6 +3,7 @@
 
 html, body, main, #_next {
   background-color: $white;
+  color: $black;
 }
 
 main {
@@ -36,10 +37,31 @@ a {
 a:hover, a:focus {
   color: $white;
   background-color: $primary;
+  border-radius: 1px;
   outline: none;
 }
 
 pre {
   border: 1px solid transparentize($black, 0.80);
   border-radius: 2px;
+}
+
+html.dark {
+  background-color: $black;
+  color: $off-white;
+
+  body, main, #_next {
+    background-color: $black;
+    color: $off-white;
+  }
+
+  a {
+    color: $primary-dark;
+  }
+  
+  a:hover, a:focus {
+    color: $black;
+    background-color: $primary-dark;
+  }
+
 }

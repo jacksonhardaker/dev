@@ -13,8 +13,10 @@ import { useState, useEffect } from 'react';
 import fetchBlogPosts from '../../src/fetch/cms/posts';
 import blogPostHtmlSerializer from '../../src/htmlSerializers/blogPost';
 import PrismicPreviewScript from '../../src/components/PrismicPreviewScript';
+import useTheme from '../../src/context/ThemeContext';
 
 const Post = ({ post, canonical, preview, slug }) => {
+  const { darkMode } = useTheme();
   const [currentPost, setCurrentPost] = useState(post);
 
   const { data } = currentPost;
@@ -56,7 +58,7 @@ const Post = ({ post, canonical, preview, slug }) => {
         </a>
         <BlogCoverImage {...data.cover_image} richTextCaption={data.cover_image_caption} />
         <div itemProp="articleBody">
-          {data.content && <RichText render={data.content} htmlSerializer={blogPostHtmlSerializer} />}
+          {data.content && <RichText render={data.content} htmlSerializer={blogPostHtmlSerializer(darkMode)} />}
         </div>
         <Author {...author} />
         <div className="hidden">
