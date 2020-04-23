@@ -34,3 +34,8 @@ a:hover, a:focus {
   background-color: $primary;
   outline: none;
 }
+
+pre {
+  border: 1px solid transparentize($black, 0.80);
+  border-radius: 2px;
+}

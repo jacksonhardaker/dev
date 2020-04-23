@@ -1,7 +1,7 @@
 import React from 'react';
 import { Elements } from 'prismic-reactjs';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/cjs/styles/hljs/';
+import style from 'react-syntax-highlighter/dist/cjs/styles/hljs/tomorrow';
 
 const propsWithUniqueKey = (props, key) => Object.assign(props || {}, { key });
 
@@ -28,10 +28,10 @@ const blogPostHtmlSerializer = (type, element, content, children, key) => {
       
       if (comment && lang)
       {
-        return <SyntaxHighlighter key={key} language={lang} style={docco}>{element.text.replace(comment, '')}</SyntaxHighlighter>
+        return <SyntaxHighlighter key={key} language={lang} style={style}>{element.text.replace(comment, '')}</SyntaxHighlighter>
       }
       else {
-        return <SyntaxHighlighter key={key} style={docco}>{element.text}</SyntaxHighlighter>
+        return <SyntaxHighlighter key={key} style={style}>{element.text}</SyntaxHighlighter>
       }
 
     // Return null to stick with the default behavior
