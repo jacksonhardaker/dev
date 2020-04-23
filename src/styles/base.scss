@@ -1,6 +1,10 @@
 @import "colors";
 @import "loading";
 
+html, body, main, #_next {
+  background-color: $white;
+}
+
 main {
   max-width: 680px;
   margin: 0 auto;
