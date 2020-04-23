@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import { primary, black } from '../constants/colors';
 import PrismicPreviewScript from './PrismicPreviewScript';
 import ClearPreviewMode from './ClearPreviewMode';
 import Nav from './Navigation';
@@ -8,7 +7,7 @@ import Nav from './Navigation';
 const Page = ({ children, canonical, preview }) => {
   return (
     <main>
-      <PrismicPreviewScript {...{ preview }} />
+      <PrismicPreviewScript preview={preview} />
       <Head>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"></link>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"></link>

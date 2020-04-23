@@ -1,5 +1,4 @@
 import Prismic from 'prismic-javascript';
-import Cookies from 'cookies';
 import useLinkResolver from "../../src/hooks/useLinkResolver";
 
 export default async (req, res) => {
@@ -10,12 +9,7 @@ export default async (req, res) => {
 
   const api = await Prismic.getApi(process.env.PRISMIC_ENDPOINT);
 
-  // Enable Preview Mode by setting the cookies
-  const cookies = new Cookies(req, res);
-  const previewRef = cookies.get(Prismic.previewCookie);
-  const masterRef = api.refs.find(ref => { return ref.isMasterRef === true; });
-  const ref = previewRef || masterRef.ref;
-  res.setPreviewData({ ref });
+  res.setPreviewData({ token });
 
   const Location = await api.previewSession(token, useLinkResolver, '/');
 

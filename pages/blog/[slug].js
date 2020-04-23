@@ -1,6 +1,8 @@
 import fetch from 'node-fetch';
 import Head from 'next/head';
 import Error from 'next/error'
+import Prismic from 'prismic-javascript';
+import Cookies from 'js-cookie';
 import { RichText } from 'prismic-reactjs';
 import format from 'date-fns/format';
 import Page from '../../src/components/Page';
@@ -11,12 +13,10 @@ import fetchBlogPost from '../../src/fetch/cms/post';
 import { useState, useEffect } from 'react';
 import fetchBlogPosts from '../../src/fetch/cms/posts';
 import blogPostHtmlSerializer from '../../src/htmlSerializers/blogPost';
+import PrismicPreviewScript from '../../src/components/PrismicPreviewScript';
 
-const Post = ({ post, canonical, preview, slug, previewRef }) => {
+const Post = ({ post, canonical, preview, slug }) => {
   const [currentPost, setCurrentPost] = useState(post);
-
-  if (!post || !post.data.public)
-    return <Error statusCode={404} />;
 
   const { data } = currentPost;
   const author = data.author.data;
@@ -26,11 +26,21 @@ const Post = ({ post, canonical, preview, slug, previewRef }) => {
   useEffect(() => {
     if (preview) {
       (async () => {
-        const post = await fetchBlogPost(slug, previewRef);
+        const prismicPreviewRef = Cookies.get(Prismic.previewCookie);
+        const post = await fetchBlogPost(slug, prismicPreviewRef);
         setCurrentPost(post);
       })();
     }
   }, [preview]);
+
+  if (!post?.data?.public && !preview)
+    return (<>
+      <PrismicPreviewScript preview={preview} />
+      <Error statusCode={404} />
+    </>);
+
+  if (!currentPost)
+    return <Page {...{ canonical }} preview={preview}></Page>;
 
   return (
     <Page {...{ canonical }} preview={preview}>
@@ -83,11 +93,11 @@ const Post = ({ post, canonical, preview, slug, previewRef }) => {
   );
 };
 
-export const getStaticProps = async ({ params, preview, previewData = {} }) => {
+export const getStaticProps = async ({ params, preview }) => {
   const { slug } = params;
 
   try {
-    const post = await fetchBlogPost(slug, previewData.ref);
+    const post = await fetchBlogPost(slug);
 
     return {
       props: {
@@ -95,7 +105,6 @@ export const getStaticProps = async ({ params, preview, previewData = {} }) => {
         canonical: `https://jacksonhardaker.dev/blog/${slug}`,
         preview: preview || null,
         slug,
-        previewRef: previewData.ref || null,
       }
     };
   }
