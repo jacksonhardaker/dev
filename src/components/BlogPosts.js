@@ -1,40 +1,36 @@
 import Link from 'next/link';
 import { RichText } from 'prismic-reactjs';
-import { gray } from '../constants/colors';
+import { gray, offWhite, black, white } from '../constants/colors';
 import { format } from 'date-fns';
 import BlogCoverImage from './BlogCoverImage';
+import useTheme from '../context/ThemeContext';
 
 const BlogPosts = ({ posts }) => {
+  const { darkMode } = useTheme();
   const publicPosts = posts.results.filter(post => post.data.public);
 
-  const previousLink = () => {
-    return posts.prev_page && (
+  const pageLink = modifier => {
+    const nextVariant = modifier === 1;
+    return (
       <div>
-        <Link href={`/blog/page/${posts.page - 1}`}>
-          <a>Previous page</a>
+        <Link href="/blog/page/[index]" as={`/blog/page/${posts.page + modifier}`}>
+          <a>{nextVariant ? 'Next' : 'Previous'} page</a>
         </Link>
         <style jsx>{`
           div {
-            margin: 0 auto 0 0;
+            margin: ${nextVariant ? '0 0 0 auto' : '0 auto 0 0'};
           }
         `}</style>
       </div>
-    )
+    );
+  };
+
+  const previousLink = () => {
+    return posts.prev_page && pageLink(-1);
   };
 
   const nextLink = () => {
-    return posts.next_page && (
-      <div>
-        <Link href={`/blog/page/${posts.page + 1}`}>
-          <a>Next page</a>
-        </Link>
-        <style jsx>{`
-          div {
-            margin: 0 0 0 auto;
-          }
-        `}</style>
-      </div>
-    )
+    return posts.next_page && pageLink(1);
   };
 
   if (!publicPosts[0])
@@ -47,7 +43,7 @@ const BlogPosts = ({ posts }) => {
           const published = post.data.published_date ? new Date(post.data.published_date) : new Date(post.first_publication_date);
           return (
             <article key={post.uid}>
-              <Link href={`/blog/${post.uid}`}>
+              <Link href="/blog/[slug]" as={`/blog/${post.uid}`}>
                 <a className="post">
                   <BlogCoverImage {...post.data.cover_image} />
                   <h2>{RichText.asText(post.data.title)}</h2>
@@ -83,6 +79,12 @@ const BlogPosts = ({ posts }) => {
           margin: 20px 0;
           border: 1px solid ${gray};
           box-sizing: border-box;
+        }
+        h2, time {
+          color: ${darkMode ? offWhite : black}
+        }
+        .post:hover h2, .post:focus h2, .post:hover time, .post:focus time {
+          color: ${darkMode ? black : white}
         }
         time {
           margin: auto 0 0;
