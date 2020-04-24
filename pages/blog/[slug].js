@@ -51,9 +51,9 @@ const Post = ({ post, canonical, preview, slug }) => {
     <Page {...{ canonical }} preview={preview}>
       <Head>
         <title>{RichText.asText(data.title)} | Jackson Hardaker</title>
-        <meta itemprop="name" content={title} />
-        <meta itemprop="description" content={description} />
-        <meta itemprop="image" content={data.cover_image.url} />
+        <meta itemProp="name" content={title} />
+        <meta itemProp="description" content={description} />
+        <meta itemProp="image" content={data.cover_image.url} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@jacksonhardaker" />

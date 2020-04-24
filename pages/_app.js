@@ -5,14 +5,16 @@ import 'normalize.css/normalize.css';
 import '../src/styles/fonts.scss';
 import '../src/styles/base.scss';
 import { ThemeProvider } from '../src/context/ThemeContext';
+import { GoogleAnalyticsProvider } from '../src/context/GoogleAnalyticsContext';
 
 const MainApp = ({ Component, pageProps }) => {
-
   return (
     <>
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
+      <ThemeProvider>
+        <GoogleAnalyticsProvider>
+          <Component {...pageProps} />
+        </GoogleAnalyticsProvider>
+      </ThemeProvider>
     </>
   );
 };
