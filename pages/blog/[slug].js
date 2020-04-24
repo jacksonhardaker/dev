@@ -14,15 +14,11 @@ import fetchBlogPosts from '../../src/fetch/cms/posts';
 import blogPostHtmlSerializer from '../../src/htmlSerializers/blogPost';
 import PrismicPreviewScript from '../../src/components/PrismicPreviewScript';
 import useTheme from '../../src/context/ThemeContext';
+import calculateReadingTime from '../../src/utils/calculateReadingTime';
 
 const Post = ({ post, canonical, preview, slug }) => {
   const { darkMode } = useTheme();
   const [currentPost, setCurrentPost] = useState(post);
-
-  const { data } = currentPost;
-  const author = data.author.data;
-  const published = data.published_date ? new Date(data.published_date) : new Date(currentPost.first_publication_date);
-  const modified = new Date(currentPost.last_publication_date);
 
   useEffect(() => {
     if (preview) {
@@ -43,19 +39,50 @@ const Post = ({ post, canonical, preview, slug }) => {
   if (!currentPost)
     return <Page {...{ canonical }} preview={preview}></Page>;
 
+  const { data } = currentPost;
+  const author = data.author.data;
+  const title = RichText.asText(data.title);
+  const description = `${RichText.asText(data.content).substr(0, 197)}...`;
+  const published = data.published_date ? new Date(data.published_date) : new Date(currentPost.first_publication_date);
+  const modified = new Date(currentPost.last_publication_date);
+  const readingTime = calculateReadingTime(RichText.asText(data.content));
+
   return (
     <Page {...{ canonical }} preview={preview}>
       <Head>
         <title>{RichText.asText(data.title)} | Jackson Hardaker</title>
+        <meta itemprop="name" content={title} />
+        <meta itemprop="description" content={description} />
+        <meta itemprop="image" content={data.cover_image.url} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@jacksonhardaker" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:creator" content="@jacksonhardaker" />
+        <meta name="twitter:image:src" content={data.cover_image.url} />
+        <meta name="twitter:label1" value="Reading time"/>
+        <meta name="twitter:data1" value={readingTime}/>
+
+        <meta property="og:title" content={title} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonical} />
+        <meta property="og:image" content={data.cover_image.url} />
+        <meta property="og:description" content={description} />
+        <meta property="og:site_name" content="Jackson Hardaker | Frontend Engineer" />
+
+        <meta property="article:published_time" content={published} />
+        <meta property="article:modified_time" content={modified} />
       </Head>
       <article itemScope itemType="http://schema.org/BlogPosting">
         <header itemProp="headline">
-          <h1 itemProp="name">{RichText.asText(data.title)}</h1>
+          <h1 itemProp="name">{title}</h1>
         </header>
         <time dateTime={published} itemProp="datePublished">{format(published, 'MMMM do, y')}</time>
         <a href="/" title={RichText.asText(author.name)}>
           <span>{RichText.asText(author.name)}</span>
         </a>
+        <span className="reading-time">{readingTime}</span>
         <BlogCoverImage {...data.cover_image} richTextCaption={data.cover_image_caption} />
         <div itemProp="articleBody">
           {data.content && <RichText render={data.content} htmlSerializer={blogPostHtmlSerializer(darkMode)} />}
@@ -70,8 +97,8 @@ const Post = ({ post, canonical, preview, slug }) => {
         </div>
       </article>
       <style jsx>{`
-        time::after {
-          content: '-';
+        time::after, .reading-time::before {
+          content: '·';
           display: inline-block;
           margin: 0 1ch;
         }
