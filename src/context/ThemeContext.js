@@ -1,9 +1,20 @@
-import React, { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
+
+  const getPreferredColorScheme = () => {
+    if (window.matchMedia) {
+      if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+        return 'dark';
+      } else {
+        return 'light';
+      }
+    }
+    return 'light';
+  }
 
   const value = {
     darkMode,
@@ -11,8 +22,16 @@ export const ThemeProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const modeFromStorage = JSON.parse(localStorage.getItem('darkMode') || 'false');
-    setDarkMode(modeFromStorage);
+    const darkModeFromLocalStorage = localStorage.getItem('darkMode');
+    if (darkModeFromLocalStorage) {
+      setDarkMode(JSON.parse(darkModeFromLocalStorage || 'false'));
+    }
+    else if (getPreferredColorScheme() === 'dark') {
+      setDarkMode(true);
+    }
+    else {
+      setDarkMode(false);
+    }
   }, []);
 
   useEffect(() => {
