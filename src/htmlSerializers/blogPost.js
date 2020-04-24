@@ -12,6 +12,12 @@ const blogPostHtmlSerializer = darkMode => (type, element, content, children, ke
   const style = darkMode ? darkStyle : lightStyle;
   let props = {};
   switch (type) {
+    case Elements.paragraph:
+      if (element.text.match(/".+"\s-\s.+/)) {
+        return React.createElement('blockquote', propsWithUniqueKey(props, key), children);
+      }
+      
+      return null;
     case Elements.hyperlink:
       const href = element.data.url || linkResolver(element.data);
       props = {
