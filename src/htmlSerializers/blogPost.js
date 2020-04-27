@@ -16,7 +16,9 @@ const blogPostHtmlSerializer = darkMode => (type, element, content, children, ke
   switch (type) {
     case Elements.paragraph:
       if (element.text.match(/".+"\s-\s.+/)) {
-        return React.createElement('blockquote', propsWithUniqueKey(props, key), children);
+        const [, author] = element.text.match(/".+"(\s-\s.+)/);
+        const surroundingQuotesStripped = element.text.replace(/^\"/, '').replace(`"${author}`, author);
+        return React.createElement('blockquote', propsWithUniqueKey(props, key), surroundingQuotesStripped);
       }
 
       return null;

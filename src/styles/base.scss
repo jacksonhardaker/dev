@@ -1,7 +1,10 @@
 @import "colors";
 @import "loading";
 
-html, body, main, #_next {
+html,
+body,
+main,
+#_next {
   background-color: $white;
   color: $black;
 }
@@ -31,11 +34,34 @@ body {
   font-size: 18px;
 }
 
+blockquote {
+  position: relative;
+  margin: 3rem 2rem;
+  &::before,
+  &::after {
+    display: block;
+    font-size: 10rem;
+    position: absolute;
+    color: transparentize($primary, 0.8);
+  }
+  &::before {
+    content: "“";
+    top: -4rem;
+    left: -2rem;
+  }
+  &::after {
+    content: "”";
+    bottom: -8rem;
+    right: -2rem;
+  }
+}
+
 a {
   color: $primary;
 }
 
-a:hover, a:focus {
+a:hover,
+a:focus {
   color: $white;
   background-color: $primary;
   border-radius: 1px;
@@ -43,7 +69,7 @@ a:hover, a:focus {
 }
 
 pre {
-  border: 1px solid transparentize($black, 0.80);
+  border: 1px solid transparentize($black, 0.8);
   border-radius: 2px;
 }
 
@@ -51,7 +77,9 @@ html.dark {
   background-color: $black;
   color: $off-white;
 
-  body, main, #_next {
+  body,
+  main,
+  #_next {
     background-color: $black;
     color: $off-white;
   }
@@ -59,10 +87,17 @@ html.dark {
   a {
     color: $primary-dark;
   }
-  
-  a:hover, a:focus {
+
+  a:hover,
+  a:focus {
     color: $black;
     background-color: $primary-dark;
   }
 
+  blockquote {
+    &::before,
+    &::after {
+      color: transparentize($primary-dark, 0.8);
+    }
+  }
 }
