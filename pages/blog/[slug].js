@@ -120,7 +120,7 @@ export const getStaticProps = async ({ params, preview }) => {
 
     return {
       props: {
-        post,
+        post: post || null,
         canonical: `https://jacksonhardaker.dev/blog/${slug}`,
         preview: preview || null,
         slug,

@@ -3,20 +3,22 @@ import { Elements } from 'prismic-reactjs';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import lightStyle from 'react-syntax-highlighter/dist/cjs/styles/hljs/tomorrow';
 import darkStyle from 'react-syntax-highlighter/dist/cjs/styles/hljs/tomorrow-night';
+import ReactMarkdown from 'react-markdown';
+import { normalizeHeading } from '../utils/normalize';
+import { mdCodeRenderer, mdHeaderingRenderer } from './md';
 
 const propsWithUniqueKey = (props, key) => Object.assign(props || {}, { key });
 
-const normalizeHeading = text => text.replace(/[^A-Za-z\s]/g, '').replace(/\s/g, '-').toLowerCase();
-
 const blogPostHtmlSerializer = darkMode => (type, element, content, children, key) => {
   const style = darkMode ? darkStyle : lightStyle;
+
   let props = {};
   switch (type) {
     case Elements.paragraph:
       if (element.text.match(/".+"\s-\s.+/)) {
         return React.createElement('blockquote', propsWithUniqueKey(props, key), children);
       }
-      
+
       return null;
     case Elements.hyperlink:
       const href = element.data.url || linkResolver(element.data);
@@ -32,10 +34,12 @@ const blogPostHtmlSerializer = darkMode => (type, element, content, children, ke
       return React.createElement('h2', propsWithUniqueKey(props, key), children)
 
     case Elements.preformatted:
-      const [comment, lang] = element.text.match(/^\/\/(javascript|css|html)\n/) || [];
-      
-      if (comment && lang)
-      {
+      const [comment, lang] = element.text.match(/^\/\/(javascript|css|html|md|js)\n/) || [];
+
+      if (comment && lang && lang === 'md') {
+        return <ReactMarkdown key={key} source={element.text.replace(comment, '')} renderers={{ heading: mdHeaderingRenderer, code: mdCodeRenderer(style) }} />
+      }
+      else if (comment && lang) {
         return <SyntaxHighlighter key={key} language={lang} style={style}>{element.text.replace(comment, '')}</SyntaxHighlighter>
       }
       else {
