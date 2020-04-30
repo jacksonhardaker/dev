@@ -83,6 +83,9 @@ const Post = ({ post, canonical, preview, slug }) => {
           <span>{RichText.asText(author.name)}</span>
         </a>
         <span className="reading-time">{readingTime}</span>
+        <small className="date-modified">
+          <time dateTime={modified} itemProp="dateModified">Last modified: {format(modified, 'MMMM do, y')}</time>
+        </small>
         <BlogCoverImage {...data.cover_image} richTextCaption={data.cover_image_caption} />
         <div itemProp="articleBody">
           {data.content && <RichText render={data.content} htmlSerializer={blogPostHtmlSerializer(darkMode)} />}
@@ -101,6 +104,20 @@ const Post = ({ post, canonical, preview, slug }) => {
           content: '·';
           display: inline-block;
           margin: 0 1ch;
+        }
+        .date-modified {
+          display: block;
+          font-style: italic;
+          margin: 0.5rem 0;
+        }
+        .date-modified::before {
+          content: '(';
+        }
+        .date-modified::after {
+          content: ')';
+        }
+        .date-modified time::after {
+          content: none;
         }
         .hidden {
           visibility: hidden;
