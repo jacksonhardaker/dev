@@ -25,6 +25,13 @@ h6 {
   font-weight: 100;
 }
 
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
 body {
   margin: 0;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
@@ -32,6 +39,10 @@ body {
   line-height: 1.4;
   color: $black;
   font-size: 18px;
+}
+
+iframe {
+  max-width: 100%;
 }
 
 pre, code {
