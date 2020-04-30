@@ -1,8 +1,8 @@
 import React from 'react';
 import { Elements } from 'prismic-reactjs';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import lightStyle from 'react-syntax-highlighter/dist/cjs/styles/hljs/tomorrow';
-import darkStyle from 'react-syntax-highlighter/dist/cjs/styles/hljs/tomorrow-night';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import lightStyle from 'react-syntax-highlighter/dist/cjs/styles/prism/base16-ateliersulphurpool.light';
+import darkStyle from 'react-syntax-highlighter/dist/cjs/styles/prism/funky';
 import ReactMarkdown from 'react-markdown';
 import { normalizeHeading } from '../utils/normalize';
 import { mdCodeRenderer, mdHeaderingRenderer } from './md';
@@ -36,7 +36,7 @@ const blogPostHtmlSerializer = darkMode => (type, element, content, children, ke
       return React.createElement('h2', propsWithUniqueKey(props, key), children)
 
     case Elements.preformatted:
-      const [comment, lang] = element.text.match(/^\/\/(javascript|css|html|md|js)\n/) || [];
+      const [comment, lang] = element.text.match(/^\/\/(javascript|css|html|md|js|jsx)\n/) || [];
 
       if (comment && lang && lang === 'md') {
         return <ReactMarkdown key={key} source={element.text.replace(comment, '')} renderers={{ heading: mdHeaderingRenderer, code: mdCodeRenderer(style) }} />
