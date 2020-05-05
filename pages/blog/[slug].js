@@ -5,6 +5,7 @@ import Prismic from 'prismic-javascript';
 import Cookies from 'js-cookie';
 import { RichText } from 'prismic-reactjs';
 import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 import Page from '../../src/components/Page';
 import BlogCoverImage from '../../src/components/BlogCoverImage';
 import Author from '../../src/components/Author';
@@ -44,7 +45,7 @@ const Post = ({ post, canonical, preview, slug }) => {
   const title = RichText.asText(data.title);
   const description = `${RichText.asText(data.content).substr(0, 197)}...`;
   const published = data.published_date ? new Date(data.published_date) : new Date(currentPost.first_publication_date);
-  const modified = new Date(currentPost.last_publication_date);
+  const modified = new Date(currentPost.last_publication_date.split('T')[0]);
   const readingTime = calculateReadingTime(RichText.asText(data.content));
 
   return (
