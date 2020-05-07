@@ -8,7 +8,7 @@ const postSitemapBlock = post => {
     <loc>https://jacksonhardaker.dev/blog/${post.uid}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-    <lastmod>${post.last_publication_date}</lastmod>
+    <lastmod>${new Date(post.last_publication_date).toISOString()}</lastmod>
   </url>`;
 };
 
