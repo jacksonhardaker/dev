@@ -43,7 +43,8 @@ Sitemap.getInitialProps = async ({ res }) => {
     ${indexPages}
   </urlset>
   `;
-  res.setHeader("Content-Type", "text/xml");
+  res.setHeader('Content-Type', 'text/xml');
+  res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
   res.write(sitemap);
   res.end();
 };
