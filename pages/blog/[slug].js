@@ -80,7 +80,7 @@ const Post = ({ post, canonical, preview, slug }) => {
           <h1 itemProp="name">{title}</h1>
         </header>
         <time dateTime={published} itemProp="datePublished">{format(published, 'MMMM do, y')}</time>
-        <a href="/" title={RichText.asText(author.name)}>
+        <a href="/">
           <span>{RichText.asText(author.name)}</span>
         </a>
         <span className="reading-time">{readingTime}</span>
