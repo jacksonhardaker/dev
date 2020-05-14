@@ -36,6 +36,7 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     document.querySelector('html').classList.toggle('dark', darkMode);
+    document.querySelector('html').classList.toggle('light', !darkMode);
     localStorage.setItem('darkMode', darkMode);
   }, [darkMode]);
 

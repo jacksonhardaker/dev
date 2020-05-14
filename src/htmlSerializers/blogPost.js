@@ -1,8 +1,8 @@
 import React from 'react';
 import { Elements } from 'prismic-reactjs';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import lightStyle from 'react-syntax-highlighter/dist/cjs/styles/prism/base16-ateliersulphurpool.light';
-import darkStyle from 'react-syntax-highlighter/dist/cjs/styles/prism/funky';
+import lightStyle from 'react-syntax-highlighter/dist/cjs/styles/prism/vs';
+import darkStyle from 'react-syntax-highlighter/dist/cjs/styles/prism/vs-dark';
 import ReactMarkdown from 'react-markdown';
 import { normalizeHeading } from '../utils/normalize';
 import { mdCodeRenderer, mdHeaderingRenderer } from './md';
