@@ -12,13 +12,16 @@ const ToggleDarkModeButton = () => {
   }
 
   return (
-    <button title={`toggle ${darkMode ? 'light' : 'dark'} mode`} onClick={toggle}>
+    <button onClick={toggle}>
       <Icon height={16} />
       <span tabIndex={-1}>toggle {darkMode ? 'light' : 'dark'} mode</span>
       <style jsx>{`
         span {
           text-indent: 999px;
+          color: transparent;
           position: absolute;
+          width: 1px;
+          height: 1px;
         }
         button {
           background-color: transparent;
