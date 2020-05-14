@@ -14,7 +14,12 @@ const ToggleDarkModeButton = () => {
   return (
     <button title={`toggle ${darkMode ? 'light' : 'dark'} mode`} onClick={toggle}>
       <Icon height={16} />
+      <span tabIndex={-1}>toggle {darkMode ? 'light' : 'dark'} mode</span>
       <style jsx>{`
+        span {
+          text-indent: 999px;
+          position: absolute;
+        }
         button {
           background-color: transparent;
           border: none;
@@ -22,6 +27,8 @@ const ToggleDarkModeButton = () => {
           fill: ${darkMode ? offWhite : black};
           cursor: pointer;
           outline: none;
+          overflow: hidden;
+          position: relative;
         }
         button:hover, button:focus {
 
