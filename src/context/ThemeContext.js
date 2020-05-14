@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import useQueryParams from '../hooks/useQueryParams';
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
+  const darkModeFromQueryParams = useQueryParams('dark');
 
   const getPreferredColorScheme = () => {
     if (window.matchMedia) {
@@ -23,8 +25,17 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const darkModeFromLocalStorage = localStorage.getItem('darkMode');
-    if (darkModeFromLocalStorage) {
-      setDarkMode(JSON.parse(darkModeFromLocalStorage || 'false'));
+
+    if (darkModeFromQueryParams === true) {
+      setDarkMode(darkModeFromQueryParams);
+    }
+    else if (darkModeFromLocalStorage) {
+      try {
+        setDarkMode(JSON.parse(darkModeFromLocalStorage || 'false'));
+      }
+      catch {
+        setDarkMode(false);
+      }
     }
     else if (getPreferredColorScheme() === 'dark') {
       setDarkMode(true);
@@ -32,7 +43,7 @@ export const ThemeProvider = ({ children }) => {
     else {
       setDarkMode(false);
     }
-  }, []);
+  }, [darkModeFromQueryParams]);
 
   useEffect(() => {
     document.querySelector('html').classList.toggle('dark', darkMode);
