@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import useQueryParams from '../hooks/useQueryParams';
+import useIsomorphicLayoutEffect from '../hooks/useIsometricEffect';
 
 export const ThemeContext = createContext();
 
@@ -23,7 +24,7 @@ export const ThemeProvider = ({ children }) => {
     setDarkMode,
   };
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const darkModeFromLocalStorage = localStorage.getItem('darkMode');
 
     if (darkModeFromQueryParams === true) {
@@ -45,7 +46,7 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [darkModeFromQueryParams]);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     document.querySelector('html').classList.toggle('dark', darkMode);
     document.querySelector('html').classList.toggle('light', !darkMode);
     localStorage.setItem('darkMode', darkMode);
