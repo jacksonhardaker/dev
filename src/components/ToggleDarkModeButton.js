@@ -17,6 +17,7 @@ const ToggleDarkModeButton = () => {
       <span tabIndex={-1}>toggle {darkMode ? 'light' : 'dark'} mode</span>
       <style jsx>{`
         span {
+          pointer-events: none;
           text-indent: 999px;
           color: transparent;
           position: absolute;
