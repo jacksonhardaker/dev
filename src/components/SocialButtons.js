@@ -11,7 +11,7 @@ const SocialButtons = () => {
     <div>
       <SocialButton title="Keybase profile" Icon={KeybaseIcon} label="Jackson's keybase profile" href="https://keybase.io/jacksonhardaker" />
       <SocialButton title="GitHub Profile" Icon={GithubIcon} label="Jackson's github profile" href="https://www.github.com/jacksonhardaker" />
-      <SocialButton title="LinkedIn Profile" Icon={LinkedInIcon} label="Jackson's linkedin profile" href="www.linkedin.com/in/jacksonhardaker/" />
+      <SocialButton title="LinkedIn Profile" Icon={LinkedInIcon} label="Jackson's linkedin profile" href="https://www.linkedin.com/in/jacksonhardaker/" />
       <SocialButton title="Twitter Profile" Icon={TwitterIcon} label="Jackson's twitter profile" href="https://twitter.com/jacksonhardaker" />
 
       <style jsx>{`
