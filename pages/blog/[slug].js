@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import Head from 'next/head';
 import Error from 'next/error'
 import Prismic from 'prismic-javascript';
