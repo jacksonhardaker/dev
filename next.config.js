@@ -8,6 +8,15 @@ const withMDX = require('@next/mdx')({
 
 module.exports = withMDX({
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  async redirects() {
+    return [
+      {
+        source: '/blog',
+        destination: '/blog/page/1',
+        permanent: true,
+      },
+    ]
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
