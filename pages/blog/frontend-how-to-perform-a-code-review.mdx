@@ -9,10 +9,362 @@ export const meta = {
   author: 'Jackson',
   cover: {
     src: 'sossusvlei.jpeg',
-    alt: 'Sand dunes of Sossusvlei in Namibia'
-  }
+    alt: 'Sand dunes of Sossusvlei in Namibia',
+  },
 };
 
-export default ({ children }) => <Post meta={meta}>{children}</Post
+Code reviews fill an integral role in improving overall code quality, maintainability, and performance, as well as providing an excellent resource for learning. While this post focuses on things to look for as a Frontend Engineer when performing a code review, many of these principals will apply across the board. Before delving into the specifics, it's worth going over the who / what / when / where / how of code reviews.
 
->
+## Who should perform a code review?
+A code review can, and should, be performed by engineers of any skill level. In my view, one of the side benefits of a great code review, is the opportunity for junior devs to learn something they may not already know (or for that matter, for senior devs to learn something new they may not be up to date with).
+
+If, as a dev with less experience, you come across some code in a PR that you don't understand: ask! It's very possible you're not the only one confused. As a developer, there's no better test for your own understanding of a concept or problem than by explaining it to someone else, so not only will this provide a learning opportunity for the dev asking the question, but also provides the code author the chance to reinforce their own understanding by providing an explanation.
+
+Even if a dev is not intending to review a particular PR, I always encourage them to read through the reviews that others leave (time permitting, of course). Perhaps in doing so you'll learn a new coding technique? Or perhaps seeing a question that someone else asks will inform your own questions down the line?
+
+## What should we be looking for?
+How long is "a piece" of string? This is one of those questions which doesn't necessarily have a clear answer. I'll delve into the things that I look for when performing a code review (focusing on the frontend) later, but what I look for will fall under at least one of several categories:
+
+### Maintainability
+How easy would it be for another dev to come in at a later date and make changes/fixes? Does this PR knowingly incur tech debt (for the purpose of getting it quickly), and if so, is there a task in place to rectify that? Are tests included, and are they easy to understand? Could the code be refactored to make tests easier to write? Does this change require updates/additions to documentation, and has that occurred?
+
+### Clarity
+How easy is it to determine the purpose of the code? Are there meaningful, consistent, variable/function names? Is there an opportunity to break a larger function up into smaller, more targeted functions? Does the code conform to your team's style guide?
+
+To automate code style, many teams utilize Prettier. Personally, I'm not a fan, but if you find it works for you and your team, use it! My personal preference is to utilize ESLint to provide some relatively generic code style rules, and then apply common sense for code formatting which isn't dictated by those rules. Perhaps I'm fortunate, but that, less opinionated, approach hasn't come back to bite me so far.
+
+### Implementation
+Is the issue that the PR is addressing resolved? Is there an alternative to the approach used that is faster/cleaner/safer? Is there reused code which could be abstracted out into a reusable function? Has there been some code added which duplicates existing functionality, which could be reused instead?
+
+Have 3rd party packages been imported? If so, was it really necessary? Was the package vetted?
+
+### Security
+Are there any API keys or credentials that are being made public which shouldn't be? Are there any risks of script injection? Are there 3rd party scripts being included which may be a security risk?
+
+## When should a code review be performed?
+If we care about the quality of our codebase (we do), no code should be merged without a code review. It's up to your team to decide on the timeframe for performing a code review once a PR has been submitted, but what we don't want is for a PR to become stale, and out of date. With that in mind, reviews should be performed in a timely manner after a PR is submitted.
+
+## Where to perform a code review?
+This one might seem obvious, but the answer is "wherever your codebase lives". If you're using GitHub, then you'll be using the built in PR reviewing tools there.
+
+What you shouldn't do, is read through a PR, and then privately message notes directly to the author. As mentioned before, codes reviews can be a great learning tool, and by taking the review "offline", so to speak, that opportunity is robbed. Keeping it private would also make it difficult to determine whether any given PR has already been reviewed or not. Keeping it all public is the best way forward.
+
+A final option would be an "in person" code review. For a complex PR which requires additional context, it can make sense to do a "in person" walk through of the PR by the author, with the reviewer providing feedback as they go. For me, I'd still prefer a paper trail of comments for any given PR, so even if an "in person" code review has been performed, it would still be beneficial to leave comments with relevant notes.
+
+## How should I leave notes/comments?
+Keep your comments clear and concise. Use plain language as much as possible. Try to address the code, rather than the author. Don't be afraid to ask questions for more context if it's necessary.
+
+There will likely be nuance to how serious your comments are. How can you differentiate between: "this change needs to happen" vs "here's a potentially better way to do the same thing"? Some companies formalize these variations of importance into a [feedback ladder](https://www.netlify.com/blog/2020/03/05/feedback-ladders-how-we-encode-code-reviews-at-netlify/).
+
+You should always sum up your review with a final statement pointing out the most important sections of your review. Most code repositories will have a formalized method for requesting changes.
+
+Finally, if you see something you really like, make sure you share that fact!
+
+## Examples
+This is where we start delving into what I personally look for when performing a frontend code review. For each example, I'll relate it back to one of the four categories from above: Maintainability, Clarity, Implementation, Security.
+
+_Note: Any code examples included are likely to be super trivial, so use your imagination a little bit._
+
+### Image Assets
+_Implementation_
+
+Perhaps you use a CDN for your image assets, if so: great! But perhaps you're including image assets into your repo. If you aren't running an automated optimization on these images during deployment, you'll want to assess that these images are suitable dimensions/file sizes.
+
+When including images into a page, has thought been given to the point at which this image should load? If it's below the fold, it's probably desirable that it should be lazy loaded.
+
+### Newly imported packages
+_Implementation / Maintainability / Security_
+
+For me, whether to include a new package should be a calculation based on things like: ease-of-use, complexity of a custom solution, package size, likelihood to be used elsewhere, package support/test coverage etc.
+
+For packages being included client side, what will this do to the size of your js/css bundle? Can we utilize tree-shaking to limit this size? (_I like to use [https://bundlephobia.com/](https://bundlephobia.com/) for a quick overview of a package._)
+
+Could we utilize the new package elsewhere in the site to get more bang for our buck?
+
+Are we already importing a similar package to do the same job e.g. two different carousel packages, underscore and lodash etc.
+
+How frequently is it being used? Is there a lighter weight option which will achieve the same result?
+
+Is there vanilla JS that could do the same job, with a little more effort? If this is the case, is it worth the investment of time to implement and provide unit tests for the same functionality?
+
+### 3rd Party Scripts
+_Security_
+
+Is this script trustworthy?
+
+### Directory/file structure + code splitting
+_Clarity / Maintainability_
+
+If a single file is getting to be long, is there an opportunity to split it into multiple files?
+
+If a change to an existing file now makes the file name descriptively inaccurate, why has it not been renamed? If that change no longer matches with the file name, but there is other code that does, why hasn't this change been split into a new file?
+
+Is this piece of code going to be reused? Could it be? If so, is it nested in a location where it will be easily findable in order to be reused, or is it hidden in a feature subdirectory?
+
+Separation of concerns
+Maintainability / Clarity
+
+In JS, are we applying styles to elements where we could be toggling a class?
+
+In JS, are we stringing together a sequence of selectors, where some refactoring could make this more readable and less prone to regression?
+
+```js
+document.querySelectorAll('body nav ul > li a')
+
+// vs
+
+document.querySelectorAll('[data-nav-link]')
+```
+
+In CSS are we applying styles to elements rather than class names?
+
+```css
+nav ul > li a {
+   color: #ff0000;
+}
+
+/* vs */
+
+.nav__link {
+   color: #ff0000;
+}
+```
+
+## Variable types, naming, and magic numbers
+_Maintainability / Clarity_
+
+Are there any magic numbers? Why can they not be extracted into a named const variable?
+
+```js
+const someArray = [...];
+if (someArray[9] === 'cheese') {
+   // do something
+}
+```
+
+Are there single letter variable names which should be more descriptive?
+
+```js
+const products = [...];
+function findProduct(id) {
+   return products.find(p => p.id === id);
+}
+```
+
+Does a variable name make sense? Does it make the logic easier or more difficult to follow?
+
+```js
+function(product) {
+   const onSale = product.originalPrice > product.currentPrice;
+   // vs
+   const isOnSale = product.originalPrice > product.currentPrice;
+
+  if (isOnSale) {
+     // do something
+  }
+}
+```
+
+Is `var` or `let` being used when `const` should be? If they are being used, is there a good reason?
+
+```js
+function(arr, index) {
+   var total = arr.length;
+   return `Item ${index} of ${count}`;
+}
+```
+
+Are variables named consistently? If they're being used for conditionals later on, can they be named in a way to make the conditional clearer?
+
+```js
+function(product) {
+  const isOnSale = ...;
+  const productInStock = ...;
+
+  if (isOnSale || !productInStock) {
+     // do something if on sale or out of stock
+  }
+}
+
+// vs
+
+function(product) {
+   const isOnSale = ...;
+   const isOutOfStock = ...;
+
+   if (isOnSale || isOutOfStock) {
+     // do something if on sale or out of stock
+   }
+}
+```
+
+## Code refactors
+_Maintainability_
+
+Can a block code be refactored to make following the logic easier, or the code shorter (whilst still being understandable)?
+
+```js
+function(arr) {
+   const transformedValues = [];
+   for (let i = 0; i < arr.length; i++) {
+      mappedValues.push(transformValInSomeWay(arr[i]));
+   }
+   return transformedValues;
+}
+
+// vs
+
+function(arr) {
+   return arr.map(transformValInSomeWay);
+}
+```
+
+Can a variable type we're using be changed to make following the logic easier?
+
+Is it possible to write a unit-test for a block of code? If not, can it be refactored to make it so?
+
+Does a code block have the potential for side effects, through the reliance on external variables? Can it be made more pure?
+
+## Code smell
+_Maintainability / Clarity / Implementation / Security_
+
+These can often be subjective, but can be an indicator that some refactoring is necessary. To name a few:
+
+- Function with many parameters
+- Overly long/short variable names
+- Unnecessary conditionals
+- Too many return statements
+- Sometimes you just get a gut feeling that something could be done cleaner, but as a reviewer you don't necessarily have the full context to provide an alternative. This would be a great opportunity to schedule a walk-through of the code with the author, to gain more context, and work through the section in question together.
+
+## Code comments
+_Maintainability_
+
+Is there some hard to understand code which isn't commented? Good code can be self documenting, but sometimes you can't beat a well placed comment.
+
+Is there an empty catch block with no explanation as to why it's ok to ignore the error?
+
+```js
+try {
+   // do some things
+}
+catch { } // why can we ignore any thrown errors?
+```
+
+## Semantic HTML
+_Implementation_
+
+Do the tags being used make semantic sense? Are there better options?
+
+```html
+<div class="article">
+   <div class="header">
+      ...
+   </div>
+   <div class="body">
+      <div class="section">
+         <img src="..." alt="..."/>
+         <p>image caption</p>
+         ...
+      </div>
+      <div class="section"></div>
+      <div class="section"></div>
+   </div>
+   <div class="footer">
+      ...
+   </div>
+</div>
+
+<!-- vs -->
+
+<article>
+   <header>
+      ...
+   </header>
+   <div class="body">
+      <section>
+         <figure>
+            <img src="..." alt="..." />
+            <figcaption>image caption</figcaption>
+         </figure>
+      </section>
+      <section></section>
+      <section></section>
+   </div>
+   <footer>
+      ...
+   </footer>
+</article>
+```
+
+`<a>` vs `<button>` (a nice rule of thumb is "`<a>` navigates somewhere, `<button>` triggers something")
+
+```html
+<a href="#">Open Login Modal</a>
+
+<!-- vs -->
+
+<button>Open Login Modal</button>
+```
+
+Is there a “gotcha” that's been missed? For example:
+
+```html
+<form>
+   <!-- form stuff -->
+
+   <!-- open info modal -->
+   <button>More Info</button>
+
+   <input type="submit">Submit form</input>
+</form>
+```
+In the above example, the "More Info" button, will trigger the form submit by default unless it is given `type="button"`.
+
+## CSS/SASS
+_Implementation / Maintainability / Clarity_
+
+Is there an existing mixin or function which can simplify a class definition?
+
+Are the same styles being applied frequently. Could they be a utility class? If not, could a mixin be used to centralize these rules?
+
+Is a specific pixel value breakpoint being set frequently? Consider adding this as a variable for that sass file.
+
+## Accessibility
+_Implementation_
+
+Do images have _alt_ tags?
+
+Are there some aria-* tags which would improve the experience for people using screen readers?
+
+Can interactive elements be selected via the _tab_ key? Are there instances of _tabIndex_ with a value of anything _other_ than -1 or 0 (this is an anti-pattern)?
+
+Does the PR introduce some kind of notification modal or banner which triggers on page load? If so, where in the DOM is it included? Modals/banners such as these should appear at the top of the DOM, so that users navigating by keyboard can interact with them immediately, without having to tab through the entirety of the DOM.
+
+Are color contrasts acceptable?
+
+## Keep things as DRY (don't repeat yourself) as possible
+_Implementation_
+
+Have you seen similar code in this PR? Why is it not being reused?
+
+Is there similar code being used elsewhere in the codebase? Why not reuse it?
+
+## Best practices and anti patterns
+_Security / Maintainability_
+
+This is an area with the potential for disagreement, however it also makes for great discussions!
+
+Is there a best practice that isn't being followed, or an anti pattern which is?
+
+i.e. overuse of _!important_ in css, polluting the global namespace in JavaScript, or extending the Object prototype.
+
+## Leave the files you touch in a better state than you found them
+_Maintainability_
+
+Is there an opportunity to refactor some legacy code and pay down some technical debt? Perhaps there are ES2015+ features which could replace existing usage of a library such as jQuery/underscore/lodash?
+
+This quote nicely sums up this point:
+
+> The person who desires to leave things better than he found them, who does more than his share, who is not attached to rewards, who is always seeking to benefit others, who knows he is cared for and rewarded by the Universe for his every effort, is able to act selflessly, without expectation of a reward or a return, without thought of advantage, and of him it is said, “He is better than the best,” and, of course, he is greatly rewarded. - Wu Wei
+
+export default ({ children }) => <Post meta={meta}>{children}</Post>;
