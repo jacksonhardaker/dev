@@ -4,11 +4,13 @@ import path from 'path';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { Post as PostLayout, Meta } from '../../templates/blog/Post';
+import lightStyle from '../../src/constants/prism/lightStyle';
 
-const CodeBlock = (props) => {
-  // console.log({ props });
-  return <code {...props}></code>;
+const CodeBlock = ({ className, children }) => {
+  const language = className.replace('language-', '');
+  return <SyntaxHighlighter style={lightStyle} language={language}>{children}</SyntaxHighlighter>;
 };
 
 const components = {
