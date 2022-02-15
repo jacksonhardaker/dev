@@ -1,4 +1,3 @@
-import App from 'next/app';
 import '../src/loading.config';
 
 import 'normalize.css/normalize.css';
@@ -12,7 +11,9 @@ const MainApp = ({ Component, pageProps }) => {
     <>
       <ThemeProvider>
         <GoogleAnalyticsProvider>
-          <Component {...pageProps} />
+          <main>
+            <Component {...pageProps} />
+          </main>
         </GoogleAnalyticsProvider>
       </ThemeProvider>
     </>
