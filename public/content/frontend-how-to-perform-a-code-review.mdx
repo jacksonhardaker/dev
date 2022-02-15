@@ -1,17 +1,13 @@
-import { Post } from '../../templates/blog/Post';
-
-export const meta = {
-  title: 'Frontend: how to perform a code review',
-  description: '',
-  public: true,
-  published: '2020-04-23',
-  modified: '2020-04-24',
-  author: 'Jackson',
-  cover: {
-    src: 'sossusvlei.jpeg',
-    alt: 'Sand dunes of Sossusvlei in Namibia',
-  },
-};
+---
+title: 'Frontend: how to perform a code review'
+description: ''
+public: true
+published: '2020-04-23'
+modified: '2020-04-24'
+author: 'Jackson'
+coverSrc: '/images/sossusvlei.jpeg'
+coverAlt: 'Sand dunes of Sossusvlei in Namibia'
+---
 
 Code reviews fill an integral role in improving overall code quality, maintainability, and performance, as well as providing an excellent resource for learning. While this post focuses on things to look for as a Frontend Engineer when performing a code review, many of these principals will apply across the board. Before delving into the specifics, it's worth going over the who / what / when / where / how of code reviews.
 
@@ -366,5 +362,3 @@ Is there an opportunity to refactor some legacy code and pay down some technical
 This quote nicely sums up this point:
 
 > The person who desires to leave things better than he found them, who does more than his share, who is not attached to rewards, who is always seeking to benefit others, who knows he is cared for and rewarded by the Universe for his every effort, is able to act selflessly, without expectation of a reward or a return, without thought of advantage, and of him it is said, “He is better than the best,” and, of course, he is greatly rewarded. - Wu Wei
-
-export default ({ children }) => <Post meta={meta}>{children}</Post>;

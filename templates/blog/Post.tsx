@@ -1,19 +1,27 @@
-import { MDXProvider } from '@mdx-js/react';
+import { FC } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import format from 'date-fns/format';
 import { CoverImage } from './CoverImage';
 import { HeadMeta } from './HeadMeta';
-
-import styles from './Post.module.css';
 import { CompletelyHidden } from '../../components/CompletelyHidden';
+import styles from './Post.module.css';
 
-const components = {};
+export type Meta = {
+  title: string;
+  description: string;
+  public: boolean;
+  published: string;
+  modified: string;
+  author: string;
+  coverSrc: string;
+  coverAlt: string;
+};
 
-export const Post = ({ children, meta }) => {
+export const Post: FC<{ meta: Meta }> = ({ children, meta }) => {
   const { pathname } = useRouter();
   return (
-    <MDXProvider components={components}>
+    <>
       <HeadMeta {...meta} canonical={pathname} />
       <article itemScope itemType="http://schema.org/BlogPosting">
         <header itemProp="headline">
@@ -32,7 +40,7 @@ export const Post = ({ children, meta }) => {
             Last modified: {format(new Date(meta.modified), 'MMMM do, y')}
           </time>
         </small>
-        <CoverImage {...meta.cover} />
+        <CoverImage src={meta.coverSrc} alt={meta.coverAlt} />
         <div itemProp="articleBody">{children}</div>
       </article>
       <CompletelyHidden>
@@ -47,6 +55,6 @@ export const Post = ({ children, meta }) => {
           <meta itemProp="name" content="Jackson Hardaker" />
         </div>
       </CompletelyHidden>
-    </MDXProvider>
+    </>
   );
 };

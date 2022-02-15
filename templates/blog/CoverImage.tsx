@@ -22,7 +22,6 @@ export const CoverImage: VFC<
         height={510}
         priority={true}
         {...props}
-        src={`/images/${props.src}`}
       />
       {props.src && <meta itemProp="url" content={props.src} />}
       {props.width && <meta itemProp="width" content={`${props.width}`} />}

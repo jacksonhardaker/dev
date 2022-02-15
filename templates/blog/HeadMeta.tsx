@@ -4,20 +4,26 @@ import Head from 'next/head';
 export const HeadMeta: VFC<{
   title: string;
   description: string;
-  cover: {
-    src: string;
-    alt: string;
-  };
+  coverSrc: string;
+  coverAlt: string;
   canonical: string;
   published: string;
   modified: string;
-}> = ({ title, description, cover, canonical, published, modified }) => {
+}> = ({
+  title,
+  description,
+  coverSrc,
+  coverAlt,
+  canonical,
+  published,
+  modified,
+}) => {
   return (
     <Head>
       <title>{title}</title>
       <meta itemProp="name" content={title} />
       <meta itemProp="description" content={description} />
-      <meta itemProp="image" content={cover.src} />
+      <meta itemProp="image" content={coverSrc} />
       <link rel="canonical" href={canonical} />
 
       <meta name="twitter:card" content="summary_large_image" />
@@ -25,14 +31,14 @@ export const HeadMeta: VFC<{
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:creator" content="@jacksonhardaker" />
-      <meta name="twitter:image" content={cover.src} />
-      <meta name="twitter:image:alt" content={cover.alt} />
+      <meta name="twitter:image" content={coverSrc} />
+      <meta name="twitter:image:alt" content={coverAlt} />
 
       <meta property="og:title" content={title} />
       <meta property="og:type" content="article" />
       <meta property="og:url" content={canonical} />
-      <meta property="og:image" content={cover.src} />
-      <meta property="og:image:alt" content={cover.alt} />
+      <meta property="og:image" content={coverSrc} />
+      <meta property="og:image:alt" content={coverAlt} />
       <meta property="og:description" content={description} />
       <meta
         property="og:site_name"
