@@ -4,22 +4,21 @@ import SocialButtons from '../src/components/SocialButtons'
 import Page from '../src/components/Page'
 
 const Home = () => (
-  <Page>
-    <div>
-      <Head>
-        <title>Jackson Hardaker | Frontend Engineer</title>
-      </Head>
+  <div>
+    <Head>
+      <title>Jackson Hardaker | Frontend Engineer</title>
+    </Head>
 
-      <div className="hero">
-        <h1 className="title">Jackson Hardaker</h1>
-        <p className="description">
-          Frontend Engineer @ <a href='https://tn.com'>tuftandneedle.com</a>
-        </p>
+    <div className="hero">
+      <h1 className="title">Jackson Hardaker</h1>
+      <p className="description">
+        Frontend Engineer @ <a href='https://tn.com'>tuftandneedle.com</a>
+      </p>
 
-        <SocialButtons />
-      </div>
+      <SocialButtons />
+    </div>
 
-      <style jsx>{`
+    <style jsx>{`
         .title {
           margin: 0;
           width: 100%;
@@ -36,8 +35,7 @@ const Home = () => (
           text-align: center;
         }
       `}</style>
-    </div>
-  </Page>
+  </div>
 )
 
 export default Home
