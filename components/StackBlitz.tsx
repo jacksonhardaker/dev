@@ -17,6 +17,7 @@ export const StackBlitz: VFC<{
       openFile,
       clickToLoad,
       hideNavigation,
+      hideExplorer: true,
     });
   }, [id, openFile, clickToLoad]);
   return <div id={id}></div>;

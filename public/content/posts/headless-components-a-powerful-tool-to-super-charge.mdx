@@ -31,3 +31,324 @@ That said, if you're supporting a component library or making use of the same co
 In the early days of your codebase, you have the need for a simple manual counter component such as this:
 
 <StackBlitz id="headless-example-1" />
+
+Great! It's simple, and it works. Job done.
+
+A little while later, a use case for this component comes down the line. We need to support a "decrement" button, but not in every case. We'll add that as optional functionality:
+
+<StackBlitz id="headless-example-2" />
+
+Ok, getting a little more complicated, but still manageable.
+
+Further down the line, we have another use for the component: Automatic mode. We want to be able to start the counter, and have it automatically increment until manually stopped. Let's do that:
+
+<StackBlitz id="headless-example-3" />
+
+But wait, there's a new use case. The label "Count" has worked nicely so far, but there are a few other situations where we want to use it, where we can customize the label. While we're at it, we've had a request to customize the number itself with an optional prefix and/or suffix. We should really have a little more control over the increment/decrement/start/stop button labels as well:
+
+<StackBlitz id="headless-example-4" />
+
+_Note: for the purpose of the above example, we'll just ignore the fact that we can't rely on setInterval to give us an accurate timer, despite the new label suggesting as much._
+
+Wow, this is turning into a mess. Just as we finish the label additions, now we've got to support min/max values. Something's gotta' give. Maybe we should split this component into several different components to handle the newer use cases. But what about the fact that when we boil it down, the components are just variations of the same functionality?
+
+Enter headless components.
+
+## Headless to the rescue
+
+<StackBlitz id="headless-example-5" />
+
+Take a look at the code snippet above: HeadlessCounter.js. It boils down to a few features:
+
+1. The "count" state, this is the cornerstone of all of our functionality.
+1. Additional state, for the express purpose of making it easier to extend functionality.
+1. Helper functions, for updating the count state.
+1. A few conditionals to make sure the component receives a function as a child of the headless component.
+1. A return point which calls the child function with our predetermined props.
+1. A default return point of null.
+
+Now take a look at index.js for some recreations of the usage of our bloated Counter.js from earlier. Each of these makes use of the headless component directly, but there's nothing stopping us from creating a new component to wrap the headless functionality, or a Presentational Component for the UI, to make reuse even easier.
+
+```jsx
+const BasicCounterUI = ({ count, increment, decrement }) => {
+  return (
+    <>
+      <p>Count: {count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+    </>
+  );
+};
+
+...
+
+// usage
+<HeadlesssCounter>{props => <BasicCounterUI {...props} />}</HeadlesssCounter>
+```
+
+Suddenly, we can easily share the core functionality of "keeping track of a number which can increase or decrease", but it's also trivial to make slight adaptions to button labels, number formatting whenever we please, or even extending functionality.
+
+## A real world example
+
+I hear you: the counter functionality is pretty simplistic, and splitting those various use cases into standalone components wouldn't be a big deal. So let me suggest a potential real world example.
+
+Say you're building an ecommerce website. The designs call for the concept of a "product selector", where a product can be selected via a combination of size and color variations, and added to a shopping cart. Your site makes use of this product selector in multiple locations, but the UI can be quite different depending on where it is being used.
+
+Let's begin with the headless component:
+
+```jsx
+import React, { useState, useEffect } from 'react';
+
+const ProductSelector = ({ children, productType }) => {
+  const { name, colorOptions, sizeOptions, id, description, products } = productType;
+  const [initialColor] = colorOptions;
+  const [initialSize] = sizeOptions;
+
+  // State logic
+  const [selectedColor, setSelectedColor] = useState(initialColor);
+  const [selectedSize, setSelectedSize] = useState(initialSize);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // Helper functions
+  const findProduct = (color, size) => {
+    return products.find(
+        product => product.color === color && product.size === size
+      );
+  };
+  const addToCart = () => {
+    alert(`Adding ${selectedProduct.name} to cart...`);
+  };
+  const selectColor = color => {
+    colorOptions.includes(color) && setSelectedColor(color);
+  };
+  const selectSize = size => {
+    sizeOptions.includes(size) && setSelectedSize(size);
+  };
+
+  // Maintain selected product when size/color changes
+  useEffect(() => {
+    if (selectedColor && selectedSize) {
+      setSelectedProduct(
+        findProduct(selectedColor, selectedSize)
+      );
+    }
+  }, [selectedColor, selectedSize]);
+
+  // Props to pass to child function
+  const props = {
+    typeId: id,
+    selectColor,
+    selectSize,
+    name,
+    description,
+    colorOptions,
+    sizeOptions,
+    addToCart,
+    findProduct,
+    variant: selectedProduct,
+  };
+
+  if (!children || !selectedProduct)
+    return null;
+
+  return children(props);
+};
+
+export default ProductSelector;
+```
+
+So what have we got here? Our component is instantiated with a product type, which has some expected attributes which we destructure up front.
+
+Next up, we set up the initial state. In our world, we just set the selected color and size to be the first option available. We also want to keep track of which product variant is selected, so we set up the state to store that.
+
+After that, we've got several helper functions: for selecting different options, finding the selected variant, and adding to cart.
+
+Next, we're using a _React_ hook, [useEffect](https://reactjs.org/docs/hooks-effect.html) which fires whenever a change is made to the selected color or size. Whenever we detect a change, we want to save the new selected product to state.
+
+Finally, we've got a couple of return points. The first prevents the child function from being called until we're ready, and then we finish by calling the child function with the props from above.
+
+In the real world, we'd want to add some additional error handling here. What if a developer uses this headless component, but passes it another component instead of a function as the child? What if it's passed multiple children? At the moment, either of those would throw an error.
+
+If you wanted to use this approach in a production application, now would be the time to write some tests for your headless component. Because of the fact that we're now centralizing some logic to be reused multiple times, our tests will provide us with more bang for our buck!
+
+## The UI
+
+Now that our headless component is ready to use, we can build some simple Presentational Components to use it. Looking at the code, you'll not see anything complicated. Just components which take in a series of props, and use them to render a UI. Because all of the state logic is contained within our headless component, there's no need for anything more complicated.
+
+_Note: In this code snippet, there are some unexplained styled-components, purely for the sake of making the end result a little prettier._
+
+First use case
+The first use case is for a product card on a listing page.
+
+```jsx
+const ProductCardUI = ({
+  typeId,
+  name,
+  colorOptions,
+  sizeOptions,
+  variant,
+  selectColor,
+  selectSize,
+  addToCart
+}) => {
+  const { image, color, size, price } = variant;
+
+  const handleSizeChange = ({ currentTarget }) => selectSize(sizeOptions[currentTarget.selectedIndex]);
+
+  return (
+    <Card>
+      <ProductImage src={image} alt={`photo of a ${color} ${name}`} />
+      <Heading2>
+        {name} - ${price}
+      </Heading2>
+      <Block>
+        <ColorSelector
+          {...{ selectColor, colorOptions }}
+          selectedVariant={variant}
+        />
+      </Block>
+      <Block>
+        <Button tabIndex={-1}>
+          {size}
+          <Select
+            value={size}
+            onChange={handleSizeChange}
+          >
+            {sizeOptions.map(sizeOption => (
+              <option key={sizeOption} value={sizeOption}>
+                {sizeOption}
+              </option>
+            ))}
+          </Select>
+        </Button>
+      </Block>
+      <Block>
+        <Button onClick={addToCart}>Add to Cart</Button>
+      </Block>
+      <Block>
+        <Link to={`/product/${typeId}`}>
+          <TextButton>View Product</TextButton>
+        </Link>
+      </Block>
+    </Card>
+  );
+};
+```
+
+Second use case
+Our second use case would be used on a full product page. It has a more open layout, and additional product descriptions.
+
+```jsx
+const ProductCardExpandedUI = ({
+  name,
+  description,
+  selectColor,
+  sizeOptions,
+  selectSize,
+  colorOptions,
+  variant,
+  addToCart
+}) => {
+  const { price, size, color, image } = variant;
+  
+  return (
+    <ProductWrapper>
+      <Section>
+        <Heading1>{name}</Heading1>
+        <Price>{price}</Price>
+        <p>{description}</p>
+        <ColorSelector
+          {...{ selectColor, colorOptions }}
+          selectedVariant={variant}
+        />
+        <Block>
+          {sizeOptions.map(sizeOption => (
+            <Button
+              selected={size === sizeOption}
+              key={sizeOption}
+              onClick={() => selectSize(sizeOption)}
+            >
+              {sizeOption}
+            </Button>
+          ))}
+        </Block>
+        <Block>
+          <Button onClick={addToCart}>Add to Cart</Button>
+        </Block>
+      </Section>
+      <Section>
+        <ProductImage
+          src={image}
+          alt={`photo of a ${color} ${name}`}
+        />
+      </Section>
+    </ProductWrapper>
+  );
+};
+```
+
+## Putting it all together
+
+And there we have it. Our single headless component is providing shared functionality to two separate UI elements of our website, with the potential to be used in others as our site grows.
+
+Here is the "finished" product (please forgive the shoddy photoshop job I did recoloring the product images):
+
+<StackBlitz id="headless-example-6" />
+
+## Potential niceties
+
+As mentioned before, the examples I've given so far assume that _children_ will be a function. Perhaps you want to safeguard against unexpected usage, or perhaps you just don't like the look of a function sitting inside your _jsx_. If so we could do something like this:
+
+```jsx
+const HeadlessComponent = ({ children }) => {
+  const childList = Array.isArray(children) ? children : [children];
+
+  // ... component logic here
+  const props = { ... }
+
+  if (!children) {
+    console.warn('HeadlessComponent expects a child');
+    return null; // early return if no children
+  }
+
+  return childList.map(child => 
+    typeof child === 'function' ? child(props) : React.cloneElement(child, props)
+  );
+};
+```
+
+With these modifications, `HeadlessComponent` can have any number of children, including zero, without throwing an error. It can also take another component as a child, rather than a function, and that component will be passed the same props that the function would be called with. Usage could be something like this:
+
+```jsx
+// will show a console warning regarding the lack of children
+<HeadlessComponent>
+</HeadlessComponent>
+
+// or
+
+// with one or more functions as children
+<HeadlessComponent>
+  {props => (
+    <MyUIComponent {...props} />
+    <MyOtherUIComponent {...props} />
+  )}
+</HeadlessComponent>
+
+// or
+
+// with one or more component as children
+<HeadlessComponent>
+  <MyUIComponent />
+  <MyOtherUIComponent />
+</HeadlessComponent>
+```
+
+## Conclusion
+
+Hopefully in reading this, you've added a few tools to your belt! In parting I'll leave you with some great examples of headless components out in the wild:
+
+[https://github.com/tannerlinsley/react-table](https://github.com/tannerlinsley/react-table)
+
+[https://github.com/downshift-js/downshift](https://github.com/downshift-js/downshift)
+
+[https://github.com/jxom/awesome-react-headless-components](https://github.com/jxom/awesome-react-headless-components)
