@@ -1,0 +1,16 @@
+.time::after {
+  content: '·';
+  display: inline-block;
+  margin: 0 1ch;
+}
+.dateModified {
+  display: block;
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+.dateModified::before {
+  content: '(';
+}
+.dateModified::after {
+  content: ')';
+}
