@@ -1,0 +1,33 @@
+---
+title: 'Headless Components: a powerful tool to super charge your reusable components'
+description: ''
+public: true
+published: '2020-04-29'
+modified: '2020-04-30'
+author: 'Jackson'
+coverSrc: '/images/statue.jpeg'
+coverAlt: 'A headless statute of a women from The National Archaeological Museum of Athens, Greece'
+coverCaption: 'Photo by Mika on Unsplash'
+---
+
+import { StackBlitz } from '../../../components/StackBlitz';
+
+Headless components are your secret weapon when it comes to building flexible reusable components. Using this pattern can be overkill many situations. But if you find yourself writing a components library or having to maintain multiple variants of a similar component within your project, then you'll find headless components indispensable.
+
+## What is a headless component?
+
+In essence, a headless component is a component which has no user interface, but _does_ have some underlying logic/functionality.
+
+For the sake of this article, I'll demonstrate using _React_, but this pattern can be utilized by any component based framework.
+
+## Isn't this overly convoluted?
+
+For the majority of your codebase: probably. If the components you build are usually used once off or are used unchanged throughout your application, then headless components _are_ overkill.
+
+That said, if you're supporting a component library or making use of the same components with minor variations throughout your codebase, then that is where headless components shine.
+
+## A (super) trivial use case
+
+In the early days of your codebase, you have the need for a simple manual counter component such as this:
+
+<StackBlitz id="headless-example-1" />

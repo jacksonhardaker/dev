@@ -18,13 +18,17 @@ const Post: VFC<{ content: MDXRemoteSerializeResult; meta: Meta }> = ({
 
 export const getServerSideProps = async (ctx) => {
   const { slug } = ctx.params;
-  const target = path.resolve(process.cwd(), 'public/content/', `${slug}.mdx`);
+  const target = path.resolve(process.cwd(), 'public/content/posts/', `${slug}.mdx`);
 
-  const source = await promises.readFile(target, { encoding: 'utf-8' });
-  const { content: raw, data: meta } = matter(source);
-  const content = await serialize(raw);
+  try {
+    const source = await promises.readFile(target, { encoding: 'utf-8' });
+    const { content: raw, data: meta } = matter(source);
+    const content = await serialize(raw);
 
-  return { props: { content, meta } };
+    return { props: { content, meta } };
+  } catch {
+    return { notFound: true };
+  }
 };
 
 export default Post;

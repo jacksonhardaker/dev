@@ -1194,6 +1194,11 @@
   resolved "https://registry.yarnpkg.com/@prismicio/richtext/-/richtext-1.1.0.tgz#c8769c3d953ae42854a2aba951e3b2121682b8c7"
   integrity sha512-925JuFiZiIkwu9jmlR9O/U8xCSZk/Y6BQDXKpavoVsKo+n90ml1hGdtWkglIupX+ITQO1ZINyDgUgiY1oG9dsA==
 
+"@stackblitz/sdk@^1.5.6":
+  version "1.5.6"
+  resolved "https://registry.yarnpkg.com/@stackblitz/sdk/-/sdk-1.5.6.tgz#fcbaf3ac382f6fc9ff7aa3e535f3821c78879542"
+  integrity sha512-OJRkMPfPkgnqXm8H7JytiWdr0QYmdEFi4gfE0K+pbbPBO1dc97SP4S+kxrwrVfiV+tNaxJnSNHFj+H2XnUvcjw==
+
 "@svgr/babel-plugin-add-jsx-attribute@^6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-6.0.0.tgz#bd6d1ff32a31b82b601e73672a789cc41e84fe18"

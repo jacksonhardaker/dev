@@ -16,6 +16,7 @@ export type Meta = {
   author: string;
   coverSrc: string;
   coverAlt: string;
+  coverCaption?: string;
 };
 
 export const Post: FC<{ meta: Meta }> = ({ children, meta }) => {
@@ -40,7 +41,7 @@ export const Post: FC<{ meta: Meta }> = ({ children, meta }) => {
             Last modified: {format(new Date(meta.modified), 'MMMM do, y')}
           </time>
         </small>
-        <CoverImage src={meta.coverSrc} alt={meta.coverAlt} />
+        <CoverImage src={meta.coverSrc} alt={meta.coverAlt} caption={meta.coverCaption} />
         <div itemProp="articleBody">{children}</div>
       </article>
       <CompletelyHidden>
