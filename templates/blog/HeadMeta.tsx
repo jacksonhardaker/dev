@@ -6,8 +6,8 @@ export const HeadMeta: VFC<{
   description: string;
   coverSrc: string;
   coverAlt: string;
-  published: string;
-  modified: string;
+  published?: string;
+  modified?: string;
 }> = ({
   title,
   description,
@@ -42,8 +42,8 @@ export const HeadMeta: VFC<{
         content="Jackson Hardaker | Frontend Engineer"
       />
 
-      <meta property="article:published_time" content={published} />
-      <meta property="article:modified_time" content={modified} />
+      {published && <meta property="article:published_time" content={published} />}
+      {modified && <meta property="article:modified_time" content={modified} />}
     </Head>
   );
 };

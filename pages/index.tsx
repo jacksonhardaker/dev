@@ -1,40 +1,50 @@
-import React from 'react'
-import Head from 'next/head'
-import SocialButtons from '../src/components/SocialButtons'
+import React from 'react';
+import { HeadMeta } from '@templates/blog/HeadMeta';
+import SocialButtons from '../src/components/SocialButtons';
 
 const Home = () => (
   <div>
-    <Head>
-      <title>Jackson Hardaker | Frontend Engineer</title>
-    </Head>
+    <HeadMeta
+      title="Jackson Hardaker | Frontend Engineer"
+      description="Developer blog for Jackson Hardaker."
+      coverSrc="/images/jackson.jpeg"
+      coverAlt="Photo of Jackson Hardaker in Reykjavik"
+    />
 
     <div className="hero">
-      <h1 className="title">Jackson Hardaker</h1>
-      <p className="description">
-        Frontend Engineer @ <a href='https://tn.com'>tuftandneedle.com</a>
-      </p>
+      <h1>
+        <span className="title">Jackson Hardaker</span>
+        <p className="description">
+          Frontend Engineer @ <a href="https://tn.com">tuftandneedle.com</a>
+        </p>
+      </h1>
 
       <SocialButtons />
     </div>
 
     <style jsx>{`
-        .title {
-          margin: 0;
-          width: 100%;
-          padding-top: 80px;
-          line-height: 1.15;
-          font-size: 48px;
-        }
-        a:hover, a:focus {
-          padding: 3px 3px;
-          margin: -3px -3px;
-        }
-        .title,
-        .description {
-          text-align: center;
-        }
-      `}</style>
+      .title {
+        margin: 0;
+        width: 100%;
+        padding-top: 80px;
+        line-height: 1.15;
+        font-size: 48px;
+      }
+      a:hover,
+      a:focus {
+        padding: 3px 3px;
+        margin: -3px -3px;
+      }
+      .title,
+      .description {
+        display: block;
+        text-align: center;
+      }
+      .description {
+        font-size: 18px;
+      }
+    `}</style>
   </div>
-)
+);
 
-export default Home
+export default Home;
