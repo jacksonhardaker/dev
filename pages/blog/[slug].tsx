@@ -6,6 +6,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { Post as PostLayout, Meta } from '@templates/blog/Post';
 import { MDX } from '@components/MDX';
+import { staleWhileRevalidate } from '@templates/blog/middleware/staleWhileRevalidate';
 
 const Post: VFC<{ content: MDXRemoteSerializeResult; meta: Meta }> = ({
   content,
@@ -16,9 +17,13 @@ const Post: VFC<{ content: MDXRemoteSerializeResult; meta: Meta }> = ({
   </PostLayout>
 );
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps = staleWhileRevalidate(async (ctx) => {
   const { slug } = ctx.params;
-  const target = path.resolve(process.cwd(), 'public/content/posts/', `${slug}.mdx`);
+  const target = path.resolve(
+    process.cwd(),
+    'public/content/posts/',
+    `${slug}.mdx`
+  );
 
   try {
     const source = await promises.readFile(target, { encoding: 'utf-8' });
@@ -29,6 +34,6 @@ export const getServerSideProps = async (ctx) => {
   } catch {
     return { notFound: true };
   }
-};
+});
 
 export default Post;
