@@ -1,6 +1,34 @@
-$black: #111;
-$white: #fff;
-$off-white: #efefef;
-$gray: #ccc;
-$primary: #9c370c;
-$primary-dark: #d89375;
+$black: rgb(17, 17, 17);
+$white: rgb(255, 255, 255);
+$off-white: rgb(239, 239, 239);
+$gray: rgb(204, 204, 204);
+$primary: rgb(156, 55, 12);
+$primary-dark: rgb(216, 147, 117);
+
+:root {
+  --c-black-80: rgba(17, 17, 17, 0.8);
+  --c-gray: #{$gray};
+
+  --primary-color: #{$primary};
+  --primary-color-80: rgb(156, 55, 12, 0.8);
+  --text-color: #{$black};
+  --text-color--focus: #{$white};
+  --bg-color: #{$white};
+
+  --link-color: #{$primary};
+  --link-bg: transparent;
+  --link-color--hover: #{$white};
+  --link-bg--hover: #{$primary};
+}
+
+:root.dark {
+  --primary-color: #{$primary-dark};
+  --bg-color: #{$black};
+  --text-color: #{$off-white};
+  --text-color--focus: #{$black};
+
+  --link-color: #{$primary-dark};
+  --link-bg: transparent;
+  --link-color--hover: #{$black};
+  --link-bg--hover: #{$primary-dark};
+}

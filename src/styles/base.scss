@@ -5,8 +5,8 @@ html,
 body,
 main,
 #_next {
-  background-color: $white;
-  color: $black;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 main {
@@ -57,7 +57,7 @@ blockquote {
     display: block;
     font-size: 10rem;
     position: absolute;
-    color: transparentize($primary, 0.8);
+    color: var(--primary-color-80);
   }
   &::before {
     content: "“";
@@ -72,47 +72,18 @@ blockquote {
 }
 
 a {
-  color: $primary;
+  color: var(--link-color);
 }
 
 a:hover,
 a:focus {
-  color: $white;
-  background-color: $primary;
+  color: var(--link-color--hover);
+  background-color: var(--link-bg--hover);
   border-radius: 1px;
   outline: none;
 }
 
 pre {
-  border: 1px solid transparentize($black, 0.8);
+  border: 1px solid var(--c-black-80);
   border-radius: 2px;
-}
-
-html.dark {
-  background-color: $black;
-  color: $off-white;
-
-  body,
-  main,
-  #_next {
-    background-color: $black;
-    color: $off-white;
-  }
-
-  a {
-    color: $primary-dark;
-  }
-
-  a:hover,
-  a:focus {
-    color: $black;
-    background-color: $primary-dark;
-  }
-
-  blockquote {
-    &::before,
-    &::after {
-      color: transparentize($primary-dark, 0.8);
-    }
-  }
 }

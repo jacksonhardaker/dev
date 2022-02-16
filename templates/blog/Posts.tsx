@@ -4,6 +4,8 @@ import { format } from 'date-fns';
 import useTheme from '../../src/context/ThemeContext';
 import { CoverImage } from '@templates/blog/CoverImage';
 
+import styles from './Posts.module.css';
+
 export const Posts = ({ posts }) => {
   const { darkMode } = useTheme();
   const publicPosts = posts.filter((post) => post.meta.public);
@@ -39,19 +41,23 @@ export const Posts = ({ posts }) => {
 
   return (
     <section>
-      <div className="posts">
+      <div className={styles.posts}>
         {publicPosts
           .filter((post) => post.meta.public)
           .map((post) => (
-            <article key={post.meta.title}>
+            <article className={styles.article} key={post.meta.title}>
               <Link href="/blog/[slug]" as={`/blog/${post.uid}`}>
-                <a className="post">
+                <a className={styles.post}>
                   <CoverImage
                     src={post.meta.coverSrc}
                     alt={post.meta.coverAlt}
                   />
-                  <h2>{post.meta.title}</h2>
-                  <time dateTime={post.meta.published} itemProp="datePublished">
+                  <h2 className={styles.text}>{post.meta.title}</h2>
+                  <time
+                    className={styles.time}
+                    dateTime={post.meta.published}
+                    itemProp="datePublished"
+                  >
                     {format(new Date(post.meta.published), 'MMMM do, y')}
                   </time>
                 </a>
@@ -59,48 +65,10 @@ export const Posts = ({ posts }) => {
             </article>
           ))}
       </div>
-      <footer>
+      <footer className={styles.footer}>
         {previousLink()}
         {nextLink()}
       </footer>
-      <style jsx>{`
-        .posts {
-          display: flex;
-          justify-content: space-between;
-          flex-wrap: wrap;
-        }
-        .post {
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-          height: 100%;
-          padding: 0 20px 20px;
-          box-sizing: border-box;
-          text-decoration: none;
-        }
-        article {
-          width: 320px;
-          margin: 20px 0;
-          border: 1px solid ${gray};
-          box-sizing: border-box;
-        }
-        h2,
-        time {
-          color: ${darkMode ? offWhite : black};
-        }
-        .post:hover h2,
-        .post:focus h2,
-        .post:hover time,
-        .post:focus time {
-          color: ${darkMode ? black : white};
-        }
-        time {
-          margin: auto 0 0;
-        }
-        footer {
-          display: flex;
-        }
-      `}</style>
     </section>
   );
 };
