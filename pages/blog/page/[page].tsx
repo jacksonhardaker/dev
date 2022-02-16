@@ -18,7 +18,7 @@ const BlogPage = ({ posts, page, hasNext }) => {
 
 export const getServerSideProps = staleWhileRevalidate(async (ctx) => {
   const { page } = ctx.params;
-  const { posts, hasNext } = await getPosts(['meta'], Number(page) - 1);
+  const { posts, hasNext } = await getPosts(Number(page) - 1);
 
   return {
     props: {
