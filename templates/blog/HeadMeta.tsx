@@ -23,6 +23,7 @@ export const HeadMeta: VFC<{
       <title>{title}</title>
       <meta itemProp="name" content={title} />
       <meta itemProp="description" content={description} />
+      <meta name="description" content={description} />
       <meta itemProp="image" content={coverSrc} />
       <link rel="canonical" href={canonical} />
 

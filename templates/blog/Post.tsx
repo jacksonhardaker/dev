@@ -20,10 +20,10 @@ export type Meta = {
 };
 
 export const Post: FC<{ meta: Meta }> = ({ children, meta }) => {
-  const { pathname } = useRouter();
+  const { asPath } = useRouter();
   return (
     <>
-      <HeadMeta {...meta} canonical={pathname} />
+      <HeadMeta {...meta} canonical={asPath} />
       <article itemScope itemType="http://schema.org/BlogPosting">
         <header itemProp="headline">
           <h1 itemProp="name">{meta.title}</h1>
@@ -45,7 +45,7 @@ export const Post: FC<{ meta: Meta }> = ({ children, meta }) => {
         <div itemProp="articleBody">{children}</div>
       </article>
       <CompletelyHidden>
-        <a itemProp="mainEntityOfPage" href={pathname}>
+        <a itemProp="mainEntityOfPage" href={asPath}>
           {meta.title}
         </a>
         <div
