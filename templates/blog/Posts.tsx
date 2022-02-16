@@ -1,22 +1,17 @@
 import Link from 'next/link';
 import { format } from 'date-fns';
-import useTheme from '@context/ThemeContext';
 import { CoverImage } from '@templates/blog/CoverImage';
 
 import styles from './Posts.module.css';
 
-export const Posts = ({ posts }) => {
-  const { darkMode } = useTheme();
+export const Posts = ({ posts, hasNext, page }) => {
   const publicPosts = posts.filter((post) => post.meta.public);
 
   const pageLink = (modifier) => {
     const nextVariant = modifier === 1;
     return (
       <div>
-        <Link
-          href="/blog/page/[index]"
-          as={`/blog/page/${posts.page + modifier}`}
-        >
+        <Link href={`/blog/page/${page + modifier}`}>
           <a>{nextVariant ? 'Next' : 'Previous'} page</a>
         </Link>
         <style jsx>{`
@@ -29,11 +24,11 @@ export const Posts = ({ posts }) => {
   };
 
   const previousLink = () => {
-    return posts.prev_page && pageLink(-1);
+    return page > 1 && pageLink(-1);
   };
 
   const nextLink = () => {
-    return posts.next_page && pageLink(1);
+    return hasNext && pageLink(1);
   };
 
   if (!publicPosts[0]) return <h2>No Posts</h2>;
@@ -44,8 +39,8 @@ export const Posts = ({ posts }) => {
         {publicPosts
           .filter((post) => post.meta.public)
           .map((post) => (
-            <article className={styles.article} key={post.meta.title}>
-              <Link href="/blog/[slug]" as={`/blog/${post.uid}`}>
+            <article className={styles.article} key={post.meta.slug}>
+              <Link href={`/blog/${post.meta.slug}`}>
                 <a className={styles.post}>
                   <CoverImage
                     src={post.meta.coverSrc}

@@ -38,7 +38,12 @@ export const getPosts = async (picks: string[], page: number) => {
     page * BLOG_PAGE_SIZE + BLOG_PAGE_SIZE
   );
 
-  return paginatedData;
+  const hasNext = data.slice(page * BLOG_PAGE_SIZE + BLOG_PAGE_SIZE).length > 0;
+
+  return {
+    posts: paginatedData,
+    hasNext,
+  };
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
