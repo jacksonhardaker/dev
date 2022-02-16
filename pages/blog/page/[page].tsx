@@ -1,6 +1,6 @@
-import BlogPosts from '../../../src/components/BlogPosts';
 import Head from 'next/head';
 import { getPosts } from '../../api/posts';
+import { Posts } from '../../../templates/blog/Posts';
 
 const BlogPage = ({ posts }) => {
   return (
@@ -10,14 +10,14 @@ const BlogPage = ({ posts }) => {
           Blog page {posts.page} of {posts.total_pages} | Jackson Hardaker
         </title>
       </Head>
-      <BlogPosts posts={posts} />
+      <Posts posts={posts} />
     </>
   );
 };
 
 export const getServerSideProps = async (ctx) => {
   const { page } = ctx.params;
-  const posts = await getPosts(['meta'], Number(page));
+  const posts = await getPosts(['meta'], Number(page) - 1);
 
   return {
     props: {
