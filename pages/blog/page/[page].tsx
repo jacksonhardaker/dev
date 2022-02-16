@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import { getPosts } from '../../api/posts';
-import { Posts } from '../../../templates/blog/Posts';
+import { getPosts } from '@api/posts';
+import { Posts } from '@templates/blog/Posts';
 
 const BlogPage = ({ posts }) => {
   return (

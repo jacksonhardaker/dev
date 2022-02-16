@@ -2,7 +2,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { promises } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { BLOG_PAGE_SIZE } from '../../constants/blog';
+import { BLOG_PAGE_SIZE } from '@constants/blog';
 
 export const getPosts = async (picks: string[], page: number) => {
   const files = await promises

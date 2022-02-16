@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
 import SocialButtons from '../src/components/SocialButtons'
-import Page from '../src/components/Page'
 
 const Home = () => (
   <div>

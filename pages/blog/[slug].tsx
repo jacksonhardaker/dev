@@ -4,8 +4,8 @@ import path from 'path';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { Post as PostLayout, Meta } from '../../templates/blog/Post';
-import { MDX } from '../../components/MDX';
+import { Post as PostLayout, Meta } from '@templates/blog/Post';
+import { MDX } from '@components/MDX';
 
 const Post: VFC<{ content: MDXRemoteSerializeResult; meta: Meta }> = ({
   content,

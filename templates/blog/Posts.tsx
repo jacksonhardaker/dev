@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { gray, offWhite, black, white } from '../../src/constants/colors';
 import { format } from 'date-fns';
 import useTheme from '../../src/context/ThemeContext';
-import { CoverImage } from '../../templates/blog/CoverImage';
+import { CoverImage } from '@templates/blog/CoverImage';
 
 export const Posts = ({ posts }) => {
   const { darkMode } = useTheme();
