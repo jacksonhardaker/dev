@@ -1,1 +1,1 @@
-export const BLOG_PAGE_SIZE = 10 as const;
+export const BLOG_PAGE_SIZE = 1 as const;

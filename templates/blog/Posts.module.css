@@ -32,3 +32,10 @@
 .footer {
   display: flex;
 }
+
+.next {
+  margin: 0 0 0 auto;
+}
+.prev {
+  margin: 0 auto 0 0;
+}

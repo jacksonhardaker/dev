@@ -1,35 +1,29 @@
 import Link from 'next/link';
+import { VFC } from 'react';
 import { format } from 'date-fns';
 import { CoverImage } from '@templates/blog/CoverImage';
 
 import styles from './Posts.module.css';
 
+const PageLink: VFC<{ direction: 'next' | 'prev'; page: number }> = ({
+  direction,
+  page,
+}) => {
+  const variant = {
+    next: { modifier: 1, label: 'Next' },
+    prev: { modifier: -1, label: 'Previous' },
+  };
+  return (
+    <div className={styles[direction]}>
+      <Link passHref={true} href={`/blog/page/${page + variant[direction].modifier}`}>
+        <a>{variant[direction].label} page</a>
+      </Link>
+    </div>
+  );
+};
+
 export const Posts = ({ posts, hasNext, page }) => {
   const publicPosts = posts.filter((post) => post.meta.public);
-
-  const pageLink = (modifier) => {
-    const nextVariant = modifier === 1;
-    return (
-      <div>
-        <Link href={`/blog/page/${page + modifier}`}>
-          <a>{nextVariant ? 'Next' : 'Previous'} page</a>
-        </Link>
-        <style jsx>{`
-          div {
-            margin: ${nextVariant ? '0 0 0 auto' : '0 auto 0 0'};
-          }
-        `}</style>
-      </div>
-    );
-  };
-
-  const previousLink = () => {
-    return page > 1 && pageLink(-1);
-  };
-
-  const nextLink = () => {
-    return hasNext && pageLink(1);
-  };
 
   if (!publicPosts[0]) return <h2>No Posts</h2>;
 
@@ -60,8 +54,8 @@ export const Posts = ({ posts, hasNext, page }) => {
           ))}
       </div>
       <footer className={styles.footer}>
-        {previousLink()}
-        {nextLink()}
+        {page > 1 && <PageLink direction="prev" page={page} />}
+        {hasNext && <PageLink direction="next" page={page} />}
       </footer>
     </section>
   );
