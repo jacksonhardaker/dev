@@ -3,20 +3,15 @@ import ToggleDarkModeButton from './ToggleDarkModeButton';
 
 const links = [
   { href: '/', label: 'home' },
-  { href: '/blog/page/[index]', as: '/blog/page/1', label: 'blog' },
-].map(link => {
-  link.key = `nav-link-${link.href}-${link.label}`
-  return link
-})
+  { href: '/blog/page/1', label: 'blog' },
+]
 
 const Nav = () => (
   <nav>
     <ul>
-      {links.map(({ key, href, label, as }) => (
-        <li key={key}>
-          <Link href={href} as={as}>
-            <a>{label}</a>
-          </Link>
+      {links.map(({ href, label }) => (
+        <li key={href}>
+          <Link href={href}>{label}</Link>
         </li>
       ))}
       <li className="right">

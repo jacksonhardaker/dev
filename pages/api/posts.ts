@@ -27,7 +27,9 @@ export const getPosts = async (page: number) => {
           const source = await promises.readFile(filePath, {
             encoding: 'utf-8',
           });
-          const { data: meta } = matter(source) as unknown as { data: Data[number]['meta']};
+          const { data: meta } = matter(source) as unknown as {
+            data: Data[number]['meta'];
+          };
           return { meta: { ...meta, slug } };
         })
       )
@@ -47,6 +49,7 @@ export const getPosts = async (page: number) => {
   return {
     posts: paginatedData,
     hasNext,
+    totalPages: Math.ceil(data.length / BLOG_PAGE_SIZE),
   };
 };
 
