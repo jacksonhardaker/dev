@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
-import useQueryParams from '../hooks/useQueryParams';
-import useIsomorphicLayoutEffect from '../hooks/useIsometricEffect';
+import useQueryParams from '../src/hooks/useQueryParams';
+import useIsomorphicLayoutEffect from '../src/hooks/useIsometricEffect';
 
 export const ThemeContext = createContext();
 

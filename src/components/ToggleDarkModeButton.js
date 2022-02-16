@@ -1,6 +1,6 @@
 import SunIcon from '@fortawesome/fontawesome-free/svgs/regular/sun.svg';
 import MoonIcon from '@fortawesome/fontawesome-free/svgs/regular/moon.svg';
-import useTheme from "../context/ThemeContext";
+import useTheme from "@context/ThemeContext";
 import { black, offWhite, primaryDark, primary } from '../constants/colors';
 
 const ToggleDarkModeButton = () => {

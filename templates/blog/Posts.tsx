@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { gray, offWhite, black, white } from '../../src/constants/colors';
 import { format } from 'date-fns';
-import useTheme from '../../src/context/ThemeContext';
+import useTheme from '@context/ThemeContext';
 import { CoverImage } from '@templates/blog/CoverImage';
 
 import styles from './Posts.module.css';

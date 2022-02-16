@@ -1,5 +1,5 @@
 import { primary, black, primaryDark, offWhite } from "../constants/colors";
-import useTheme from "../context/ThemeContext";
+import useTheme from "@context/ThemeContext";
 
 const SocialButton = ({ href, Icon, label, ...rest }) => {
   const { darkMode } = useTheme();

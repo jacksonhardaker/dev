@@ -1,6 +1,6 @@
 import '../src/loading.config';
-import { ThemeProvider } from '../src/context/ThemeContext';
-import { GoogleAnalyticsProvider } from '../src/context/GoogleAnalyticsContext';
+import { ThemeProvider } from '@context/ThemeContext';
+import { GoogleAnalyticsProvider } from '@context/GoogleAnalyticsContext';
 import Nav from '../src/components/Navigation';
 
 import 'normalize.css/normalize.css';
