@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { getPosts } from '@api/posts';
 import { Posts } from '@templates/blog/Posts';
+import { staleWhileRevalidate } from '@templates/blog/middleware/staleWhileRevalidate';
 
 const BlogPage = ({ posts, page, hasNext }) => {
   return (
@@ -15,7 +16,7 @@ const BlogPage = ({ posts, page, hasNext }) => {
   );
 };
 
-export const getServerSideProps = async (ctx) => {
+export const getServerSideProps = staleWhileRevalidate(async (ctx) => {
   const { page } = ctx.params;
   const { posts, hasNext } = await getPosts(['meta'], Number(page) - 1);
 
@@ -26,6 +27,6 @@ export const getServerSideProps = async (ctx) => {
       hasNext,
     },
   };
-};
+});
 
 export default BlogPage;
