@@ -2,10 +2,12 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import format from 'date-fns/format';
+import { AUTHOR } from '@constants/blog';
 import { CoverImage } from './CoverImage';
 import { HeadMeta } from './HeadMeta';
 import { CompletelyHidden } from '../../components/CompletelyHidden';
 import styles from './Post.module.css';
+import { Author } from './Author';
 
 export type Meta = {
   title: string;
@@ -35,13 +37,17 @@ export const Post: FC<{ meta: Meta }> = ({ children, meta }) => {
         >
           {format(new Date(meta.published), 'MMMM do, y')}
         </time>
-        <Link href="/">{meta.author}</Link>
+        <Link href="/">{AUTHOR[meta.author].name}</Link>
         <small className={styles.dateModified}>
           <time dateTime={meta.modified} itemProp="dateModified">
             Last modified: {format(new Date(meta.modified), 'MMMM do, y')}
           </time>
         </small>
-        <CoverImage src={meta.coverSrc} alt={meta.coverAlt} caption={meta.coverCaption} />
+        <CoverImage
+          src={meta.coverSrc}
+          alt={meta.coverAlt}
+          caption={meta.coverCaption}
+        />
         <div itemProp="articleBody">{children}</div>
       </article>
       <CompletelyHidden>
@@ -56,6 +62,7 @@ export const Post: FC<{ meta: Meta }> = ({ children, meta }) => {
           <meta itemProp="name" content="Jackson Hardaker" />
         </div>
       </CompletelyHidden>
+      <Author id={meta.author} />
     </>
   );
 };

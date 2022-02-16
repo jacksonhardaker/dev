@@ -20,7 +20,8 @@
       "@api/*": ["pages/api/*"],
       "@components/*": ["components/*"],
       "@constants/*": ["constants/*"],
-      "@context/*": ["context/*"]
+      "@context/*": ["context/*"],
+      "@middleware/*": ["middleware/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { getPosts } from '@api/posts';
 import { Posts } from '@templates/blog/Posts';
-import { staleWhileRevalidate } from '@templates/blog/middleware/staleWhileRevalidate';
+import { staleWhileRevalidate } from '@middleware/staleWhileRevalidate';
 
 const BlogPage = ({ posts, page, hasNext }) => {
   return (

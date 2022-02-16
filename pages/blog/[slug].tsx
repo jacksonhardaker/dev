@@ -6,7 +6,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { Post as PostLayout, Meta } from '@templates/blog/Post';
 import { MDX } from '@components/MDX';
-import { staleWhileRevalidate } from '@templates/blog/middleware/staleWhileRevalidate';
+import { staleWhileRevalidate } from '@middleware/staleWhileRevalidate';
 
 const Post: VFC<{ content: MDXRemoteSerializeResult; meta: Meta }> = ({
   content,
