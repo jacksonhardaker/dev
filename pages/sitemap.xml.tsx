@@ -1,6 +1,6 @@
 import { getPosts } from '@api/posts';
 
-const Sitemap = () => null;
+export default () => null;
 
 const postSitemapBlock = (post) => {
   return `<url>
@@ -23,7 +23,7 @@ const blogIndexPageBlocks = (totalPages) => {
     });
 };
 
-Sitemap.getInitialProps = async ({ res }) => {
+export const getServerSideProps = async ({ res }) => {
   const data = await getPosts();
 
   const indexPages = blogIndexPageBlocks(data.totalPages);
@@ -44,6 +44,6 @@ Sitemap.getInitialProps = async ({ res }) => {
   res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
   res.write(sitemap);
   res.end();
-};
 
-export default Sitemap;
+  return { props: {} };
+};
