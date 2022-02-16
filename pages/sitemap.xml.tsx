@@ -1,36 +1,33 @@
-import fetchBlogPosts from "../src/fetch/cms/posts";
-import { BLOG_PAGE_SIZE } from "../src/constants/blog";
+import { getPosts } from '@api/posts';
 
 const Sitemap = () => null;
 
-const postSitemapBlock = post => {
+const postSitemapBlock = (post) => {
   return `<url>
-    <loc>https://jacksonhardaker.dev/blog/${post.uid}</loc>
+    <loc>https://jacksonhardaker.dev/blog/${post.meta.slug}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-    <lastmod>${new Date(post.last_publication_date).toISOString()}</lastmod>
+    <lastmod>${new Date(post.meta.published).toISOString()}</lastmod>
   </url>`;
 };
 
-const blogIndexPageBlocks = meta => {
-  return Array(meta.total_pages).fill(0).map((_, index) => {
-    return `<url>
+const blogIndexPageBlocks = (totalPages) => {
+  return Array(totalPages)
+    .fill(0)
+    .map((_, index) => {
+      return `<url>
       <loc>https://jacksonhardaker.dev/blog/page/${index + 1}</loc>
       <changefreq>weekly</changefreq>
       <priority>0.5</priority>
     </url>`;
-  });
+    });
 };
 
 Sitemap.getInitialProps = async ({ res }) => {
-  let meta = await fetchBlogPosts(BLOG_PAGE_SIZE);
-  const indexPages = blogIndexPageBlocks(meta);
-  const posts = meta.results.map(postSitemapBlock);
+  const data = await getPosts();
 
-  while (meta.next_page) {
-    meta = await fetch(meta.next_page).then(res => res.json());
-    posts.push(...meta.results.map(postSitemapBlock));
-  }
+  const indexPages = blogIndexPageBlocks(data.totalPages);
+  const posts = data.posts.map(postSitemapBlock);
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

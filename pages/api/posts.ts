@@ -11,7 +11,7 @@ type Data = {
   };
 }[];
 
-export const getPosts = async (page: number) => {
+export const getPosts = async (page?: number) => {
   const data: Data = await Promise.all(
     await promises
       .readdir(path.resolve(process.cwd(), 'public/content/posts/'))
@@ -39,18 +39,27 @@ export const getPosts = async (page: number) => {
     return new Date(a.meta.published) > new Date(b.meta.published) ? -1 : 1;
   });
 
-  const paginatedData = data.slice(
-    page * BLOG_PAGE_SIZE,
-    page * BLOG_PAGE_SIZE + BLOG_PAGE_SIZE
-  );
+  if (page) {
+    const paginatedData = data.slice(
+      page * BLOG_PAGE_SIZE,
+      page * BLOG_PAGE_SIZE + BLOG_PAGE_SIZE
+    );
 
-  const hasNext = data.slice(page * BLOG_PAGE_SIZE + BLOG_PAGE_SIZE).length > 0;
+    const hasNext =
+      data.slice(page * BLOG_PAGE_SIZE + BLOG_PAGE_SIZE).length > 0;
 
-  return {
-    posts: paginatedData,
-    hasNext,
-    totalPages: Math.ceil(data.length / BLOG_PAGE_SIZE),
-  };
+    return {
+      posts: paginatedData,
+      hasNext,
+      totalPages: Math.ceil(data.length / BLOG_PAGE_SIZE),
+    };
+  } else {
+    return {
+      posts: data,
+      hasNext: false,
+      totalPages: Math.ceil(data.length / BLOG_PAGE_SIZE),
+    };
+  }
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
