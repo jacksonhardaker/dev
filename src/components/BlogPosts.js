@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import { RichText } from 'prismic-reactjs';
 import { gray, offWhite, black, white } from '../constants/colors';
 import { format } from 'date-fns';
-import BlogCoverImage from './BlogCoverImage';
 import useTheme from '../context/ThemeContext';
+import { CoverImage } from '../../templates/blog/CoverImage';
 
 const BlogPosts = ({ posts }) => {
   const { darkMode } = useTheme();
-  const publicPosts = posts.results.filter(post => post.data.public);
+  const publicPosts = posts.filter(post => post.meta.public);
 
   const pageLink = modifier => {
     const nextVariant = modifier === 1;
@@ -39,14 +38,14 @@ const BlogPosts = ({ posts }) => {
   return (
     <section>
       <div className="posts">
-        {publicPosts.filter(post => post.data.public).map(post => {
-          const published = post.data.published_date ? new Date(post.data.published_date) : new Date(post.first_publication_date);
+        {publicPosts.filter(post => post.meta.public).map(post => {
+          const published = new Date(post.meta.published)
           return (
             <article key={post.uid}>
               <Link href="/blog/[slug]" as={`/blog/${post.uid}`}>
                 <a className="post">
-                  <BlogCoverImage {...post.data.cover_image} />
-                  <h2>{RichText.asText(post.data.title)}</h2>
+                  <CoverImage src={post.meta.coverSrc} alt={post.meta.coverAlt} />
+                  <h2>{post.meta.title}</h2>
                   <time dateTime={published} itemProp="datePublished">{format(published, 'MMMM do, y')}</time>
                 </a>
               </Link>
