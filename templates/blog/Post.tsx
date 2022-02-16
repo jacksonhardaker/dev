@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import format from 'date-fns/format';
 import { CoverImage } from './CoverImage';
 import { HeadMeta } from './HeadMeta';
@@ -23,7 +23,7 @@ export const Post: FC<{ meta: Meta }> = ({ children, meta }) => {
   const { asPath } = useRouter();
   return (
     <>
-      <HeadMeta {...meta} canonical={asPath} />
+      <HeadMeta {...meta} />
       <article itemScope itemType="http://schema.org/BlogPosting">
         <header itemProp="headline">
           <h1 itemProp="name">{meta.title}</h1>

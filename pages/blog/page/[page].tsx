@@ -10,7 +10,8 @@ const BlogPage = ({ posts, page, hasNext }) => {
         <title>
           Blog page {posts.page} of {posts.total_pages} | Jackson Hardaker
         </title>
-      </Head>
+        <meta name="description" content="Read writing about from Jackson Hardaker. Frontend Engineering articles." />
+        </Head>
       <Posts posts={posts} page={page} hasNext={hasNext} />
     </>
   );

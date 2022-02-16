@@ -6,7 +6,6 @@ export const HeadMeta: VFC<{
   description: string;
   coverSrc: string;
   coverAlt: string;
-  canonical: string;
   published: string;
   modified: string;
 }> = ({
@@ -14,7 +13,6 @@ export const HeadMeta: VFC<{
   description,
   coverSrc,
   coverAlt,
-  canonical,
   published,
   modified,
 }) => {
@@ -25,7 +23,6 @@ export const HeadMeta: VFC<{
       <meta itemProp="description" content={description} />
       <meta name="description" content={description} />
       <meta itemProp="image" content={coverSrc} />
-      <link rel="canonical" href={canonical} />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@jacksonhardaker" />
@@ -37,7 +34,6 @@ export const HeadMeta: VFC<{
 
       <meta property="og:title" content={title} />
       <meta property="og:type" content="article" />
-      <meta property="og:url" content={canonical} />
       <meta property="og:image" content={coverSrc} />
       <meta property="og:image:alt" content={coverAlt} />
       <meta property="og:description" content={description} />
