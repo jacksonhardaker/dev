@@ -2,7 +2,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 100;
-  font-display: block;
+  font-display: fallback;
   src: url("/fonts/Inter-Thin-BETA.woff2?v=3.11") format("woff2"),
     url("/fonts/Inter-Thin-BETA.woff?v=3.11") format("woff");
 }
@@ -10,7 +10,7 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: fallback;
   src: url("/fonts/Inter-Light-BETA.woff2?v=3.11") format("woff2"),
     url("/fonts/Inter-Light-BETA.woff?v=3.11") format("woff");
 }
