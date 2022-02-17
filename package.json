@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "build:image": "docker build -t nextjs-docker .",
+    "start:image": "docker run -p 3000:3000 nextjs-docker"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
