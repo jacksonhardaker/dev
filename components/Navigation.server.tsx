@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { VFC } from 'react';
 import styled from '@styles/styled';
-// import ToggleDarkModeButton from './ToggleDarkModeButton';
+import ToggleDarkModeButton from './ToggleDarkModeButton.client';
 
 const { classNames: cn, Styles } = styled({
   container: {
@@ -43,7 +43,7 @@ export const Navigation: VFC = () => (
           </li>
         ))}
         <li className={`${cn.listItem} ${cn.right}`}>
-          {/* <ToggleDarkModeButton /> */}
+          <ToggleDarkModeButton />
         </li>
       </ul>
     </nav>

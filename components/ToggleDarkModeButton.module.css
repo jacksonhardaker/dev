@@ -1,0 +1,14 @@
+.icon {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  fill: var(--icon-color);
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+}
+.icon:hover,
+.icon:focus {
+  fill: var(--icon-color--hover);
+}
