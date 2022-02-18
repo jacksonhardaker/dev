@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ThemeProvider } from '@context/ThemeContext';
 import { GoogleAnalyticsProvider } from '@context/GoogleAnalyticsContext';
-import Nav from '../src/components/Navigation';
+import { Navigation } from '@components/Navigation';
 
 import '../src/loading.config';
 import 'normalize.css/normalize.css';
@@ -20,7 +20,7 @@ const MainApp = ({ Component, pageProps }) => {
       <ThemeProvider>
         <GoogleAnalyticsProvider>
           <main>
-            <Nav />
+            <Navigation />
             <Component {...pageProps} />
           </main>
         </GoogleAnalyticsProvider>

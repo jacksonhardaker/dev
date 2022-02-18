@@ -1,0 +1,20 @@
+.container {
+  text-align: center;
+}
+.list {
+  display: flex;
+  padding: 4px 0;
+  margin-left: -13px;
+}
+.listItem {
+  display: flex;
+  padding: 6px 8px;
+}
+.listItemRight {
+  composes: listItem;
+  margin: 0 0 0 auto;
+}
+.link {
+  text-decoration: none;
+  padding: 3px 5px;
+}
