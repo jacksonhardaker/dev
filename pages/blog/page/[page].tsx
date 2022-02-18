@@ -18,7 +18,21 @@ const BlogPage = ({ posts, page, hasNext, totalPages }) => {
   );
 };
 
-export const getServerSideProps = staleWhileRevalidate(async (ctx) => {
+export const getStaticPaths = async () => {
+  const { totalPages } = await getPosts();
+  const paths = Array(totalPages)
+    .fill(0)
+    .map((_, index) => ({
+      params: { page: `${index + 1}` },
+    }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async (ctx) => {
   const { page } = ctx.params;
   const { posts, hasNext, totalPages } = await getPosts(Number(page) - 1);
 
@@ -30,6 +44,6 @@ export const getServerSideProps = staleWhileRevalidate(async (ctx) => {
       totalPages,
     },
   };
-});
+};
 
 export default BlogPage;
