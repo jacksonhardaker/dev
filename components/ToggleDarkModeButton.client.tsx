@@ -6,7 +6,9 @@ import styles from './ToggleDarkModeButton.module.css';
 
 const ToggleDarkModeButton = () => {
   const [darkMode, setDarkMode] = useState(() =>
-    document.documentElement.classList.contains('dark')
+    typeof document !== 'undefined'
+      ? document.documentElement.classList.contains('dark')
+      : false
   );
 
   const Icon = useMemo(() => (darkMode ? MoonIcon : SunIcon), [darkMode]);
