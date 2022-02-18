@@ -61,7 +61,7 @@ export const styled = <T extends string>(
           );
         });
 
-      return [...acc, additions];
+      return [...acc, ...additions];
     }, [])
     .join('\n');
 
