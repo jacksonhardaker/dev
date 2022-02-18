@@ -1,5 +1,5 @@
 import Link from 'next/link';
-// import ToggleDarkModeButton from './ToggleDarkModeButton';
+import ToggleDarkModeButton from '@components/ToggleDarkModeButton';
 import styles from './Navigation.module.css';
 
 const links = [
@@ -17,7 +17,9 @@ export const Navigation = () => (
           </Link>
         </li>
       ))}
-      <li className={styles.listItemRight}>{/* <ToggleDarkModeButton /> */}</li>
+      <li className={styles.listItemRight}>
+        <ToggleDarkModeButton />
+      </li>
     </ul>
   </nav>
 );
