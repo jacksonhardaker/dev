@@ -1,0 +1,36 @@
+:root {
+  --c-black: rgb(17, 17, 17);
+  --c-black-80: rgba(17, 17, 17, 0.8);
+  --c-white: rgb(255, 255, 255);
+  --c-off-white: rgb(239, 239, 239);
+  --c-gray: rgb(204, 204, 204);
+
+  --primary-color: rgb(156, 55, 12);
+  --primary-color-80: rgba(156, 55, 12, 0.8);
+  --bg-color: var(--c-white);
+
+  --text-color: var(--c-black);
+  --text-color--focus: var(--c-white);
+
+  --link-color: var(--primary-color);
+  --link-bg: transparent;
+  --link-color--hover: rgb(255, 255, 255);
+  --link-bg--hover: var(--primary-color);
+
+  --icon-color: var(--c-black);
+  --icon-color--hover: var(--primary-color);
+}
+
+:root.dark {
+  --primary-color: rgb(216, 147, 117);
+  --primary-color-80: rgba(216, 147, 117, 0.8);
+  --bg-color: var(--c-black);
+
+  --text-color: var(--c-off-white);
+  --text-color--focus: var(--c-black);
+
+  --link-bg: transparent;
+  --link-color--hover: var(--c-black);
+
+  --icon-color: var(--c-off-white);
+}

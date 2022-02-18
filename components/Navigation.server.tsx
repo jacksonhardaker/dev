@@ -1,12 +1,13 @@
 import Link from 'next/link';
+import { VFC } from 'react';
 // import ToggleDarkModeButton from './ToggleDarkModeButton';
 
 const links = [
   { href: '/', label: 'home' },
   { href: '/blog/page/1', label: 'blog' },
-]
+];
 
-const Nav = () => (
+export const Navigation: VFC = () => (
   <nav>
     <ul>
       {links.map(({ href, label }) => (
@@ -14,12 +15,10 @@ const Nav = () => (
           <Link href={href}>{label}</Link>
         </li>
       ))}
-      <li className="right">
-        {/* <ToggleDarkModeButton /> */}
-      </li>
+      <li className="right">{/* <ToggleDarkModeButton /> */}</li>
     </ul>
 
-    <style jsx>{`
+    {/* <style jsx>{`
       nav {
         text-align: center;
       }
@@ -41,8 +40,8 @@ const Nav = () => (
         text-decoration: none;
         padding: 3px 5px;
       }
-    `}</style>
+    `}</style> */}
   </nav>
-)
+);
 
-export default Nav
+export default Navigation;

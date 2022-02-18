@@ -12,6 +12,15 @@ const Document = () => {
         <meta name="msapplication-TileColor" content="#da532c"></meta>
         <meta name="theme-color" content="#ffffff"></meta>
         {process.env.META_ROBOTS && <meta name="robots" content={process.env.META_ROBOTS}></meta>}
+
+        <link rel="preload" href="/styles/fonts.css" as="style"></link>
+        <link rel="preload" href="/styles/base.css" as="style"></link>
+        <link rel="preload" href="/styles/colors.css" as="style"></link>
+
+        <link rel="stylesheet" href="/styles/fonts.css"></link>
+        <link rel="stylesheet" href="/styles/base.css"></link>
+        <link rel="stylesheet" href="/styles/colors.css"></link>
+        <link rel="stylesheet" href="/styles/loading.css"></link>
       </Head>
       <body>
         <Main />
