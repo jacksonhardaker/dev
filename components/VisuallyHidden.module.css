@@ -1,0 +1,8 @@
+.hidden {
+  pointer-events: none;
+  text-indent: 999px;
+  color: transparent;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+}
