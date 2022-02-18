@@ -1,44 +1,24 @@
 import React from 'react';
 import HeadMeta from '@templates/blog/HeadMeta.client';
 import SocialButtons from '@components/SocialButtons.server';
-import md5 from 'md5';
+import { styled } from '@styles/styled';
 
-const generateStyles = (
-  cn = {
-    title: 'title',
-    link: 'link',
-    description: 'description',
-  }
-) => `
-.${cn.title} {
-  margin: 0;
-  width: 100%;
-  padding-top: 80px;
-  line-height: 1.15;
-  font-size: 48px;
-}
-.${cn.link}:hover,
-.${cn.link}:focus {
-  padding: 3px 3px;
-  margin: -3px -3px;
-}
-.${cn.title},
-.${cn.description} {
-  display: block;
-  text-align: center;
-}
-.${cn.description} {
-  font-size: 18px;
-}
-`;
-
-const cn = {
-  title: `title-${md5(generateStyles())}`,
-  link: `link-${md5(generateStyles())}`,
-  description: `description-${md5(generateStyles())}`,
-};
-
-const styles = generateStyles(cn);
+const { classNames: cn, styles } = styled({
+  title: {
+    margin: 0,
+    width: '100%',
+    paddingTop: '80px',
+    lineHeight: 1.15,
+    fontSize: '48px',
+    display: 'block',
+    textAlign: 'center',
+  },
+  description: {
+    display: 'block',
+    textAlign: 'center',
+    fontSize: '18px',
+  },
+});
 
 const Home = () => (
   <div>
@@ -61,29 +41,6 @@ const Home = () => (
       </h1>
       <SocialButtons />
     </div>
-
-    {/* <style jsx>{`
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      a:hover,
-      a:focus {
-        padding: 3px 3px;
-        margin: -3px -3px;
-      }
-      .title,
-      .description {
-        display: block;
-        text-align: center;
-      }
-      .description {
-        font-size: 18px;
-      }
-    `}</style> */}
   </div>
 );
 

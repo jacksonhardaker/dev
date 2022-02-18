@@ -21,7 +21,8 @@
       "@components/*": ["components/*"],
       "@constants/*": ["constants/*"],
       "@context/*": ["context/*"],
-      "@middleware/*": ["middleware/*"]
+      "@middleware/*": ["middleware/*"],
+      "@styles/*": ["styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
