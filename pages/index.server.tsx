@@ -18,6 +18,16 @@ const { classNames: cn, styles } = styled({
     textAlign: 'center',
     fontSize: '18px',
   },
+  link: {
+    ':hover': {
+      margin: '-3px -3px',
+      padding: '3px 3px',
+    },
+    ':focus': {
+      margin: '-3px -3px',
+      padding: '3px 3px',
+    },
+  },
 });
 
 const Home = () => (
