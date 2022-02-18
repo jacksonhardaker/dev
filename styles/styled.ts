@@ -23,6 +23,11 @@ const pick = (obj: CSSProperties & PseudoClass, keys: string[]) => {
   );
 };
 
+const stringifyProperties = (properties: CSSProperties) =>
+  Object.entries(properties)
+    .map(([key, value]) => `${kebabCase(key)}:${value}`)
+    .join(';');
+
 export const styled = <T extends string>(
   styles: Record<T, CSSProperties & PseudoClass>
 ) => {
@@ -32,33 +37,29 @@ export const styled = <T extends string>(
     {} as Record<T, string>
   );
 
-  const stringifyProperties = (properties: CSSProperties) =>
-    Object.entries(properties)
-      .map(([key, value]) => `${kebabCase(key)}:${value}`)
-      .join(';');
-
   const stylesArr = Object.entries(styles).reduce(
     (acc, [key, value]: [T, CSSProperties & PseudoClass]) => {
       const properties = omit(value, [...PSEUDO_CLASSES]);
       const pseudoClasses = pick(value, [...PSEUDO_CLASSES]);
 
-      let newAcc = [...acc];
-
-      console.log({ pseudoClasses });
+      let additions = [];
 
       if (Object.keys(properties).length > 0) {
-        newAcc.push(`.${classNames[key]} {${stringifyProperties(properties)}}`);
+        additions.push(
+          `.${classNames[key]} {${stringifyProperties(properties)}}`
+        );
       }
 
-      newAcc.push(
-        ...Object.entries(pseudoClasses).map(([pseudoKey, pseudoValue]) => {
-          return `.${classNames[key]}${pseudoKey} {${stringifyProperties(
-            pseudoValue
-          )}}`;
-        })
-      );
+      if (Object.keys(pseudoClasses).length > 0)
+        Object.entries(pseudoClasses).forEach(([pseudoKey, pseudoValue]) => {
+          additions.push(
+            `.${classNames[key]}${pseudoKey} {${stringifyProperties(
+              pseudoValue
+            )}}`
+          );
+        });
 
-      return newAcc;
+      return [...acc, additions];
     },
     []
   );
