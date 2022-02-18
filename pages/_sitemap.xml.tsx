@@ -1,3 +1,5 @@
+import { promises } from 'fs';
+import path from 'path';
 import { getPosts } from '@api/posts';
 
 export default () => null;
@@ -23,7 +25,7 @@ const blogIndexPageBlocks = (totalPages) => {
     });
 };
 
-export const getServerSideProps = async ({ res }) => {
+export const getStaticProps = async () => {
   const data = await getPosts();
 
   const indexPages = blogIndexPageBlocks(data.totalPages);
@@ -40,10 +42,10 @@ export const getServerSideProps = async ({ res }) => {
     ${indexPages}
   </urlset>
   `;
-  res.setHeader('Content-Type', 'text/xml');
-  res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
-  res.write(sitemap);
-  res.end();
+  promises.writeFile(
+    path.resolve(process.cwd(), 'public/sitemap.xml'),
+    sitemap
+  );
 
-  return { props: {} };
+  return { notFound: true };
 };
