@@ -17,7 +17,7 @@
     "jsx": "preserve",
     "paths": {
       "@templates/*": ["templates/*"],
-      "@api/*": ["pages/api/*"],
+      "@api/*": ["api/*"],
       "@components/*": ["components/*"],
       "@constants/*": ["constants/*"],
       "@context/*": ["context/*"],
