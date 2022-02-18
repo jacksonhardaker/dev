@@ -1,6 +1,29 @@
 import Link from 'next/link';
 import { VFC } from 'react';
+import styled from '@styles/styled';
 // import ToggleDarkModeButton from './ToggleDarkModeButton';
+
+const { classNames: cn, Styles } = styled({
+  container: {
+    textAlign: 'center',
+  },
+  list: {
+    display: 'flex',
+    padding: '4px 0',
+    marginLeft: '-13px',
+  },
+  listItem: {
+    display: 'flex',
+    padding: '6px 8px',
+  },
+  right: {
+    margin: '0 0 0 auto',
+  },
+  link: {
+    textDecoration: 'none',
+    padding: '3px 5px',
+  },
+});
 
 const links = [
   { href: '/', label: 'home' },
@@ -8,40 +31,23 @@ const links = [
 ];
 
 export const Navigation: VFC = () => (
-  <nav>
-    <ul>
-      {links.map(({ href, label }) => (
-        <li key={href}>
-          <Link href={href}>{label}</Link>
+  <>
+    <Styles />
+    <nav className={cn.container}>
+      <ul className={cn.list}>
+        {links.map(({ href, label }) => (
+          <li key={href} className={cn.listItem}>
+            <Link passHref={true} href={href}>
+              <a className={cn.link}>{label}</a>
+            </Link>
+          </li>
+        ))}
+        <li className={`${cn.listItem} ${cn.right}`}>
+          {/* <ToggleDarkModeButton /> */}
         </li>
-      ))}
-      <li className="right">{/* <ToggleDarkModeButton /> */}</li>
-    </ul>
-
-    {/* <style jsx>{`
-      nav {
-        text-align: center;
-      }
-      ul {
-        display: flex;
-      }
-      nav > ul {
-        padding: 4px 0;
-        margin-left: -13px;
-      }
-      li {
-        display: flex;
-        padding: 6px 8px;
-      }
-      li.right {
-        margin: 0 0 0 auto;
-      }
-      a {
-        text-decoration: none;
-        padding: 3px 5px;
-      }
-    `}</style> */}
-  </nav>
+      </ul>
+    </nav>
+  </>
 );
 
 export default Navigation;
