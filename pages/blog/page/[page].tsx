@@ -1,8 +1,6 @@
-import Head from 'next/head';
 import { getPosts } from '@api/posts';
 import { Posts } from '@templates/blog/Posts';
-import { staleWhileRevalidate } from '@middleware/staleWhileRevalidate';
-import { HeadMeta } from '@templates/blog/HeadMeta';
+import HeadMeta from '@templates/blog/HeadMeta.server';
 
 const BlogPage = ({ posts, page, hasNext, totalPages }) => {
   return (

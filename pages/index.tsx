@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeadMeta } from '@templates/blog/HeadMeta';
+import HeadMeta from '@templates/blog/HeadMeta.server';
 import SocialButtons from '../src/components/SocialButtons';
 
 const Home = () => (
