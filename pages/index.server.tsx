@@ -3,7 +3,7 @@ import HeadMeta from '@templates/blog/HeadMeta.client';
 import SocialButtons from '@components/SocialButtons.server';
 import { styled } from '@styles/styled';
 
-const { classNames: cn, styles } = styled({
+const { classNames: cn, Styles } = styled({
   title: {
     margin: 0,
     width: '100%',
@@ -32,7 +32,7 @@ const { classNames: cn, styles } = styled({
 
 const Home = () => (
   <div>
-    <style>{styles}</style>
+    <Styles />
     <HeadMeta
       title="Jackson Hardaker | Frontend Engineer"
       description="Developer blog for Jackson Hardaker."

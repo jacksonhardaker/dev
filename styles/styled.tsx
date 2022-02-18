@@ -65,7 +65,9 @@ export const styled = <T extends string>(
     }, [])
     .join('\n');
 
-  return { classNames, styles };
+  const Styles = () => <style>{styles}</style>;
+
+  return { classNames, Styles };
 };
 
 export default styled;
