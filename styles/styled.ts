@@ -2,6 +2,8 @@ import type { CSSProperties } from 'react';
 import md5 from 'md5';
 import kebabCase from 'kebab-case';
 
+const hash = (obj) => md5(JSON.stringify(obj)).slice(0, 10);
+
 const PSEUDO_CLASSES = [':hover', ':focus'] as const;
 type PseudoClass = Partial<
   Record<typeof PSEUDO_CLASSES[number], CSSProperties>
@@ -29,16 +31,16 @@ const stringifyProperties = (properties: CSSProperties) =>
     .join(';');
 
 export const styled = <T extends string>(
-  styles: Record<T, CSSProperties & PseudoClass>
+  styleObj: Record<T, CSSProperties & PseudoClass>
 ) => {
-  const hash = md5(JSON.stringify(styles));
-  const classNames = Object.keys(styles).reduce<Record<T, string>>(
-    (acc, className) => ({ ...acc, [className]: `${className}-${hash}` }),
+  const scope = hash(styleObj);
+  const classNames = Object.keys(styleObj).reduce<Record<T, string>>(
+    (acc, className) => ({ ...acc, [className]: `${className}-${scope}` }),
     {} as Record<T, string>
   );
 
-  const stylesArr = Object.entries(styles).reduce(
-    (acc, [key, value]: [T, CSSProperties & PseudoClass]) => {
+  const styles = Object.entries(styleObj)
+    .reduce((acc, [key, value]: [T, CSSProperties & PseudoClass]) => {
       const properties = omit(value, [...PSEUDO_CLASSES]);
       const pseudoClasses = pick(value, [...PSEUDO_CLASSES]);
 
@@ -60,11 +62,10 @@ export const styled = <T extends string>(
         });
 
       return [...acc, additions];
-    },
-    []
-  );
+    }, [])
+    .join('\n');
 
-  return { classNames, styles: stylesArr.join('\n') };
+  return { classNames, styles };
 };
 
 export default styled;
