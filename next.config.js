@@ -1,8 +1,6 @@
 module.exports = {
   experimental: {
     outputStandalone: true,
-    runtime: 'nodejs',
-    serverComponents: true,
   },
   async redirects() {
     return [

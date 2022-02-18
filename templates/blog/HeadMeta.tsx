@@ -47,5 +47,3 @@ export const HeadMeta: VFC<{
     </Head>
   );
 };
-
-export default HeadMeta;

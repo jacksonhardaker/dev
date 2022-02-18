@@ -1,0 +1,16 @@
+.container {
+  text-align: center;
+}
+.link {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin: 5px;
+  fill: var(--icon-color);
+}
+.link:hover,
+.link:focus {
+  fill: var(--icon-color--hover);
+  outline: none;
+  background-color: transparent !important;
+}
