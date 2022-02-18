@@ -3,6 +3,7 @@ module.exports = {
     outputStandalone: true,
     runtime: 'nodejs',
     serverComponents: true,
+    styledComponents: true,
   },
   async redirects() {
     return [

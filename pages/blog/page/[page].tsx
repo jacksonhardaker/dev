@@ -1,6 +1,6 @@
 import { getPosts } from '@api/posts';
 import { Posts } from '@templates/blog/Posts';
-import HeadMeta from '@templates/blog/HeadMeta.server';
+import HeadMeta from '@templates/blog/HeadMeta.client';
 
 const BlogPage = ({ posts, page, hasNext, totalPages }) => {
   return (

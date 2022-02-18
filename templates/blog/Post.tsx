@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import format from 'date-fns/format';
 import { AUTHOR } from '@constants/blog';
 import { CoverImage } from './CoverImage';
-import HeadMeta from '@templates/blog/HeadMeta.server';
+import HeadMeta from '@templates/blog/HeadMeta.client';
 import { CompletelyHidden } from '../../components/CompletelyHidden';
 import styles from './Post.module.css';
 import { Author } from './Author';

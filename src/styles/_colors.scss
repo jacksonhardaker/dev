@@ -19,6 +19,9 @@ $primary-dark: rgb(216, 147, 117);
   --link-bg: transparent;
   --link-color--hover: #{$white};
   --link-bg--hover: #{$primary};
+
+  --icon-color: #{$black};
+  --icon-color--hover: #{$primary};
 }
 
 :root.dark {
@@ -31,4 +34,7 @@ $primary-dark: rgb(216, 147, 117);
   --link-bg: transparent;
   --link-color--hover: #{$black};
   --link-bg--hover: #{$primary-dark};
+
+  --icon-color: #{$off-white};
+  --icon-color--hover: #{$primary-dark};
 }

@@ -1,32 +1,29 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { ThemeProvider } from '@context/ThemeContext';
 import { GoogleAnalyticsProvider } from '@context/GoogleAnalyticsContext';
-import Nav from '../src/components/Navigation';
+import Nav from '../src/components/Navigation.server';
 
 import '../src/loading.config';
 import 'normalize.css/normalize.css';
 import '../src/styles/fonts.scss';
 import '../src/styles/base.scss';
 
-const MainApp = ({ Component, pageProps }) => {
-  const { asPath: canonical } = useRouter();
+const App = ({ Component, pageProps }) => {
+  // const { asPath: canonical } = useRouter();
+  const canonical = pageProps?.router?.asPath;
   return (
     <>
       <Head>
         <link rel="canonical" href={canonical} />
         <meta property="og:url" content={canonical} />
       </Head>
-      <ThemeProvider>
-        <GoogleAnalyticsProvider>
-          <main>
-            <Nav />
-            <Component {...pageProps} />
-          </main>
-        </GoogleAnalyticsProvider>
-      </ThemeProvider>
+      <GoogleAnalyticsProvider>
+        <main>
+          {/* <Nav /> */}
+          <Component {...pageProps} />
+        </main>
+      </GoogleAnalyticsProvider>
     </>
   );
 };
 
-export default MainApp;
+export default App;

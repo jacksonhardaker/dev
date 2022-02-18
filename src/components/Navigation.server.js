@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import ToggleDarkModeButton from './ToggleDarkModeButton';
+// import ToggleDarkModeButton from './ToggleDarkModeButton';
 
 const links = [
   { href: '/', label: 'home' },
@@ -15,7 +15,7 @@ const Nav = () => (
         </li>
       ))}
       <li className="right">
-        <ToggleDarkModeButton />
+        {/* <ToggleDarkModeButton /> */}
       </li>
     </ul>
 
