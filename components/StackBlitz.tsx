@@ -1,7 +1,7 @@
 import sdk from '@stackblitz/sdk';
-import { useEffect, VFC } from 'react';
+import { useEffect, FC } from 'react';
 
-export const StackBlitz: VFC<{
+export const StackBlitz: FC<{
   id: string;
   openFile?: string;
   clickToLoad?: boolean;
