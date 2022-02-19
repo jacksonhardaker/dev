@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import lightStyle from '../src/constants/prism/lightStyle';
-import darkStyle from '../src/constants/prism/darkStyle';
+import lightStyle from '@constants/code/lightStyle';
+import darkStyle from '@constants/code/darkStyle';
 import useTheme from '@context/ThemeContext';
 
 export const Code: FC<{ className: string }> = ({ className, children }) => {
