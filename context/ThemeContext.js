@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import useIsomorphicLayoutEffect from '../src/hooks/useIsometricEffect';
+import useIsomorphicEffect from '../src/hooks/useIsomorphicEffect';
 
 export const ThemeContext = createContext();
 
@@ -22,7 +22,7 @@ export const ThemeProvider = ({ children }) => {
     setDarkMode,
   };
 
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     const darkModeFromLocalStorage = localStorage.getItem('darkMode');
 
      if (darkModeFromLocalStorage) {
