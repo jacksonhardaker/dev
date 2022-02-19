@@ -9,12 +9,12 @@
   --c-gray: #rgb(204, 204, 204);
   --c-off-white: rgb(239, 239, 239);
   --c-rust: rgb(var(--c-raw-rust));
-  --c-rust-80: rgba(var(--c-raw-rust));
+  --c-rust-20: rgba(var(--c-raw-rust), 0.2);
   --c-feldspar: rgb(var(--c-raw-feldspar));
-  --c-feldspar-80: rgba(var(--c-raw-feldspar), 0.8);
+  --c-feldspar-20: rgba(var(--c-raw-feldspar), 0.2);
 
   --primary-color: var(--c-rust);
-  --primary-color-80: var(--c-rust-80);
+  --primary-color-20: var(--c-rust-20);
 
   --text-color: var(--c-black);
   --text-color--focus: var(--c-white);
@@ -31,6 +31,7 @@
 
 :root.dark {
   --primary-color: var(--c-feldspar);
+  --primary-color-20: var(--c-feldspar-20);
   --bg-color: var(--c-black);
   --text-color: var(--c-off-white);
   --text-color--focus: var(--c-black);
