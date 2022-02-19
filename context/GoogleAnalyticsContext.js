@@ -4,7 +4,7 @@ import Router from 'next/router';
 export const GoogleAnalyticsContext = createContext();
 
 export const GoogleAnalyticsProvider = ({ children }) => {
-  const [analyticsEnabled] = useState(JSON.parse(process.env.ENABLE_GOOGLE_ANALYTICS || 'false'));
+  const [analyticsEnabled] = useState(JSON.parse(process.env.NEXT_PUBLIC_ANALYTICS_ENABLED || 'false'));
   const [analyticsInitialized, setAnalyticsInitialized] = useState(null);
 
   const analyticsDebug = (...args) => {
