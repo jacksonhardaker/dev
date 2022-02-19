@@ -1,6 +1,10 @@
 @import "colors";
 @import "loading";
 
+:root {
+  --font-family: "Avenir", -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
+}
+
 html,
 body,
 main,
@@ -21,7 +25,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
+  font-family: var(--font-family);
   font-weight: 100;
 }
 
@@ -34,7 +38,7 @@ h6 {
 
 body {
   margin: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
+  font-family: var(--font-family);
   font-weight: 400;
   line-height: 1.4;
   color: $black;

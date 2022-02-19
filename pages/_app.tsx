@@ -6,7 +6,6 @@ import { Navigation } from '@components/Navigation';
 
 import '../src/loading.config';
 import 'normalize.css/normalize.css';
-import '../src/styles/fonts.scss';
 import '../src/styles/base.scss';
 import { GlobalIntersectionObserverProvider } from '@context/GlobalIntersectionObserver';
 
