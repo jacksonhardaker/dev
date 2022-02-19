@@ -1,4 +1,4 @@
-import { useIntersectionObserver } from '@hooks/useIntersectionObserver';
+import { useGlobalIntersectionObserver } from '@context/GlobalIntersectionObserver';
 import sdk from '@stackblitz/sdk';
 import { useEffect, FC, useRef, useCallback } from 'react';
 
@@ -26,7 +26,7 @@ export const StackBlitz: FC<{
       initialized.current = true;
     }
   }, []);
-  useIntersectionObserver(el, renderSandbox);
+  useGlobalIntersectionObserver(el, renderSandbox, true);
 
   return <div ref={el} style={{ height: '300px' }} id={id}></div>;
 };

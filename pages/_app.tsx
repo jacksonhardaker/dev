@@ -8,6 +8,7 @@ import '../src/loading.config';
 import 'normalize.css/normalize.css';
 import '../src/styles/fonts.scss';
 import '../src/styles/base.scss';
+import { GlobalIntersectionObserverProvider } from '@context/GlobalIntersectionObserver';
 
 const MainApp = ({ Component, pageProps }) => {
   const { asPath: canonical } = useRouter();
@@ -17,14 +18,16 @@ const MainApp = ({ Component, pageProps }) => {
         <link rel="canonical" href={canonical} />
         <meta property="og:url" content={canonical} />
       </Head>
-      <ThemeProvider>
-        <GoogleAnalyticsProvider>
-          <main>
-            <Navigation />
-            <Component {...pageProps} />
-          </main>
-        </GoogleAnalyticsProvider>
-      </ThemeProvider>
+      <GlobalIntersectionObserverProvider>
+        <ThemeProvider>
+          <GoogleAnalyticsProvider>
+            <main>
+              <Navigation />
+              <Component {...pageProps} />
+            </main>
+          </GoogleAnalyticsProvider>
+        </ThemeProvider>
+      </GlobalIntersectionObserverProvider>
     </>
   );
 };
