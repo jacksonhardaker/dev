@@ -11,7 +11,7 @@ const Document = () => {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"></link>
         <meta name="msapplication-TileColor" content="#da532c"></meta>
         <meta name="theme-color" content="#ffffff"></meta>
-        {process.env.META_ROBOTS && <meta name="robots" content={process.env.META_ROBOTS}></meta>}
+        {process.env.NEXT_PUBLIC_META_ROBOTS && <meta name="robots" content={process.env.NEXT_PUBLIC_META_ROBOTS}></meta>}
       </Head>
       <body>
         <Main />
