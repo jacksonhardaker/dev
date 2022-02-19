@@ -22,6 +22,8 @@
       "@constants/*": ["constants/*"],
       "@context/*": ["context/*"],
       "@middleware/*": ["middleware/*"],
+      "@styles/*": ["styles/*"],
+      "@config/*": ["config/*"],
       "@hooks/*": ["hooks/*"]
     }
   },
