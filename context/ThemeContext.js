@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import useIsomorphicEffect from '../src/hooks/useIsomorphicEffect';
+import { useIsomorphicEffect } from '../src/hooks/useIsomorphicEffect';
 
 export const ThemeContext = createContext();
 
@@ -8,7 +8,7 @@ export const ThemeProvider = ({ children }) => {
 
   const getPreferredColorScheme = () => {
     if (window.matchMedia) {
-      if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         return 'dark';
       } else {
         return 'light';
@@ -25,7 +25,7 @@ export const ThemeProvider = ({ children }) => {
   useIsomorphicEffect(() => {
     const darkModeFromLocalStorage = localStorage.getItem('darkMode');
 
-     if (darkModeFromLocalStorage) {
+    if (darkModeFromLocalStorage) {
       try {
         setDarkMode(JSON.parse(darkModeFromLocalStorage || 'false'));
       }
@@ -41,7 +41,7 @@ export const ThemeProvider = ({ children }) => {
     }
   }, []);
 
-  useIsomorphicLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     document.querySelector('html').classList.toggle('dark', darkMode);
     document.querySelector('html').classList.toggle('light', !darkMode);
     localStorage.setItem('darkMode', darkMode);
