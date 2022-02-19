@@ -32,7 +32,7 @@ export const getStaticProps = async () => {
   const posts = data.posts.map(postSitemapBlock);
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" data-random="${Math.random()}">
     <url>
       <loc>https://jacksonhardaker.dev/</loc>
       <changefreq>monthly</changefreq>
@@ -47,5 +47,5 @@ export const getStaticProps = async () => {
     sitemap
   );
 
-  return { notFound: true };
+  return { notFound: true, revalidate: 30 };
 };
