@@ -1,0 +1,45 @@
+:root {
+  --c-raw-feldspar: 216, 147, 117;
+  --c-raw-rust: 156, 55, 12;
+  --c-raw-black: 17, 17, 17;
+
+  --c-black: rgb(var(--c-raw-black));
+  --c-black-80: rgba(var(--c-raw-black), 0.8);
+  --c-white: rgb(255, 255, 255);
+  --c-gray: #rgb(204, 204, 204);
+  --c-off-white: rgb(239, 239, 239);
+  --c-rust: rgb(var(--c-raw-rust));
+  --c-rust-80: rgba(var(--c-raw-rust));
+  --c-feldspar: rgb(var(--c-raw-feldspar));
+  --c-feldspar-80: rgba(var(--c-raw-feldspar), 0.8);
+
+  --primary-color: var(--c-rust);
+  --primary-color-80: var(--c-rust-80);
+
+  --text-color: var(--c-black);
+  --text-color--focus: var(--c-white);
+  --bg-color: var(--c-white);
+
+  --link-color: var(--primary-color);
+  --link-bg: transparent;
+  --link-color--hover: var(--c-white);
+  --link-bg--hover: var(--primary-color);
+
+  --icon-color: var(--c-black);
+  --icon-color--hover: var(--primary-color);
+}
+
+:root.dark {
+  --primary-color: var(--c-feldspar);
+  --bg-color: var(--c-black);
+  --text-color: var(--c-off-white);
+  --text-color--focus: var(--c-black);
+
+  --link-color: var(--c-feldspar);
+  --link-bg: transparent;
+  --link-color--hover: var(--c-black);
+  --link-bg--hover: var(--c-feldspar);
+
+  --icon-color: var(--c-off-white);
+  --icon-color--hover: var(--c-feldspar);
+}

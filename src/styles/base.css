@@ -1,8 +1,6 @@
-@import "colors";
-@import "loading";
-
 :root {
-  --font-family: "Avenir", -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica, sans-serif;
+  --font-family: 'Avenir', -apple-system, BlinkMacSystemFont, Avenir Next,
+    Avenir, Helvetica, sans-serif;
 }
 
 html,
@@ -41,7 +39,7 @@ body {
   font-family: var(--font-family);
   font-weight: 400;
   line-height: 1.4;
-  color: $black;
+  color: var(--c-black);
   font-size: 18px;
 }
 
@@ -49,30 +47,31 @@ iframe {
   max-width: 100%;
 }
 
-pre, code {
+pre,
+code {
   font-size: 1em !important;
 }
 
 blockquote {
   position: relative;
   margin: 3rem 2rem;
-  &::before,
-  &::after {
-    display: block;
-    font-size: 10rem;
-    position: absolute;
-    color: var(--primary-color-80);
-  }
-  &::before {
-    content: "“";
-    top: -4rem;
-    left: -2rem;
-  }
-  &::after {
-    content: "”";
-    bottom: -8rem;
-    right: -2rem;
-  }
+}
+blockquote::before,
+blockquote::after {
+  display: block;
+  font-size: 10rem;
+  position: absolute;
+  color: var(--primary-color-80);
+}
+blockquote::before {
+  content: '“';
+  top: -4rem;
+  left: -2rem;
+}
+blockquote::after {
+  content: '”';
+  bottom: -8rem;
+  right: -2rem;
 }
 
 a {
@@ -84,5 +83,4 @@ a:focus {
   color: var(--link-color--hover);
   background-color: var(--link-bg--hover);
   border-radius: 1px;
-  outline: none;
 }
