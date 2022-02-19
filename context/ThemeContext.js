@@ -1,12 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
-import useQueryParams from '../src/hooks/useQueryParams';
 import useIsomorphicLayoutEffect from '../src/hooks/useIsometricEffect';
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
-  const darkModeFromQueryParams = useQueryParams('dark');
 
   const getPreferredColorScheme = () => {
     if (window.matchMedia) {
@@ -27,10 +25,7 @@ export const ThemeProvider = ({ children }) => {
   useIsomorphicLayoutEffect(() => {
     const darkModeFromLocalStorage = localStorage.getItem('darkMode');
 
-    if (darkModeFromQueryParams === true) {
-      setDarkMode(darkModeFromQueryParams);
-    }
-    else if (darkModeFromLocalStorage) {
+     if (darkModeFromLocalStorage) {
       try {
         setDarkMode(JSON.parse(darkModeFromLocalStorage || 'false'));
       }
@@ -44,7 +39,7 @@ export const ThemeProvider = ({ children }) => {
     else {
       setDarkMode(false);
     }
-  }, [darkModeFromQueryParams]);
+  }, []);
 
   useIsomorphicLayoutEffect(() => {
     document.querySelector('html').classList.toggle('dark', darkMode);
