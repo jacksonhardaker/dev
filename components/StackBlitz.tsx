@@ -1,5 +1,6 @@
+import { useIntersectionObserver } from '@hooks/useIntersectionObserver';
 import sdk from '@stackblitz/sdk';
-import { useEffect, FC } from 'react';
+import { useEffect, FC, useRef, useCallback } from 'react';
 
 export const StackBlitz: FC<{
   id: string;
@@ -12,13 +13,20 @@ export const StackBlitz: FC<{
   clickToLoad = true,
   hideNavigation = true,
 }) => {
-  useEffect(() => {
-    sdk.embedProjectId(id, id, {
-      openFile,
-      clickToLoad,
-      hideNavigation,
-      hideExplorer: true,
-    });
-  }, [id, openFile, clickToLoad]);
-  return <div id={id}></div>;
+  const initialized = useRef(false);
+  const el = useRef(null);
+  const renderSandbox = useCallback(() => {
+    if (!initialized.current) {
+      sdk.embedProjectId(id, id, {
+        openFile,
+        clickToLoad,
+        hideNavigation,
+        hideExplorer: true,
+      });
+      initialized.current = true;
+    }
+  }, []);
+  useIntersectionObserver(el, renderSandbox);
+
+  return <div ref={el} style={{ height: '300px' }} id={id}></div>;
 };
