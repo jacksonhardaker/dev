@@ -1,13 +1,19 @@
-import { useCallback, useEffect, useState } from 'react';
+import { RefObject, useCallback, useEffect, useState } from 'react';
 
-export const useIntersectionObserver = (element, callback) => {
-  const [observer, setObserver] = useState(null);
+export const useIntersectionObserver = (
+  element: RefObject<HTMLElement>,
+  callback: (entry: IntersectionObserverEntry) => void
+) => {
+  const [observer, setObserver] = useState<IntersectionObserver | null>(null);
 
-  const handleIntersection = useCallback(([entry]) => {
-    if (entry.isIntersecting) {
-      callback(entry);
-    }
-  }, []);
+  const handleIntersection: IntersectionObserverCallback = useCallback(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        callback(entry);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     if (element.current) {
