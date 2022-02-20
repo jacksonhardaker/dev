@@ -4,6 +4,6 @@ export const AUTHOR = {
     name: 'Jackson Hardaker',
     blurb:
       'New Zealand born, NYC based Frontend Engineer, with a past life as a professional jazz trombonist/composer. My mantra is to leave things better than I found them, and strive to make life easier for others (future me included).',
-    photo: '/images/jackson.jpeg',
+    photo: '/images/jackson.jpg',
   },
 } as const;
