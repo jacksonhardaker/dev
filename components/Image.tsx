@@ -3,7 +3,7 @@ import NextImage, { ImageLoader, ImageProps } from 'next/image';
 const loader =
   (origin: string): ImageLoader =>
   ({ src, width, quality }) =>
-    `https://sharpify.vercel.app/p?src=${origin}${src}&q=${quality}&w=${width}`;
+    `https://sharpify.vercel.app/p?src=${origin}${src}&q=${quality || 80}&w=${width}`;
 
 export const Image = (props: ImageProps) => {
   let origin = '';
