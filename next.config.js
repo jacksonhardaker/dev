@@ -2,9 +2,6 @@ module.exports = {
   images: {
     loader: 'custom',
   },
-  experimental: {
-    outputStandalone: true,
-  },
   async redirects() {
     return [
       {
