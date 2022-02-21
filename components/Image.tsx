@@ -27,7 +27,5 @@ export const Image = (props: ImageProps) => {
         };
   }, [origin]);
 
-  if (!origin) return null;
-
   return <NextImage {...props} {...customProps} />;
 };
