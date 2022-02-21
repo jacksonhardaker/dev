@@ -1,7 +1,7 @@
 import { VFC } from 'react';
-import Image from 'next/image';
 import { AUTHOR } from '@constants/blog';
 import styles from './Author.module.css';
+import { Image } from '@components/Image';
 
 export const Author: VFC<{ id: string }> = ({ id }) => {
   const { name, blurb, photo } = AUTHOR[id];
@@ -13,7 +13,14 @@ export const Author: VFC<{ id: string }> = ({ id }) => {
       itemType="https://schema.org/Person"
     >
       <div className={styles.avatarWrapper}>
-        <Image className={styles.avatar} itemProp="image" src={photo} alt="" width={75} height={75} />
+        <Image
+          className={styles.avatar}
+          itemProp="image"
+          src={photo}
+          alt=""
+          width={75}
+          height={75}
+        />
       </div>
       <h2 className={styles.heading} itemProp="name">
         {name}

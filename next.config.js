@@ -1,4 +1,7 @@
 module.exports = {
+  images: {
+    loader: 'custom',
+  },
   experimental: {
     outputStandalone: true,
   },
@@ -9,7 +12,7 @@ module.exports = {
         destination: '/blog/page/1',
         permanent: true,
       },
-    ]
+    ];
   },
   webpack: (config) => {
     config.module.rules.push({
@@ -19,8 +22,8 @@ module.exports = {
         'next-swc-loader',
         {
           loader: '@svgr/webpack',
-          options: { babel: false }
-        }
+          options: { babel: false },
+        },
       ],
     });
 
