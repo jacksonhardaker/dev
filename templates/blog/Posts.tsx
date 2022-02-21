@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { VFC } from 'react';
 import { format } from 'date-fns';
-import { CoverImage } from '@templates/blog/CoverImage';
 
 import styles from './Posts.module.css';
+import { Image } from '@components/Image';
 
 const PageLink: VFC<{ direction: 'next' | 'prev'; page: number }> = ({
   direction,
@@ -36,9 +36,12 @@ export const Posts = ({ posts, hasNext, page }) => {
             <article className={styles.article} key={post.meta.slug}>
               <Link href={`/blog/${post.meta.slug}`}>
                 <a className={styles.post}>
-                  <CoverImage
+                  <Image
                     src={post.meta.coverSrc}
                     alt={post.meta.coverAlt}
+                    width={200}
+                    height={200}
+                    objectFit="cover"
                   />
                   <h2 className={styles.text}>{post.meta.title}</h2>
                   <time
