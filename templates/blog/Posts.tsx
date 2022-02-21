@@ -41,6 +41,7 @@ export const Posts = ({ posts, hasNext, page }) => {
                     alt={post.meta.coverAlt}
                     width={200}
                     height={200}
+                    quality={40}
                     objectFit="cover"
                   />
                   <h2 className={styles.text}>{post.meta.title}</h2>
