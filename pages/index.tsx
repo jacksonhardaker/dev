@@ -15,7 +15,7 @@ const Home = () => (
       <h1>
         <span className="title">Jackson Hardaker</span>
         <p className="description">
-          Frontend Engineer @ <a href="https://tn.com">tuftandneedle.com</a>
+          Staff Frontend Engineer @ <a href="https://www.lyft.com/careers">lyft.com</a>
         </p>
       </h1>
 
