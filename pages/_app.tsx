@@ -10,10 +10,8 @@ import '@styles/colors.css';
 import '@styles/loading.css';
 import '@styles/base.css';
 
-
-
 const MainApp = ({ Component, pageProps }) => {
-  const { asPath: canonical } = useRouter();
+  const { pathname: canonical } = useRouter();
   return (
     <>
       <Head>
