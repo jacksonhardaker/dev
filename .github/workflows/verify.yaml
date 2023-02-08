@@ -1,0 +1,45 @@
+name: verify
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+jobs:
+  install:
+    name: install
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repo to Github Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Install Node
+      - name: Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install
+        run: yarn
+  build:
+    name: build
+    needs: install
+    runs-on: ubuntu-latest
+    setups:
+      - name: Run build
+        run: yarn build
+  lint:
+    name: lint
+    needs: install
+    runs-on: ubuntu-latest
+    setups:
+      - name: Run lint
+        run: yarn lint
+  test:
+    name: test
+    needs: install
+    runs-on: ubuntu-latest
+    setups:
+      - name: Run test
+        run: yarn test
