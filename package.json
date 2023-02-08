@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "echo 'lint passed'",
-    "test": "echo 'test passed'",
+    "lint": "echo 'lint passed!'",
+    "test": "echo 'test passed!'",
     "build:image": "docker build -t nextjs-docker .",
     "start:image": "docker run -p 3000:3000 nextjs-docker"
   },
