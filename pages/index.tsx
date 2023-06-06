@@ -15,7 +15,8 @@ const Home = () => (
       <h1>
         <span className="title">Jackson Hardaker</span>
         <p className="description">
-          Staff Frontend Engineer @ <a href="https://www.lyft.com/careers">lyft.com</a>
+          Software Engineer
+          {/* Staff Frontend Engineer @ <a href="https://www.lyft.com/careers">lyft.com</a> */}
         </p>
       </h1>
 
