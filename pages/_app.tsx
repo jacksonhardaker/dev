@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { Analytics } from '@vercel/analytics/react';
 import { GlobalIntersectionObserverProvider } from '@context/GlobalIntersectionObserver';
 import { ThemeProvider } from '@context/ThemeContext';
 import { GoogleAnalyticsProvider } from '@context/GoogleAnalyticsContext';
@@ -24,6 +25,7 @@ const MainApp = ({ Component, pageProps }) => {
             <main>
               <Navigation />
               <Component {...pageProps} />
+              <Analytics />
             </main>
           </GoogleAnalyticsProvider>
         </ThemeProvider>
