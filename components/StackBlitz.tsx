@@ -1,6 +1,6 @@
 import { useGlobalIntersectionObserver } from '@context/GlobalIntersectionObserver';
 import sdk from '@stackblitz/sdk';
-import { useEffect, FC, useRef, useCallback } from 'react';
+import { FC, useRef, useCallback } from 'react';
 
 export const StackBlitz: FC<{
   id: string;

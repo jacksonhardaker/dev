@@ -21,7 +21,10 @@ export type Meta = {
   coverCaption?: string;
 };
 
-export const Post: FC<{ meta: Meta }> = ({ children, meta }) => {
+export const Post: FC<{ meta: Meta; children: React.ReactNode }> = ({
+  children,
+  meta,
+}) => {
   const { asPath } = useRouter();
   return (
     <>

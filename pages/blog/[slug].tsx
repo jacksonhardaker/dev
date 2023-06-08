@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import { promises } from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -8,7 +8,7 @@ import { Post as PostLayout, Meta } from '@templates/blog/Post';
 import { MDX } from '@components/MDX';
 import { getPosts } from '@api/posts';
 
-const Post: VFC<{ content: MDXRemoteSerializeResult; meta: Meta }> = ({
+const Post: FC<{ content: MDXRemoteSerializeResult; meta: Meta }> = ({
   content,
   meta,
 }) => (

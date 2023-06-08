@@ -23,7 +23,9 @@ const ctx = createContext<ContextValue>(null);
 
 const { Provider } = ctx;
 
-export const GlobalIntersectionObserverProvider: FC = ({ children }) => {
+export const GlobalIntersectionObserverProvider: FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const [observer, setObserver] = useState<IntersectionObserver | null>(null);
   const [subscribers, setSubscribers] = useState<
     Array<[HTMLElement, IntersectionObserverCallback, boolean]>

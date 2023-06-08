@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { VFC } from 'react';
+import { FC } from 'react';
 import { format } from 'date-fns';
 import { CoverImage } from '@templates/blog/CoverImage';
 
 import styles from './Posts.module.css';
 
-const PageLink: VFC<{ direction: 'next' | 'prev'; page: number }> = ({
+const PageLink: FC<{ direction: 'next' | 'prev'; page: number }> = ({
   direction,
   page,
 }) => {

@@ -1,7 +1,7 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import Head from 'next/head';
 
-export const HeadMeta: VFC<{
+export const HeadMeta: FC<{
   title: string;
   description: string;
   coverSrc: string;
