@@ -1,11 +1,11 @@
 import SunIcon from '@fortawesome/fontawesome-free/svgs/regular/sun.svg';
 import MoonIcon from '@fortawesome/fontawesome-free/svgs/regular/moon.svg';
 import useTheme from '@context/ThemeContext';
-import { VFC } from 'react';
+import { FC } from 'react';
 import { VisuallyHidden } from '@components/VisuallyHidden';
 import styles from './ToggleDarkModeButton.module.css';
 
-const ToggleDarkModeButton: VFC = () => {
+const ToggleDarkModeButton: FC = () => {
   const { darkMode, setDarkMode } = useTheme();
   const Icon = darkMode ? MoonIcon : SunIcon;
 

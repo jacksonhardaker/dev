@@ -1,7 +1,5 @@
 module.exports = {
-  experimental: {
-    outputStandalone: true,
-  },
+  output: 'standalone',
   async redirects() {
     return [
       {
@@ -9,19 +7,13 @@ module.exports = {
         destination: '/blog/page/1',
         permanent: true,
       },
-    ]
+    ];
   },
-  webpack: (config) => {
+  webpack(config) {
     config.module.rules.push({
-      test: /\.svg$/,
+      test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      use: [
-        'next-swc-loader',
-        {
-          loader: '@svgr/webpack',
-          options: { babel: false }
-        }
-      ],
+      use: ['@svgr/webpack'],
     });
 
     return config;

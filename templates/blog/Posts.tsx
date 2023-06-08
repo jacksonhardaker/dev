@@ -15,8 +15,8 @@ const PageLink: FC<{ direction: 'next' | 'prev'; page: number }> = ({
   };
   return (
     <div className={styles[direction]}>
-      <Link passHref={true} href={`/blog/page/${page + variant[direction].modifier}`}>
-        <a>{variant[direction].label} page</a>
+      <Link href={`/blog/page/${page + variant[direction].modifier}`}>
+        {variant[direction].label} page
       </Link>
     </div>
   );
@@ -34,21 +34,16 @@ export const Posts = ({ posts, hasNext, page }) => {
           .filter((post) => post.meta.public)
           .map((post) => (
             <article className={styles.article} key={post.meta.slug}>
-              <Link href={`/blog/${post.meta.slug}`}>
-                <a className={styles.post}>
-                  <CoverImage
-                    src={post.meta.coverSrc}
-                    alt={post.meta.coverAlt}
-                  />
-                  <h2 className={styles.text}>{post.meta.title}</h2>
-                  <time
-                    className={styles.time}
-                    dateTime={post.meta.published}
-                    itemProp="datePublished"
-                  >
-                    {format(new Date(post.meta.published), 'MMMM do, y')}
-                  </time>
-                </a>
+              <Link href={`/blog/${post.meta.slug}`} className={styles.post}>
+                <CoverImage src={post.meta.coverSrc} alt={post.meta.coverAlt} />
+                <h2 className={styles.text}>{post.meta.title}</h2>
+                <time
+                  className={styles.time}
+                  dateTime={post.meta.published}
+                  itemProp="datePublished"
+                >
+                  {format(new Date(post.meta.published), 'MMMM do, y')}
+                </time>
               </Link>
             </article>
           ))}

@@ -12,8 +12,8 @@ export const Navigation = () => (
     <ul className={styles.list}>
       {links.map(({ href, label }) => (
         <li className={styles.listItem} key={href}>
-          <Link passHref={true} href={href}>
-            <a className={styles.link}>{label}</a>
+          <Link href={href} className={styles.link}>
+            {label}
           </Link>
         </li>
       ))}

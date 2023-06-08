@@ -1,9 +1,9 @@
 import Image, { ImageProps } from 'next/image';
-import { VFC } from 'react';
+import { FC } from 'react';
 
 import styles from './CoverImage.module.css';
 
-export const CoverImage: VFC<
+export const CoverImage: FC<
   ImageProps & {
     caption?: string;
     src: string;
@@ -18,8 +18,8 @@ export const CoverImage: VFC<
     >
       <Image
         quality={40}
-        width={680}
-        height={510}
+        width={280}
+        height={210}
         priority={true}
         {...props}
       />
