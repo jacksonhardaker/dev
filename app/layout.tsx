@@ -32,8 +32,10 @@ export default function RootLayout({
       <body>
         <GlobalIntersectionObserverProvider>
           <ThemeProvider>
-            <Navigation />
-            {children}
+            <main>
+              <Navigation />
+              {children}
+            </main>
             <Analytics />
           </ThemeProvider>
         </GlobalIntersectionObserverProvider>
