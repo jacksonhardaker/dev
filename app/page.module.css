@@ -5,11 +5,6 @@
   line-height: 1.15;
   font-size: 48px;
 }
-.link:hover,
-.link:focus {
-  padding: 3px 3px;
-  margin: -3px -3px;
-}
 .title,
 .description {
   display: block;

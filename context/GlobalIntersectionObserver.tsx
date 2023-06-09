@@ -1,3 +1,5 @@
+'use client';
+
 import {
   createContext,
   FC,
@@ -16,10 +18,10 @@ type ContextValue = {
     once?: boolean
   ) => void;
   unobserve: (element: HTMLElement) => void;
-  observer: IntersectionObserver;
+  observer: IntersectionObserver | null;
 };
 
-const ctx = createContext<ContextValue>(null);
+const ctx = createContext<ContextValue | null>(null);
 
 const { Provider } = ctx;
 
@@ -43,7 +45,7 @@ export const GlobalIntersectionObserverProvider: FC<{
           if (targetCallback) {
             targetCallback(entities, observer);
 
-            if (once) {
+            if (once && element) {
               unobserve(element);
             }
           }
@@ -88,7 +90,7 @@ export const GlobalIntersectionObserverProvider: FC<{
       unobserve,
       observer,
     }),
-    []
+    [observe, unobserve, observer]
   );
 
   return <Provider value={value}>{children}</Provider>;
@@ -99,14 +101,16 @@ export const useGlobalIntersectionObserver = (
   callback: IntersectionObserverCallback,
   once?: boolean
 ) => {
-  const { observe, unobserve } = useContext(ctx);
+  const { observe, unobserve } = useContext(ctx) || {};
 
   useEffect(() => {
     if (element.current) {
-      observe(element.current, callback, once);
+      observe?.(element.current, callback, once);
     }
     return () => {
-      unobserve(element.current);
+      if (element.current) {
+        unobserve?.(element.current);
+      }
     };
   }, [element, callback]);
 };
