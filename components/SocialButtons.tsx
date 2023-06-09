@@ -22,7 +22,6 @@ const SocialButton: FC<{
       {...rest}
     >
       <Icon />
-      <style jsx>{``}</style>
     </a>
   );
 };

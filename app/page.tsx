@@ -1,20 +1,22 @@
 import React from 'react';
-import { HeadMeta } from '@templates/blog/HeadMeta';
+// import { HeadMeta } from '@templates/blog/HeadMeta';
 import { SocialButtons } from '@components/SocialButtons';
+
+import styles from './page.module.css';
 
 const Home = () => (
   <div>
-    <HeadMeta
+    {/* <HeadMeta
       title="Jackson Hardaker | Frontend Engineer"
       description="Developer blog for Jackson Hardaker."
       coverSrc="/images/jackson.jpeg"
       coverAlt="Photo of Jackson Hardaker in Reykjavik"
-    />
+    /> */}
 
     <div className="hero">
       <h1>
-        <span className="title">Jackson Hardaker</span>
-        <p className="description">
+        <span className={styles.title}>Jackson Hardaker</span>
+        <p className={styles.description}>
           Software Engineer
           {/* Staff Frontend Engineer @ <a href="https://www.lyft.com/careers">lyft.com</a> */}
         </p>
@@ -23,7 +25,7 @@ const Home = () => (
       <SocialButtons />
     </div>
 
-    <style jsx>{`
+    {/* <style jsx>{`
       .title {
         margin: 0;
         width: 100%;
@@ -44,7 +46,7 @@ const Home = () => (
       .description {
         font-size: 18px;
       }
-    `}</style>
+    `}</style> */}
   </div>
 );
 
