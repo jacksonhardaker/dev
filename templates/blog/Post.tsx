@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import format from 'date-fns/format';
 import { AUTHOR } from '@constants/blog';
 import { CoverImage } from './CoverImage';
-import { HeadMeta } from '@templates/blog/HeadMeta';
+// import { HeadMeta } from '@templates/blog/HeadMeta';
 import { CompletelyHidden } from '../../components/CompletelyHidden';
 import styles from './Post.module.css';
 import { Author } from './Author';
@@ -28,7 +28,7 @@ export const Post: FC<{ meta: Meta; children: React.ReactNode }> = ({
   const { asPath } = useRouter();
   return (
     <>
-      <HeadMeta {...meta} />
+      {/* <HeadMeta {...meta} /> */}
       <article itemScope itemType="http://schema.org/BlogPosting">
         <header itemProp="headline">
           <h1 itemProp="name">{meta.title}</h1>
