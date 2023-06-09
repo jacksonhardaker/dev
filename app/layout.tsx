@@ -7,6 +7,8 @@ import '@styles/loading.css';
 import '@styles/base.css';
 import { GlobalIntersectionObserverProvider } from '@context/GlobalIntersectionObserver';
 import { ThemeProvider } from '@context/ThemeContext';
+import Navigation from '@components/Navigation';
+import { Analytics } from '@vercel/analytics/react';
 
 const title = 'Jackson Hardaker | Frontend Engineer';
 const description = 'Developer blog for Jackson Hardaker.';
@@ -29,7 +31,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <GlobalIntersectionObserverProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            <Navigation />
+            {children}
+            <Analytics />
+          </ThemeProvider>
         </GlobalIntersectionObserverProvider>
       </body>
     </html>
