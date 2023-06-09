@@ -57,7 +57,7 @@ export const GlobalIntersectionObserverProvider: FC<{
     setObserver(observer);
 
     return () => {
-      observer.disconnect();
+      observer?.disconnect?.();
     };
   }, [subscribers]);
 
@@ -70,7 +70,7 @@ export const GlobalIntersectionObserverProvider: FC<{
 
   const unobserve = useCallback(
     (element: HTMLElement) => {
-      observer.unobserve(element);
+      observer?.unobserve?.(element);
       setSubscribers((subs) => subs.filter(([el]) => el !== element));
     },
     [observer]
@@ -78,7 +78,7 @@ export const GlobalIntersectionObserverProvider: FC<{
 
   useEffect(() => {
     subscribers.forEach(([el]) => {
-      observer.observe(el);
+      observer?.observe?.(el);
     });
   }, [subscribers, observer]);
 
