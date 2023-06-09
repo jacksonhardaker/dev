@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { headers } from 'next/headers';
 import format from 'date-fns/format';
 import { AUTHOR } from '@constants/blog';
 import { CoverImage } from './CoverImage';
@@ -25,7 +25,7 @@ export const Post: FC<{ meta: Meta; children: React.ReactNode }> = ({
   children,
   meta,
 }) => {
-  const { asPath } = useRouter();
+  const pathname = headers().get('x-url') ?? '';
   return (
     <>
       {/* <HeadMeta {...meta} /> */}
@@ -54,7 +54,7 @@ export const Post: FC<{ meta: Meta; children: React.ReactNode }> = ({
         <div itemProp="articleBody">{children}</div>
       </article>
       <CompletelyHidden>
-        <a itemProp="mainEntityOfPage" href={asPath}>
+        <a itemProp="mainEntityOfPage" href={pathname}>
           {meta.title}
         </a>
         <div

@@ -1,3 +1,5 @@
+'use client';
+
 import { useGlobalIntersectionObserver } from '@context/GlobalIntersectionObserver';
 import sdk from '@stackblitz/sdk';
 import { FC, useRef, useCallback } from 'react';

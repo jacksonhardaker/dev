@@ -3,7 +3,7 @@ import { Posts } from '@templates/blog/Posts';
 
 const BlogPage = async ({ params }) => {
   const { number: page } = params;
-  const { posts, hasNext, totalPages } = await getPosts(Number(page) - 1);
+  const { posts, hasNext } = await getPosts(Number(page) - 1);
   return (
     <>
       <Posts posts={posts} page={page} hasNext={hasNext} />
