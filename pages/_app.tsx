@@ -19,8 +19,8 @@ const LazyStackBlitz = dynamic(
 );
 
 const components = {
-  code: LazyCode,
-  StackBlitz: LazyStackBlitz,
+  code: (props) => <LazyCode {...props} />,
+  StackBlitz: (props) => <LazyStackBlitz {...props} />,
 };
 
 const MainApp = ({ Component, pageProps }) => {
