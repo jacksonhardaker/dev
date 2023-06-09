@@ -18,9 +18,8 @@ export const CoverImage: FC<
     >
       <Image
         quality={40}
-        width={280}
-        height={210}
-        priority={true}
+        priority
+        fill
         {...props}
       />
       {props.src && <meta itemProp="url" content={props.src} />}
