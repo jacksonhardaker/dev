@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import lightStyle from '@constants/code/lightStyle';
