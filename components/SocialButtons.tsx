@@ -1,4 +1,4 @@
-import React, { ComponentType, FC, VFC } from 'react';
+import React, { ComponentType, FC } from 'react';
 import LinkedInIcon from '@fortawesome/fontawesome-free/svgs/brands/linkedin.svg';
 import KeybaseIcon from '@fortawesome/fontawesome-free/svgs/brands/keybase.svg';
 import GithubIcon from '@fortawesome/fontawesome-free/svgs/brands/github.svg';
@@ -27,7 +27,7 @@ const SocialButton: FC<{
   );
 };
 
-export const SocialButtons: VFC = () => {
+export const SocialButtons: FC = () => {
   return (
     <div className={styles.container}>
       <SocialButton

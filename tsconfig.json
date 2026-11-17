@@ -2,7 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -14,19 +18,43 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "paths": {
-      "@templates/*": ["templates/*"],
-      "@api/*": ["api/*"],
-      "@components/*": ["components/*"],
-      "@constants/*": ["constants/*"],
-      "@context/*": ["context/*"],
-      "@middleware/*": ["middleware/*"],
-      "@styles/*": ["styles/*"],
-      "@config/*": ["config/*"],
-      "@hooks/*": ["hooks/*"]
+      "@templates/*": [
+        "templates/*"
+      ],
+      "@api/*": [
+        "api/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@constants/*": [
+        "constants/*"
+      ],
+      "@context/*": [
+        "context/*"
+      ],
+      "@middleware/*": [
+        "middleware/*"
+      ],
+      "@styles/*": [
+        "styles/*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

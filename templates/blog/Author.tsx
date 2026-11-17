@@ -1,9 +1,9 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import Image from 'next/image';
 import { AUTHOR } from '@constants/blog';
 import styles from './Author.module.css';
 
-export const Author: VFC<{ id: string }> = ({ id }) => {
+export const Author: FC<{ id: string }> = ({ id }) => {
   const { name, blurb, photo } = AUTHOR[id];
   return (
     <footer
